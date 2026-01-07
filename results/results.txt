@@ -1,0 +1,29 @@
+CHAIN RULE AND APPLICATIONS
+
+**Problem 4:**
+Given: $y = \sqrt[7]{\log\left(\frac{1}{x}\right)}$
+
+Steps for differentiation:
+$\frac{dy}{dx} = \frac{1}{7} \left(\log\left(\frac{1}{x}\right)\right)^{-\frac{6}{7}} \frac{d}{dx} \left(\log\left(\frac{1}{x}\right)\right)$
+
+$= -\frac{1}{7} \left(\log\left(\frac{1}{x}\right)\right)^{-\frac{6}{7}} \frac{d}{dx} (\log x)$
+*Note: The derivative of $\log\left(\frac{1}{x}\right)$ is $\frac{d}{dx}(-\log x) = -\frac{1}{x}$. The written step includes a leading negative sign but then incorrectly shows $\frac{d}{dx}(\log x)$ instead of $\frac{d}{dx}(-\log x)$ or just evaluating it directly as $-\frac{1}{x}$.*
+
+$= -\frac{1}{7} \left(\log\left(\frac{1}{x}\right)\right)^{-\frac{6}{7}} \left(\frac{1}{x}\right)$
+*Note: This step evaluates $\frac{d}{dx}(\log x) = \frac{1}{x}$. While the overall product effectively produces the correct result for the derivative of $\log\left(\frac{1}{x}\right)$, the intermediate written derivative term $\frac{d}{dx}(\log x)$ is inconsistent with the preceding negative sign if it originated from $\frac{d}{dx}(-\log x)$.*
+
+Final simplified result:
+$\frac{dy}{dx} = \frac{-1}{7x \left(\log\left(\frac{1}{x}\right)\right)^{\frac{6}{7}}}$
+
+---
+
+**Problem:**
+Given: $y = \sin^4 x + \sin(x^4) + \sin(4x) + x^4$
+
+Steps for differentiation:
+$\frac{dy}{dx} = 4 \sin^3 x \frac{d}{dx}(\sin x) + \cos(x^4) \frac{d}{dx}(x^4) + 4 \cos(4x) + 4x^3$
+
+$= 4 \sin^3 x (\cos x) + \cos(x^4) (4x^3) + 4 \cos(4x) + 4x^3$
+
+Final simplified result:
+$= 4 \cos x \sin^3 x + 4x^3 \cos(x^4) + 4 \cos(4x) + 4x^3$
