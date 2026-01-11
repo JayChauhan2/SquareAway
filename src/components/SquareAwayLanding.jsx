@@ -189,15 +189,27 @@ export default function SquareAwayLanding() {
       if (note) {
         setNotesContent(note.content);
         setNotesTitle(note.title);
-        // Only update video URL if there's a saved one, don't clear it during generation
-        if (note.video_url) setVideoUrl(note.video_url);
+        // Prioritize Supabase video_url, fallback to local storage
+        if (note.video_url) {
+          setVideoUrl(note.video_url);
+        } else if (user) {
+          // Check local storage if Supabase doesn't have it yet (or failed save)
+          const localVideo = getVideoFromLocal(user.id, currentNoteId);
+          if (localVideo) setVideoUrl(localVideo);
+          // Don't clear if neither exist, to avoid flickering if we are just starting gen
+          // But if we switched notes, we probably should clear if nothing found?
+          // The logic below 'Don't set to empty...' handles generation state.
+        }
+
         // Don't set to empty if no video_url - preserve existing state during generation
+        // But if we switched users/notes, we MUST clear old video if new one has none.
+        // We'll rely on the fact that if we selected a NEW note, isGeneratingVideo should be false.
 
         // Load chat history if available
         setChatMessages(note.chat_history || []);
       }
     }
-  }, [currentNoteId, pastNotes]);
+  }, [currentNoteId, pastNotes, user]);
 
   const fetchNotes = async () => {
     const { data, error } = await supabase
@@ -388,6 +400,31 @@ export default function SquareAwayLanding() {
     }
   };
 
+  // Local Storage Helper for Videos
+  const saveVideoToLocal = (userId, noteId, url) => {
+    if (!userId || !noteId || !url) return;
+    try {
+      const key = `video_storage_${userId}`;
+      const storage = JSON.parse(localStorage.getItem(key) || '{}');
+      storage[noteId] = url;
+      localStorage.setItem(key, JSON.stringify(storage));
+    } catch (e) {
+      console.error("Error saving video to local storage:", e);
+    }
+  };
+
+  const getVideoFromLocal = (userId, noteId) => {
+    if (!userId || !noteId) return null;
+    try {
+      const key = `video_storage_${userId}`;
+      const storage = JSON.parse(localStorage.getItem(key) || '{}');
+      return storage[noteId] || null;
+    } catch (e) {
+      console.error("Error reading video from local storage:", e);
+      return null;
+    }
+  };
+
   const pollVideo = async () => {
     const timestamp = new Date().getTime();
     const videoCheckUrl = `http://127.0.0.1:5000/video?t=${timestamp}`;
@@ -401,6 +438,12 @@ export default function SquareAwayLanding() {
         // Upload to Supabase Storage and update note
         // Use noteIdRef which was set when the note was created
         uploadVideoToSupabase(noteIdRef.current);
+
+        // Save to local storage immediately as a backup/fast-load
+        if (user && noteIdRef.current) {
+          saveVideoToLocal(user.id, noteIdRef.current, videoCheckUrl);
+        }
+
       } else {
         setTimeout(pollVideo, 3000);
       }
@@ -452,6 +495,11 @@ export default function SquareAwayLanding() {
           .from('notes')
           .update({ video_url: publicData.publicUrl })
           .eq('id', uploadNoteId);
+
+        // Save to local storage as source of truth
+        if (user) {
+          saveVideoToLocal(user.id, uploadNoteId, publicData.publicUrl);
+        }
 
         // CRITICAL FIX: Update local state so the useEffect doesn't see stale data and wipe the URL
         setPastNotes(prev => prev.map(n =>

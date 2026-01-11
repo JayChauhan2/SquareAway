@@ -13,7 +13,13 @@ import { useAuth } from '../context/AuthContext';
 import ChatInterface from './ChatInterface';
 import DropTheBall from './DropTheBall';
 
-/////////////////////////
+
+
+// MathQuill Imports
+import { addStyles as addMathQuillStyles, EditableMathField } from 'react-mathquill';
+
+// Helper to inject MathQuill styles exactly once
+addMathQuillStyles();
 
 function LoadingSpinner({ message }) {
   return (
@@ -62,6 +68,27 @@ function QuestionSkeleton() {
 
   );
 }
+
+// Custom MathQuill Overrides
+const mathQuillStyles = `
+  .mq-editable-field {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    background: transparent !important;
+    width: 100%;
+    padding: 0 4px;
+    font-size: 1.1em;
+  }
+  .mq-focused {
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  .mq-root-block {
+    border: none !important;
+    padding: 0 !important;
+  }
+`;
 
 export default function Questions() {
   const { topic } = useParams();
@@ -351,9 +378,13 @@ export default function Questions() {
     setAnswers(prev => ({ ...prev, [currentQuestion.id]: value }));
   };
 
-  const handleFreeResponseChange = (e) => {
+  /* 
+     MathQuill onChange gives us latex. 
+     We'll update state with the latex string.
+  */
+  const handleFreeResponseChange = (mathField) => {
     if (isSubmitted) return;
-    setAnswers({ ...answers, [currentQuestion.id]: e.target.value });
+    setAnswers({ ...answers, [currentQuestion.id]: mathField.latex() });
   };
 
   const handleSubmit = async () => {
@@ -631,6 +662,8 @@ export default function Questions() {
         <div className="absolute w-72 h-72 bg-gradient-to-br from-violet-300/25 to-pink-300/25 rounded-full blur-3xl top-1/2 left-1/2 animate-[blob_18s_linear_infinite]" />
       </div>
 
+      <style>{mathQuillStyles}</style>
+
       <div className="w-full max-w-2xl flex flex-col gap-2 relative z-10">
 
         {/* Back Button for Reviewers/Teachers */}
@@ -762,13 +795,18 @@ export default function Questions() {
             {/* Free / Word */}
             {(currentQuestion.type === "free" || currentQuestion.type === "word") && (
               <div className="space-y-2">
-                <textarea
-                  className="w-full h-32 p-4 border rounded-lg"
-                  value={answers[currentQuestion.id] || ""}
-                  onChange={handleFreeResponseChange}
-                  placeholder="Your Answer Here..."
-                  disabled={isSubmitted || isReviewMode}
-                />
+                <div className="w-full bg-white p-4 border rounded-lg focus-within:ring-2 focus-within:ring-blue-500 min-h-[50px] flex items-center">
+                  <EditableMathField
+                    latex={answers[currentQuestion.id] || ""}
+                    onChange={handleFreeResponseChange}
+                    config={{
+                      autoCommands: 'pi theta sqrt sum prod integral alpha beta gamma',
+                      autoOperatorNames: 'sin cos tan log ln'
+                    }}
+                    className="mathquill-input w-full border-none outline-none text-lg"
+                  />
+                </div>
+                <p className="text-xs text-gray-400">Type math naturally (e.g. forward slash '/' for fractions, '^' for exponents)</p>
               </div>
             )}
 

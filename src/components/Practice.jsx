@@ -111,7 +111,7 @@ export default function Practice() {
       "Series": ["Taylor Series", "Maclaurin Series", "Convergence Tests"],
       "Parametric Equations": ["Derivatives of Parametrics", "Arc Length", "Area under Parametric Curves"]
     },
-    "College Math": {
+    "Other": {
       "Linear Algebra": ["Matrix Operations", "Determinants", "Vector Spaces", "Eigenvalues/Eigenvectors"],
       "Discrete Math": ["Logic & Proofs", "Set Theory", "Combinatorics", "Graph Theory"],
       "Probability & Statistics": ["Probability Rules", "Random Variables", "Distributions", "Hypothesis Testing"],
