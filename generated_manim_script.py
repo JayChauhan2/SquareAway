@@ -5,70 +5,46 @@ class Explainer(Scene):
         self.add_sound("voiceover.mp3")
 
         # Step 1: Introduction
-        title = Text("Scalars vs Vectors", font_size=48)
+        title = Text("Probability Problem", font_size=36)
         title.move_to(UP*3)
         self.play(Write(title))
         self.wait(1)
 
-        # Step 2: Scalar definition
-        scalar_def = MathTex("Scalar: magnitude only")
-        scalar_def.move_to(UP*1 + LEFT*2)
-        self.play(Write(scalar_def))
-        self.wait(1)
+        # Step 2: Problem statement
+        problem = Tex("A fair six-sided die is rolled. What is the probability of rolling a 4?")
+        problem.move_to(UP*1.5)
+        self.play(Write(problem))
+        self.wait(2)
 
-        # Step 3: Scalar examples
-        scalar_examples = BulletedList(
-            "Temperature",
-            "Mass",
-            "Speed",
-            buff=0.5
-        )
-        scalar_examples.move_to(DOWN*1 + LEFT*3)
-        self.play(Write(scalar_examples))
-        self.wait(1)
+        # Step 3: Show possible outcomes
+        outcomes = Tex("Possible outcomes: 1, 2, 3, 4, 5, 6")
+        outcomes.move_to(DOWN*0.5)
+        self.play(Write(outcomes))
+        self.wait(2)
 
-        # Step 4: Vector definition
-        vector_def = MathTex("Vector: magnitude + direction")
-        vector_def.move_to(UP*1 + RIGHT*2)
-        self.play(Write(vector_def))
-        self.wait(1)
+        # Step 4: Highlight favorable outcome
+        favorable = Tex("Favorable outcome: 4")
+        favorable.set_color(YELLOW)
+        favorable.move_to(DOWN*1.5)
+        self.play(Write(favorable))
+        self.wait(1.5)
 
-        # Step 5: Vector examples
-        vector_examples = BulletedList(
-            "Velocity",
-            "Force",
-            "Displacement",
-            buff=0.5
-        )
-        vector_examples.move_to(DOWN*1 + RIGHT*3)
-        self.play(Write(vector_examples))
-        self.wait(1)
+        # Step 5: Probability formula
+        formula = MathTex("P(\\text{rolling a 4}) = \\frac{\\text{Number of favorable outcomes}}{\\text{Total number of possible outcomes}}")
+        formula.move_to(DOWN*2.5)
+        self.play(Write(formula))
+        self.wait(2.5)
 
-        # Step 6: Comparison
-        comparison = Text("Key Difference:", font_size=36)
-        comparison.move_to(DOWN*2.5)
-        self.play(Write(comparison))
+        # Step 6: Calculate probability
+        calculation = MathTex("= \\frac{1}{6}")
+        calculation.next_to(formula, DOWN)
+        self.play(Write(calculation))
+        self.wait(2)
 
-        scalar_arrow = Arrow(LEFT, RIGHT, color=BLUE)
-        scalar_arrow.next_to(comparison, DOWN)
-        scalar_label = Text("Scalar", font_size=24).next_to(scalar_arrow, DOWN)
-
-        vector_arrow = Arrow(LEFT, RIGHT, color=RED)
-        vector_arrow.next_to(scalar_arrow, DOWN)
-        vector_label = Text("Vector", font_size=24).next_to(vector_arrow, DOWN)
-
-        self.play(
-            Create(scalar_arrow),
-            Write(scalar_label),
-            Create(vector_arrow),
-            Write(vector_label)
-        )
-        self.wait(1)
-
-        # Step 7: Conclusion
-        conclusion = Text("Answer: The scalar is the quantity with only magnitude", font_size=32)
-        conclusion.move_to(DOWN*3.5)
-        self.play(Write(conclusion))
+        # Step 7: Summary
+        summary = Tex("The probability of rolling a 4 is $\\frac{1}{6}$")
+        summary.move_to(DOWN*3.5)
+        self.play(Write(summary))
         self.wait(2)
 
         self.wait(1)  # Total duration placeholder

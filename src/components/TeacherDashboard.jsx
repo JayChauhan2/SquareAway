@@ -3,6 +3,7 @@ import { supabase } from '../supabaseClient';
 import { useAuth } from '../context/AuthContext';
 import { Users, Copy, Check, Plus, ArrowLeft } from 'lucide-react';
 import KaTeXWrapper from './KaTeXWrapper';
+import JSXGraph from "./JSXGraph";
 
 export default function TeacherDashboard() {
     const { user } = useAuth();
@@ -135,7 +136,8 @@ export default function TeacherDashboard() {
                 ...student,
                 status: p ? 'Completed' : 'Pending',
                 score: p ? p.score : null,
-                completedAt: p ? p.completed_at : null
+                completedAt: p ? p.completed_at : null,
+                answers: p ? p.answers : null // Include answers
             };
         });
 
@@ -223,7 +225,7 @@ export default function TeacherDashboard() {
             const questions = await response.json();
 
             // 2. Save Assignment to Supabase
-            const { error } = await supabase
+            const { data, error } = await supabase
                 .from('class_assignments')
                 .insert([{
                     class_id: selectedClass.id,
@@ -232,9 +234,14 @@ export default function TeacherDashboard() {
                     questions: questions,
                     question_count: questionCount,
                     question_types: typesList
-                }]);
+                }])
+                .select();
 
             if (error) throw error;
+
+            if (data) {
+                setAssignments([data[0], ...assignments]);
+            }
 
             alert("Assignment created successfully!");
             setAssignmentTopic('');
@@ -545,7 +552,7 @@ export default function TeacherDashboard() {
                                                 <div className="bg-white rounded-xl p-8 border border-slate-200">
                                                     {(() => {
                                                         const question = selectedAssignment.questions[currentQuestionIndex];
-                                                        
+
                                                         // Helper function to normalize question type
                                                         const normalizeQuestionType = (type) => {
                                                             if (type === 'multiple-choice' || type === 'mcq') return 'mcq';
@@ -554,40 +561,88 @@ export default function TeacherDashboard() {
                                                             if (type === 'word problems' || type === 'word') return 'word';
                                                             return type;
                                                         };
-                                                        
+
                                                         // Helper function to get answer data dynamically
                                                         const getAnswerData = (q) => {
                                                             // Get answer from question.answer or question.correct_answer
                                                             return q.answer || q.correct_answer || null;
                                                         };
-                                                        
+
                                                         // Helper function to check if an option matches the answer
                                                         const isOptionCorrect = (option, answerData) => {
                                                             if (!answerData) return false;
-                                                            
+
                                                             // If answer is an array, compare each part
                                                             if (Array.isArray(answerData)) {
                                                                 // For MCQ/Boolean, answer is typically an array of parts
                                                                 const answerStr = answerData.map(a => (a.content || a)).join(' ');
-                                                                const optionStr = Array.isArray(option) 
+                                                                const optionStr = Array.isArray(option)
                                                                     ? option.map(o => (o.content || o)).join(' ')
                                                                     : String(option);
-                                                                return answerStr === optionStr || 
-                                                                       JSON.stringify(answerData) === JSON.stringify(option);
+                                                                return answerStr === optionStr ||
+                                                                    JSON.stringify(answerData) === JSON.stringify(option);
                                                             }
-                                                            
+
                                                             // If answer is a string
                                                             const answerStr = String(answerData);
-                                                            const optionStr = Array.isArray(option) 
+                                                            const optionStr = Array.isArray(option)
                                                                 ? option.map(o => (o.content || o)).join(' ')
                                                                 : String(option);
                                                             return answerStr === optionStr;
                                                         };
-                                                        
+
                                                         const questionType = normalizeQuestionType(question.type);
                                                         const answerData = getAnswerData(question);
-                                                        
+
+                                                        // ---- New: Calculate Per-Question Stats ----
+                                                        let stats = { total: 0, correct: 0, options: {} };
+
+                                                        if (assignmentDetail && assignmentDetail.studentProgress) {
+                                                            assignmentDetail.studentProgress.forEach(s => {
+                                                                if (s.status === 'Completed' && s.answers) {
+                                                                    stats.total++;
+
+                                                                    // Get student's answer for this question ID
+                                                                    const studentAnsRaw = s.answers[question.id];
+                                                                    if (studentAnsRaw) {
+                                                                        // Check correctness
+                                                                        let isRight = false;
+
+                                                                        // Reuse logic from Questions.jsx or simplify 
+                                                                        if (questionType === 'mcq' || questionType === 'boolean') {
+                                                                            try {
+                                                                                const parsed = JSON.parse(studentAnsRaw);
+                                                                                // For MCQ, store which option was picked
+                                                                                // Assume pased[0].content is the key
+                                                                                const val = parsed[0]?.content || 'Unknown';
+                                                                                stats.options[val] = (stats.options[val] || 0) + 1;
+
+                                                                                if (answerData && answerData[0] && parsed[0]) {
+                                                                                    isRight = (parsed[0].content === answerData[0].content);
+                                                                                }
+                                                                            } catch {
+                                                                                // fail to parse
+                                                                            }
+                                                                        } else {
+                                                                            // Free/Word
+                                                                            // Since we don't store grading result in `answers` JSON, 
+                                                                            // we can only track that they answered. 
+                                                                            // Or do a rudimentary check. 
+                                                                            // Let's count it as 'attempted'.
+                                                                            // isRight = true; // Placeholder or skip correctness for free response
+                                                                        }
+
+                                                                        if (isRight) stats.correct++;
+                                                                    }
+                                                                }
+                                                            });
+                                                        }
+
+                                                        const percentCorrect = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
+                                                        // -------------------------------------------
+
                                                         return (
+
                                                             <>
                                                                 {/* Question Counter */}
                                                                 <div className="text-center mb-6">
@@ -613,6 +668,85 @@ export default function TeacherDashboard() {
                                                                     </h3>
                                                                 </div>
 
+                                                                {/* Graphs */}
+                                                                {question.graphs &&
+                                                                    question.graphs.map((graph, idx) => (
+                                                                        <div key={idx} className="flex justify-center mb-6">
+                                                                            <JSXGraph
+                                                                                equationType={graph.equationType}
+                                                                                expr1={graph.expr1}
+                                                                                expr2={graph.expr2}
+                                                                                range={graph.range || [-10, 10]}
+                                                                                width={graph.width || 300}
+                                                                                height={graph.height || 200}
+                                                                            />
+                                                                        </div>
+                                                                    ))
+                                                                }
+
+                                                                {/* Class Performance Stats */}
+                                                                <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm relative overflow-hidden group">
+                                                                    <div className="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+                                                                    <h4 className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-4">Class Performance</h4>
+
+                                                                    <div className="flex items-center gap-4 mb-6">
+                                                                        <div className="flex-1 h-4 bg-slate-100 rounded-full overflow-hidden">
+                                                                            <div
+                                                                                className="h-full bg-gradient-to-r from-blue-500 to-green-500 rounded-full transition-all duration-1000"
+                                                                                style={{ width: `${percentCorrect}%` }}
+                                                                            />
+                                                                        </div>
+                                                                        <span className="text-xl font-bold text-slate-800">{percentCorrect}%</span>
+                                                                        <span className="text-sm text-slate-500">Correct ({stats.correct}/{stats.total} attempts)</span>
+                                                                    </div>
+
+                                                                    {(questionType === 'mcq' || questionType === 'boolean') && question.options && (
+                                                                        <div>
+                                                                            <p className="text-xs font-semibold text-slate-400 mb-3">RESPONSE BREAKDOWN</p>
+                                                                            <div className="space-y-3">
+                                                                                {question.options.map((opt, idx) => {
+                                                                                    // Safely handle both simple strings and rich text options
+                                                                                    let optStr = "";
+                                                                                    if (Array.isArray(opt)) {
+                                                                                        optStr = opt.map(p => p.content || "").join(" ");
+                                                                                    } else if (typeof opt === 'object' && opt.content) {
+                                                                                        optStr = opt.content;
+                                                                                    } else {
+                                                                                        optStr = String(opt);
+                                                                                    }
+
+                                                                                    const count = stats.options[optStr] || 0;
+                                                                                    const percentage = stats.total > 0 ? Math.round((count / stats.total) * 100) : 0;
+                                                                                    const isCorrectOpt = isOptionCorrect(opt, answerData);
+
+                                                                                    return (
+                                                                                        <div key={idx} className="flex items-center text-sm">
+                                                                                            <div className="w-8 font-medium text-slate-400">
+                                                                                                {String.fromCharCode(65 + idx)}
+                                                                                            </div>
+                                                                                            <div className="flex-1">
+                                                                                                <div className="flex justify-between mb-1">
+                                                                                                    <span className={isCorrectOpt ? "text-green-700 font-semibold" : "text-slate-600"}>
+                                                                                                        {optStr.substring(0, 50)}{optStr.length > 50 ? "..." : ""}
+                                                                                                        {isCorrectOpt && <span className="ml-2 text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded">Correct Answer</span>}
+                                                                                                    </span>
+                                                                                                    <span className="text-slate-500 text-xs">{count} students ({percentage}%)</span>
+                                                                                                </div>
+                                                                                                <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                                                                                                    <div
+                                                                                                        className={`h-full rounded-full transition-all duration-500 ${isCorrectOpt ? 'bg-green-500' : 'bg-slate-300'}`}
+                                                                                                        style={{ width: `${percentage}%` }}
+                                                                                                    />
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    );
+                                                                                })}
+                                                                            </div>
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+
                                                                 {/* Question Type Specific Display */}
                                                                 {/* Multiple Choice Questions */}
                                                                 {(questionType === 'mcq') && question.options && (
@@ -624,8 +758,8 @@ export default function TeacherDashboard() {
                                                                                 <div
                                                                                     key={idx}
                                                                                     className={`p-4 rounded-lg border-2 transition-all ${isCorrect
-                                                                                            ? 'border-green-500 bg-green-50'
-                                                                                            : 'border-slate-200 bg-slate-50'
+                                                                                        ? 'border-green-500 bg-green-50'
+                                                                                        : 'border-slate-200 bg-slate-50'
                                                                                         }`}
                                                                                 >
                                                                                     <div className="flex items-center gap-3">
@@ -664,8 +798,8 @@ export default function TeacherDashboard() {
                                                                                 <div
                                                                                     key={idx}
                                                                                     className={`p-4 rounded-lg border-2 transition-all ${isCorrect
-                                                                                            ? 'border-green-500 bg-green-50'
-                                                                                            : 'border-slate-200 bg-slate-50'
+                                                                                        ? 'border-green-500 bg-green-50'
+                                                                                        : 'border-slate-200 bg-slate-50'
                                                                                         }`}
                                                                                 >
                                                                                     <div className="flex items-center gap-3">
@@ -708,30 +842,33 @@ export default function TeacherDashboard() {
                                                                 )}
 
                                                                 {/* Correct Answer Display for All Question Types */}
-                                                                <div className="mb-8">
-                                                                    <div className="bg-green-50 border-2 border-green-500 rounded-lg p-6">
-                                                                        <p className="text-sm font-semibold text-green-800 mb-2">Correct Answer:</p>
-                                                                        <div className="text-lg text-slate-800">
-                                                                            {answerData ? (
-                                                                                Array.isArray(answerData) ? (
-                                                                                    answerData.map((part, i) =>
-                                                                                        typeof part === 'object' && part.type === "latex" ? (
-                                                                                            <KaTeXWrapper key={i}>{part.content}</KaTeXWrapper>
-                                                                                        ) : typeof part === 'object' && part.content ? (
-                                                                                            <span key={i}>{part.content}</span>
-                                                                                        ) : (
-                                                                                            <span key={i}>{String(part)}</span>
+                                                                {/* Only show for non-MCQ/Boolean (since they have highlighted answers above) */}
+                                                                {(questionType !== 'mcq' && questionType !== 'boolean') && (
+                                                                    <div className="mb-8">
+                                                                        <div className="bg-green-50 border-2 border-green-500 rounded-lg p-6">
+                                                                            <p className="text-sm font-semibold text-green-800 mb-2">Correct Answer:</p>
+                                                                            <div className="text-lg text-slate-800">
+                                                                                {answerData ? (
+                                                                                    Array.isArray(answerData) ? (
+                                                                                        answerData.map((part, i) =>
+                                                                                            typeof part === 'object' && part.type === "latex" ? (
+                                                                                                <KaTeXWrapper key={i}>{part.content}</KaTeXWrapper>
+                                                                                            ) : typeof part === 'object' && part.content ? (
+                                                                                                <span key={i}>{part.content}</span>
+                                                                                            ) : (
+                                                                                                <span key={i}>{String(part)}</span>
+                                                                                            )
                                                                                         )
+                                                                                    ) : (
+                                                                                        String(answerData)
                                                                                     )
                                                                                 ) : (
-                                                                                    String(answerData)
-                                                                                )
-                                                                            ) : (
-                                                                                "Answer not available"
-                                                                            )}
+                                                                                    "Answer not available"
+                                                                                )}
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
+                                                                )}
 
                                                                 {/* Navigation Buttons */}
                                                                 <div className="flex justify-between items-center pt-6 border-t border-slate-200">

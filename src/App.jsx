@@ -32,12 +32,20 @@ const AuthRoot = () => {
   return <OGLanding />;
 };
 
+const TeacherRoute = ({ children }) => {
+  const { user, loading } = useAuth();
+  if (loading) return <div>Loading...</div>;
+  if (!user || user.user_metadata?.role !== 'teacher') return <Navigate to="/" replace />;
+  return children;
+};
+
 function App() {
   const { user } = useAuth();
+  const isTeacher = user?.user_metadata?.role === 'teacher';
 
   return (
     <div className="App relative bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 min-h-screen">
-      {/* Navbar is fixed - only show if logged in? Or always? User didn't specify, but usually dashboard has navbar. */}
+      {/* Navbar is fixed - only show if logged in */}
       {user && <FloatingNavbar />}
 
       {/* Padding ensures content starts below the navbar if it exists */}
@@ -48,9 +56,9 @@ function App() {
           <Route path="/signup" element={<SignUpPage />} />
 
           <Route path="/teacher-dashboard" element={
-            <ProtectedRoute>
+            <TeacherRoute>
               <TeacherDashboard />
-            </ProtectedRoute>
+            </TeacherRoute>
           } />
 
           <Route path="/questions/:topic" element={

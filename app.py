@@ -126,11 +126,21 @@ def leave_class():
     else:
         return jsonify({"error": "Failed to leave class", "details": response.text}), response.status_code
 
-@app.route('/create-questions', methods=['POST'])
+@app.route('/create-questions', methods=['POST', 'OPTIONS'])
 def create_questions():
+    if request.method == 'OPTIONS':
+        return jsonify({}), 200
+
     # Get topic and parameters from request body
-    data = request.get_json()
+    try:
+        data = request.get_json()
+    except Exception as e:
+        return jsonify({"error": "Invalid JSON in request body"}), 400
+
     topic = data.get("topic")
+    if not topic:
+        return jsonify({"error": "Topic is required"}), 400
+
     # Default to 5 if not provided, for normal practice
     count = data.get("count", 5)
     # Default to all if not provided
@@ -143,8 +153,11 @@ def create_questions():
     if question_types:
         types_str = ", ".join(question_types)
 
-    with open("./src/assets/question_create_prompt.txt", "r") as file:
-        content = file.read()
+    try:
+        with open("./src/assets/question_create_prompt.txt", "r") as file:
+            content = file.read()
+    except FileNotFoundError:
+        return jsonify({"error": "Prompt file not found"}), 500
     
     # ------------------------------------------------------------------
     # DYNAMIC PROMPT INJECTION
@@ -164,34 +177,55 @@ def create_questions():
     # ------------------------------------------------------------------
 
     model_api_key = os.getenv("MISTRAL_API_KEY")
-    response = requests.post(
-        url="https://openrouter.ai/api/v1/chat/completions",
-        headers={
-            "Authorization": f"Bearer {model_api_key}",
-            "Content-Type": "application/json",
-        },
-        data=json.dumps({
-            "model": "mistralai/devstral-2512:free",
-            "messages": [
-            {
-                "role": "user",
-                "content": content + topic
-            }
-            ]
-        })
-    )
-    data = response.json()
+    if not model_api_key:
+        return jsonify({"error": "MISTRAL_API_KEY not set"}), 500
+
+    try:
+        response = requests.post(
+            url="https://openrouter.ai/api/v1/chat/completions",
+            headers={
+                "Authorization": f"Bearer {model_api_key}",
+                "Content-Type": "application/json",
+            },
+            data=json.dumps({
+                "model": "mistralai/devstral-2512:free",
+                "messages": [
+                {
+                    "role": "user",
+                    "content": content + topic
+                }
+                ]
+            }),
+            timeout=60 # Add timeout
+        )
+        
+        if response.status_code != 200:
+            print(f"API Error: {response.status_code} - {response.text}")
+            return jsonify({"error": f"LLM API returned {response.status_code}", "details": response.text}), 500
+
+        data = response.json()
+    except requests.exceptions.RequestException as e:
+        print(f"Request failed: {e}")
+        return jsonify({"error": "Failed to contact LLM API", "details": str(e)}), 500
+    except json.JSONDecodeError as e:
+         print(f"Invalid JSON response from LLM API: {e}")
+         return jsonify({"error": "Invalid JSON response from LLM API"}), 500
+
 
     # # Extract the assistant message content
-    raw_output = data["choices"][0]["message"]["content"]
+    try:
+        raw_output = data["choices"][0]["message"]["content"]
+    except (KeyError, IndexError) as e:
+        print(f"Unexpected response format: {data}")
+        return jsonify({"error": "Unexpected response format from LLM API"}), 500
 
     print("raw_output: " + raw_output)
 
     lines = raw_output.strip().split("\n")
-    # Remove first and last lines (backticks)
+    # Remove first and last lines (backticks) if present and look like code blocks
     lines = raw_output.strip().split("\n")
-    if len(lines) > 2:
-        middle = "\n".join(lines[1:-1])
+    if len(lines) > 2 and lines[0].startswith("```") and lines[-1].startswith("```"):
+         middle = "\n".join(lines[1:-1])
     else:
         middle = raw_output  # fallback if no extra lines
 
@@ -200,7 +234,9 @@ def create_questions():
         questions_json = json.loads(middle)
     except json.JSONDecodeError as e:
         print("JSON decode error:", e)
-        return jsonify({"error": "Failed to parse questions JSON", "raw": middle}), 500
+        # Try to be lenient if the LLM outputted some extra text? 
+        # For now, just return error
+        return jsonify({"error": "Failed to parse questions JSON from LLM output", "raw": middle}), 500
 
     print(middle)
     # Return JSON directly
