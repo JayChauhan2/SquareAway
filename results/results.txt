@@ -1,36 +1,41 @@
-Unit 8
-Date: Nov. 3, 2022
+## Unit 8
+Date: Nov 3, 2022
 
-**Estimating Area Between Curves**
+### Estimating Area between curves
 
 We can calculate this area by estimating with rectangles and taking the limit to get the definite Integral.
 
-[Graph showing y=x^2 and y=2-x, with shaded area between them]
+**Height** = $(2-x)-x^2$
+$\Delta X = \frac{[1.5 - (-2)]}{n} = \frac{3.5}{n}$
 
-*   Height = (2 - x) - x^2
-*   ΔX = [1.5 - (-2)] / n = 3.5 / n
-
-∑ |Height| |width| = ∑ (from i=1 to n) [ (2 - X_(i-1)) - X_(i-1)^2 ] ΔX
-
-∫ (from -2 to 1.5) [ (2 - X) - X^2 ] dx
+$\sum |Height| \text{ } |width| = \sum_{i=1}^{n} |(2-X_{i-1})-X_{i-1}^2| \Delta X$
+$\int_{-2}^{1.5} [(2-x)-x^2] dx$
 
 ---
 
-**Negative Integral Values**
+### Negative Integral Values
 
-[Graph of a function with labeled areas A, B, C, D, E, indicating positive and negative regions]
-
-∫ (from a to b) F(t)dt = A + C + E - B - D
+$\int_a^b F(t)dt = A+C+E-B-D$
+*(Accompanying graph shows a wavy function above and below the x-axis, with areas A, C, E above and B, D below)*
 
 ---
 
-**Midpoint Rule**
+### Midpoint Rule
 
-*   Left[In] and Right[In] for approximating definite Integrals are inefficient and crude estimates.
-*   To use a more accurate and efficient [method] is the Midpoint Rule.
+*   Left[n] and Right[n] for approximating definite Integrals are inefficient and crude estimates.
+*   To use a more accurate and efficient is the **Midpoint Rule**
 
-[Three graphs illustrating Left Riemann Sum, Right Riemann Sum, and Midpoint Rule approximations]
+*(Accompanying graphs illustrate approximations with rectangles)*
 
-*   For linear functions -> Midpoint = ∫ (from a to b) F(x)dx
-*   Errors cancel out and [it is] more accurate.
-*   Value exactly equal to integral [for linear functions].
+**Left**
+*(Rectangles use the left endpoint of each interval to determine height)*
+
+**Right**
+*(Rectangles use the right endpoint of each interval to determine height)*
+
+**Mid**
+*(Rectangles use the midpoint of each interval to determine height)*
+
+*   linear functions $\to$ Midpoint $= \int_a^b f(x)dx$
+    *   Cancels out and more accurate
+    *   Value exactly equal to integral

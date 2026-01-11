@@ -11,6 +11,7 @@ import { useAuth } from '../context/AuthContext';
 import { X, ArrowLeft, Trash2 } from 'lucide-react';
 import ChatInterface from './ChatInterface';
 import DropTheBall from './DropTheBall';
+import ProcessingAnimation from './ProcessingAnimation';
 
 import remarkGfm from "remark-gfm"; // Added import
 import "github-markdown-css/github-markdown.css"; // Added import
@@ -87,17 +88,7 @@ function NotesDisplay({ content, onContentChange }) {
   );
 }
 
-function LoadingSpinner({ message }) {
-  return (
-    <div className="mt-8 flex flex-col items-center relative z-10">
-      <div className="relative">
-        <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-200"></div>
-        <div className="animate-spin rounded-full h-16 w-16 border-4 border-t-blue-500 absolute top-0 left-0"></div>
-      </div>
-      <p className="mt-4 text-gray-600 font-medium">{message}</p>
-    </div>
-  );
-}
+
 
 function VideoPlayer({ videoUrl }) {
   return (
@@ -606,7 +597,7 @@ export default function SquareAwayLanding() {
         </div>
       )}
 
-      {!notesContent && (
+      {!notesContent && !isProcessing && (
         <>
           <h1 className="text-5xl md:text-6xl font-light text-slate-900 text-center mb-8 relative z-10">Upload your Notes to Begin</h1>
 
@@ -751,7 +742,7 @@ export default function SquareAwayLanding() {
         </div>
       )}
 
-      {isProcessing && <LoadingSpinner message={loadingMessage} />}
+      {isProcessing && <ProcessingAnimation message={loadingMessage} />}
 
       {notesContent && !isProcessing && (
         <div className="mt-8 w-full max-w-6xl animate-in fade-in slide-in-from-bottom-8 duration-700 relative z-10">
