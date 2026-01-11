@@ -4,88 +4,55 @@ class Explainer(Scene):
     def construct(self):
         self.add_sound("voiceover.mp3")
 
-        # Step 1: Title and introduction
-        title = Text("Estimating Area Between Curves", font_size=36)
-        title.move_to(UP*3)
+        # Step 1: Introduction
+        title = Tex("True/False Statement").to_edge(UP)
+        statement = Tex("The area between $y = x^2$ and $y = x$ from $x = 0$ to $x = 1$ is calculated as the integral of $x - x^2$ over that interval.")
+        statement.move_to(UP*0.5)
         self.play(Write(title))
-        self.wait(1)
-
-        # Step 2: Example with functions
-        example_title = Text("Example: y = 2 - x and y = x²", font_size=30)
-        example_title.move_to(UP*2)
-
-        height_eq = MathTex("(2 - x) - x^2", font_size=30)
-        height_eq.move_to(UP*0.5)
-
-        delta_x = MathTex("\\Delta x = \\frac{3.5}{n}", font_size=30)
-        delta_x.move_to(DOWN*0.5)
-
-        integral = MathTex("\\int_{-2}^{1.5} \\left[ (2 - x) - x^2 \\right] \, dx", font_size=30)
-        integral.move_to(DOWN*1.5)
-
-        self.play(Transform(title, example_title))
-        self.play(Write(height_eq))
         self.wait(0.5)
-        self.play(Write(delta_x))
-        self.wait(0.5)
+        self.play(Write(statement))
+        self.wait(2)
+
+        # Step 2: Visual representation
+        self.clear()
+        axes = Axes(
+            x_range=[0, 1.5, 0.5],
+            y_range=[0, 1.5, 0.5],
+            axis_config={"color": BLUE},
+        )
+        axes.to_edge(DOWN)
+
+        # Graph of y = x^2
+        parabola = axes.plot(lambda x: x**2, color=RED)
+        parabola_label = MathTex("y = x^2").next_to(parabola, UP, buff=0.1).set_color(RED)
+
+        # Graph of y = x
+        line = axes.plot(lambda x: x, color=GREEN)
+        line_label = MathTex("y = x").next_to(line, UP, buff=0.1).set_color(GREEN)
+
+        self.play(Create(axes))
+        self.play(Create(parabola), Write(parabola_label))
+        self.play(Create(line), Write(line_label))
+        self.wait(2)
+
+        # Step 3: Explanation of the integral
+        integral = MathTex(r"\int_{0}^{1} (x - x^2) \, dx").move_to(UP*2)
+        explanation = Tex("Top function minus bottom function").next_to(integral, DOWN)
         self.play(Write(integral))
-        self.wait(2)
-
-        # Step 3: Negative integral values explanation
-        self.clear()
-        neg_title = Text("Negative Integral Values", font_size=36)
-        neg_title.move_to(UP*3)
-
-        explanation = Tex("Net signed area:", font_size=30)
-        explanation.move_to(UP*1)
-
-        positive_areas = Tex("• Regions above x-axis: positive contribution", font_size=28)
-        positive_areas.next_to(explanation, DOWN)
-
-        negative_areas = Tex("• Regions below x-axis: negative contribution", font_size=28)
-        negative_areas.next_to(positive_areas, DOWN)
-
-        formula = MathTex("A + C + E - B - D", font_size=30)
-        formula.next_to(negative_areas, DOWN)
-
-        self.play(Write(neg_title))
+        self.wait(0.5)
         self.play(Write(explanation))
-        self.play(Write(positive_areas))
-        self.play(Write(negative_areas))
-        self.play(Write(formula))
         self.wait(2)
 
-        # Step 4: Midpoint Rule comparison
+        # Step 4: Visual demonstration of area
+        area = axes.get_area(parabola, x_range=[0, 1], color=BLUE, opacity=0.5)
+        area_label = Tex("Area between curves").next_to(area, UP)
+        self.play(FadeIn(area), Write(area_label))
+        self.wait(2)
+
+        # Step 5: Conclusion
         self.clear()
-        midpoint_title = Text("Midpoint Rule Comparison", font_size=36)
-        midpoint_title.move_to(UP*3)
+        conclusion = Tex("The statement is TRUE!").scale(1.5).set_color(GREEN)
+        self.play(Write(conclusion))
+        self.wait(2)
 
-        left = Tex("1. Left Riemann Sum", font_size=28)
-        left.move_to(UP*1 + LEFT*3)
-
-        right = Tex("2. Right Riemann Sum", font_size=28)
-        right.move_to(UP*1 + RIGHT*3)
-
-        midpoint = Tex("3. Midpoint Rule", font_size=28)
-        midpoint.move_to(DOWN*0.5)
-
-        midpoint_advantage = Tex("• Cancels out errors", font_size=26)
-        midpoint_advantage.next_to(midpoint, DOWN)
-
-        linear_exact = Tex("• Exact for linear functions", font_size=26)
-        linear_exact.next_to(midpoint_advantage, DOWN)
-
-        accuracy = Tex("• More accurate than left/right sums", font_size=26)
-        accuracy.next_to(linear_exact, DOWN)
-
-        self.play(Write(midpoint_title))
-        self.play(Write(left), Write(right))
-        self.wait(1)
-        self.play(Write(midpoint))
-        self.play(Write(midpoint_advantage))
-        self.play(Write(linear_exact))
-        self.play(Write(accuracy))
-        self.wait(3)
-
-        # Final wait to match voiceover length
-        self.wait(1)
+        self.wait(1)  # Total duration placeholder

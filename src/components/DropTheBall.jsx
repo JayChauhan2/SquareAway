@@ -16,11 +16,13 @@ export default function DropTheBall({ size = 'small' }) {
     const highScoreRef = useRef(0);
 
     // Game constants
+    // Game constants
     const GRAVITY = 0.6;
     const JUMP_FORCE = -10;
-    const OBSTACLE_SPEED = 5;
+    const INITIAL_SPEED = 5;
 
     // Game State Refs (mutable for loop)
+    const currentSpeed = useRef(INITIAL_SPEED);
     const playerY = useRef(150);
     const playerVelocity = useRef(0);
     const jumpCount = useRef(0); // For double jump logic
@@ -60,6 +62,7 @@ export default function DropTheBall({ size = 'small' }) {
         jumpCount.current = 0;
         obstacles.current = [];
         frameCount.current = 0;
+        currentSpeed.current = INITIAL_SPEED;
 
         if (requestRef.current) cancelAnimationFrame(requestRef.current);
         requestRef.current = requestAnimationFrame(gameLoop);
@@ -128,8 +131,11 @@ export default function DropTheBall({ size = 'small' }) {
             });
         }
 
+        // Increase speed over time (subtle acceleration)
+        currentSpeed.current += 0.005;
+
         obstacles.current.forEach((obs, index) => {
-            obs.x -= OBSTACLE_SPEED;
+            obs.x -= currentSpeed.current;
         });
 
         // Remove off-screen obstacles
