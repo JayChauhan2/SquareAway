@@ -1,41 +1,46 @@
+# Estimating Area Between Curves
+
 ## Unit 8
 Date: Nov 3, 2022
 
-### Estimating Area between curves
+## Calculating Area with Definite Integrals
+We can calculate the area between curves by estimating with rectangles and taking the limit to get the definite Integral.
 
-We can calculate this area by estimating with rectangles and taking the limit to get the definite Integral.
+**Example: Area between $y = x^2$ and $y = 2-x$**
+*   **Intersection Points:** $x = -2$ and $x = 1.5$
+*   **Height of a rectangle:** $(2-x) - x^2$
+*   **Width of a rectangle ($\Delta X$):** $\frac{1.5 - (-2)}{n} = \frac{3.5}{n}$
 
-**Height** = $(2-x)-x^2$
-$\Delta X = \frac{[1.5 - (-2)]}{n} = \frac{3.5}{n}$
+**Riemann Sum Approximation:**
+$\sum_{i=1}^{n} | \text{Height} | \cdot | \text{width} | = \sum_{i=1}^{n} ( (2 - X_{i-1}) - X_{i-1}^2 ) \Delta X$
 
-$\sum |Height| \text{ } |width| = \sum_{i=1}^{n} |(2-X_{i-1})-X_{i-1}^2| \Delta X$
-$\int_{-2}^{1.5} [(2-x)-x^2] dx$
-
----
-
-### Negative Integral Values
-
-$\int_a^b F(t)dt = A+C+E-B-D$
-*(Accompanying graph shows a wavy function above and below the x-axis, with areas A, C, E above and B, D below)*
+**Definite Integral:**
+$\int_{-2}^{1.5} [ (2-X) - X^2 ] dx$
 
 ---
 
-### Midpoint Rule
+## Negative Integral Values
+When calculating a definite integral $\int_{a}^{b} F(t) dt$, areas above the x-axis are considered positive, and areas below the x-axis are considered negative.
 
-*   Left[n] and Right[n] for approximating definite Integrals are inefficient and crude estimates.
-*   To use a more accurate and efficient is the **Midpoint Rule**
+**Example:**
+For a function with regions A, B, C, D, E:
+$\int_{a}^{b} F(t) dt = A + C + E - B - D$
+*(Where A, C, E are areas above the x-axis, and B, D are areas below the x-axis)*
 
-*(Accompanying graphs illustrate approximations with rectangles)*
+---
 
-**Left**
-*(Rectangles use the left endpoint of each interval to determine height)*
+## Midpoint Rule
 
-**Right**
-*(Rectangles use the right endpoint of each interval to determine height)*
+*   Left Riemann Sum (Left(n)) and Right Riemann Sum (Right(n)) for approximating definite Integrals are inefficient and crude estimates.
+*   To get a more accurate and efficient estimate, use the Midpoint Rule.
 
-**Mid**
-*(Rectangles use the midpoint of each interval to determine height)*
+**Visualizing Riemann Sums:**
+*   **Left Endpoint Rule:** Rectangles are drawn using the function value at the left end of each subinterval.
+*   **Right Endpoint Rule:** Rectangles are drawn using the function value at the right end of each subinterval.
+*   **Midpoint Rule:** Rectangles are drawn using the function value at the midpoint of each subinterval.
 
-*   linear functions $\to$ Midpoint $= \int_a^b f(x)dx$
-    *   Cancels out and more accurate
-    *   Value exactly equal to integral
+**Advantages of the Midpoint Rule:**
+*   The errors from overestimation and underestimation often cancel out, leading to a more accurate approximation.
+*   For linear functions, the Midpoint Rule yields the exact value of the integral:
+    *   Linear functions $\implies$ Midpoint Rule = $\int_a^b f(x)dx$
+    *   This means the value is exactly equal to the integral for linear functions.

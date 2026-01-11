@@ -629,51 +629,59 @@ export default function SquareAwayLanding() {
           <div className="bg-white rounded-3xl p-8 shadow-lg border border-slate-200/50">
             <h2 className="text-2xl font-semibold text-slate-800 mb-6">Past Uploads</h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {pastNotes.map((note) => (
-                <div
-                  key={note.id}
-                  onClick={() => {
-                    setNotesContent(note.content);
-                    setNotesTitle(note.title);
-                    setCurrentNoteId(note.id);
-                    if (note.video_url) setVideoUrl(note.video_url);
-                    else setVideoUrl(''); // Reset if no video
-                  }}
-                  className="bg-white/50 p-6 rounded-2xl border border-slate-200 hover:border-blue-400 hover:shadow-lg hover:bg-white transition-all duration-300 cursor-pointer group relative"
-                >
-                  <div className="flex justify-between items-start mb-3">
-                    <h3 className="font-semibold text-lg text-slate-800 truncate group-hover:text-blue-600 transition-colors pr-8">
-                      {note.title || 'Untitled Note'}
-                    </h3>
-                    {note.video_url && <span className="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full flex-none">Video</span>}
-                  </div>
+            {(() => {
+              const pastUploads = pastNotes.filter(note => !note.video_url);
 
-                  {/* Delete Button */}
-                  <button
-                    onClick={(e) => deleteNote(note.id, e)}
-                    className="absolute top-6 right-6 p-1 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-all opacity-0 group-hover:opacity-100"
-                    title="Delete Note"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
+              if (pastUploads.length === 0) return null;
 
-                  <p className="text-sm text-slate-500 mb-4 line-clamp-3">
-                    {note.content}
-                  </p>
+              return (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {pastUploads.map((note) => (
+                    <div
+                      key={note.id}
+                      onClick={() => {
+                        setNotesContent(note.content);
+                        setNotesTitle(note.title);
+                        setCurrentNoteId(note.id);
+                        if (note.video_url) setVideoUrl(note.video_url);
+                        else setVideoUrl(''); // Reset if no video
+                      }}
+                      className="bg-white/50 p-6 rounded-2xl border border-slate-200 hover:border-blue-400 hover:shadow-lg hover:bg-white transition-all duration-300 cursor-pointer group relative"
+                    >
+                      <div className="flex justify-between items-start mb-3">
+                        <h3 className="font-semibold text-lg text-slate-800 truncate group-hover:text-blue-600 transition-colors pr-8">
+                          {note.title || 'Untitled Note'}
+                        </h3>
+                        {/* Video badge removed since these shouldn't have videos */}
+                      </div>
 
-                  <div className="text-xs text-slate-400 font-medium">
-                    {new Date(note.created_at).toLocaleString('en-US', {
-                      month: 'short',
-                      day: 'numeric',
-                      year: 'numeric',
-                      hour: 'numeric',
-                      minute: 'numeric'
-                    })}
-                  </div>
+                      {/* Delete Button */}
+                      <button
+                        onClick={(e) => deleteNote(note.id, e)}
+                        className="absolute top-6 right-6 p-1 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-all opacity-0 group-hover:opacity-100"
+                        title="Delete Note"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+
+                      <p className="text-sm text-slate-500 mb-4 line-clamp-3">
+                        {note.content}
+                      </p>
+
+                      <div className="text-xs text-slate-400 font-medium">
+                        {new Date(note.created_at).toLocaleString('en-US', {
+                          month: 'short',
+                          day: 'numeric',
+                          year: 'numeric',
+                          hour: 'numeric',
+                          minute: 'numeric'
+                        })}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              );
+            })()}
           </div>
         </div>
       )}
