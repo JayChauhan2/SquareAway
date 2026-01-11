@@ -382,9 +382,11 @@ export default function Questions() {
      MathQuill onChange gives us latex. 
      We'll update state with the latex string.
   */
-  const handleFreeResponseChange = (mathField) => {
-    if (isSubmitted) return;
-    setAnswers({ ...answers, [currentQuestion.id]: mathField.latex() });
+  const handleFreeResponseChange = (val) => {
+    if (isSubmitted || isReviewMode) return;
+    // val can be event object (from textarea) or mathField (from MathQuill)
+    const value = val.target ? val.target.value : val.latex();
+    setAnswers({ ...answers, [currentQuestion.id]: value });
   };
 
   const handleSubmit = async () => {
@@ -794,8 +796,10 @@ export default function Questions() {
 
             {/* Free / Word */}
             {(currentQuestion.type === "free" || currentQuestion.type === "word") && (
-              <div className="space-y-2">
-                <div className="w-full bg-white p-4 border rounded-lg focus-within:ring-2 focus-within:ring-blue-500 min-h-[50px] flex items-center">
+              <div className="space-y-3">
+                <div className={`w-full bg-white p-4 border rounded-lg focus-within:ring-2 focus-within:ring-blue-500 min-h-[50px] flex items-center transition-all
+                                ${isSubmitted || isReviewMode ? 'opacity-60 pointer-events-none bg-gray-50' : ''}`}
+                >
                   <EditableMathField
                     latex={answers[currentQuestion.id] || ""}
                     onChange={handleFreeResponseChange}
@@ -806,7 +810,9 @@ export default function Questions() {
                     className="mathquill-input w-full border-none outline-none text-lg"
                   />
                 </div>
-                <p className="text-xs text-gray-400">Type math naturally (e.g. forward slash '/' for fractions, '^' for exponents)</p>
+                <p className="text-xs text-gray-400">
+                  Type math naturally (e.g. forward slash '/' for fractions, '^' for exponents)
+                </p>
               </div>
             )}
 

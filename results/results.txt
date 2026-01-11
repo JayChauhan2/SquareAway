@@ -1,29 +1,30 @@
-CHAIN RULE AND APPLICATIONS
+**Estimating Area between Curves**
+Unit 8
+Date: Nov 3, 2022
 
-**Problem 4:**
-Given: $y = \sqrt[7]{\log\left(\frac{1}{x}\right)}$
+We can calculate this area by estimating with rectangles and taking the limit to get the definite Integral.
 
-Steps for differentiation:
-$\frac{dy}{dx} = \frac{1}{7} \left(\log\left(\frac{1}{x}\right)\right)^{-\frac{6}{7}} \frac{d}{dx} \left(\log\left(\frac{1}{x}\right)\right)$
-
-$= -\frac{1}{7} \left(\log\left(\frac{1}{x}\right)\right)^{-\frac{6}{7}} \frac{d}{dx} (\log x)$
-*Note: The derivative of $\log\left(\frac{1}{x}\right)$ is $\frac{d}{dx}(-\log x) = -\frac{1}{x}$. The written step includes a leading negative sign but then incorrectly shows $\frac{d}{dx}(\log x)$ instead of $\frac{d}{dx}(-\log x)$ or just evaluating it directly as $-\frac{1}{x}$.*
-
-$= -\frac{1}{7} \left(\log\left(\frac{1}{x}\right)\right)^{-\frac{6}{7}} \left(\frac{1}{x}\right)$
-*Note: This step evaluates $\frac{d}{dx}(\log x) = \frac{1}{x}$. While the overall product effectively produces the correct result for the derivative of $\log\left(\frac{1}{x}\right)$, the intermediate written derivative term $\frac{d}{dx}(\log x)$ is inconsistent with the preceding negative sign if it originated from $\frac{d}{dx}(-\log x)$.*
-
-Final simplified result:
-$\frac{dy}{dx} = \frac{-1}{7x \left(\log\left(\frac{1}{x}\right)\right)^{\frac{6}{7}}}$
+**Example: Area between y = 2-x and y = x²**
+*   **Height:** `(2 - x) - x²`
+*   **Δx:** `(1.5 - (-2)) / n = 3.5 / n`
+*   **Riemann Sum:** `Σ ( (2 - xᵢ₋₁) - xᵢ₋₁² ) Δx` (from i=1 to n)
+*   **Definite Integral:** `∫(-2 to 1.5) [ (2 - x) - x² ] dx`
 
 ---
+**Negative Integral Values**
+For a function `F(t)`, the definite integral `∫(a to b) F(t) dt` represents the net signed area.
+If A, C, E represent positive areas (above the x-axis) and B, D represent negative areas (below the x-axis), then:
+`∫(a to b) F(t) dt = A + C + E - B - D`
 
-**Problem:**
-Given: $y = \sin^4 x + \sin(x^4) + \sin(4x) + x^4$
+---
+**Midpoint Rule**
 
-Steps for differentiation:
-$\frac{dy}{dx} = 4 \sin^3 x \frac{d}{dx}(\sin x) + \cos(x^4) \frac{d}{dx}(x^4) + 4 \cos(4x) + 4x^3$
+*   Left[n] and Right[n] (Riemann sums using left and right endpoints) for approximating definite Integrals are inefficient and crude estimates.
+*   To use a more accurate and efficient method is the Midpoint Rule.
 
-$= 4 \sin^3 x (\cos x) + \cos(x^4) (4x^3) + 4 \cos(4x) + 4x^3$
-
-Final simplified result:
-$= 4 \cos x \sin^3 x + 4x^3 \cos(x^4) + 4 \cos(4x) + 4x^3$
+**Comparison of Approximation Methods:**
+1.  **Left Riemann Sum:** (Rectangles use the left endpoint of each subinterval for height)
+2.  **Right Riemann Sum:** (Rectangles use the right endpoint of each subinterval for height)
+3.  **Midpoint Rule:** (Rectangles use the midpoint of each subinterval for height)
+    *   Cancels out errors and is more accurate.
+    *   For linear functions, the Midpoint Rule gives a value exactly equal to the integral.
