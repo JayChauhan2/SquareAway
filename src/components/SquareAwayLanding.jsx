@@ -37,16 +37,16 @@ function NotesDisplay({ content, onContentChange }) {
   return (
     // Added h-full to ensure it takes available space if needed, 
     // though the parent controls the height sync.
-    <div className="bg-white rounded-lg shadow-lg p-6 h-full">
+    <div className="bg-white rounded-lg shadow-lg p-6 h-full border border-slate-200">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold text-gray-800">
+        <h2 className="text-2xl font-bold text-slate-800">
           Your Converted Notes
         </h2>
 
         {!isEditing ? (
           <button
             onClick={() => setIsEditing(true)}
-            className="px-4 py-2 bg-blue-500 text-white rounded"
+            className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded transition-colors"
           >
             Edit
           </button>
@@ -54,13 +54,13 @@ function NotesDisplay({ content, onContentChange }) {
           <div className="flex gap-2">
             <button
               onClick={handleSave}
-              className="px-4 py-2 bg-green-500 text-white rounded"
+              className="px-4 py-2 bg-green-600 hover:bg-green-500 text-white rounded transition-colors"
             >
               Save
             </button>
             <button
               onClick={handleCancel}
-              className="px-4 py-2 bg-gray-500 text-white rounded"
+              className="px-4 py-2 bg-slate-600 hover:bg-slate-500 text-white rounded transition-colors"
             >
               Cancel
             </button>
@@ -72,7 +72,7 @@ function NotesDisplay({ content, onContentChange }) {
         <textarea
           value={editContent}
           onChange={(e) => setEditContent(e.target.value)}
-          className="w-full h-96 p-4 border rounded font-mono text-sm"
+          className="w-full h-96 p-4 border border-slate-300 rounded font-mono text-sm bg-slate-50 text-slate-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
         />
       ) : (
         <div className="markdown-body">
@@ -92,9 +92,9 @@ function NotesDisplay({ content, onContentChange }) {
 
 function VideoPlayer({ videoUrl }) {
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 mt-8">
-      <h2 className="text-2xl font-bold text-gray-800 mb-4">Video Explanation</h2>
-      <div className="bg-black rounded-lg overflow-hidden">
+    <div className="bg-white rounded-lg shadow-lg p-6 mt-8 border border-slate-200">
+      <h2 className="text-2xl font-bold text-slate-800 mb-4">Video Explanation</h2>
+      <div className="bg-black rounded-lg overflow-hidden border border-slate-200">
         <video
           controls
           className="w-full"
@@ -579,7 +579,7 @@ export default function SquareAwayLanding() {
   };
 
   return (
-    <div className="bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 min-h-screen flex flex-col items-center justify-center pt-28 pb-8 px-8 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center justify-center pt-28 pb-8 px-8 relative overflow-hidden">
 
       {/* Background Blobs (Consistent) */}
       <div className="fixed inset-0 pointer-events-none z-0">
@@ -591,7 +591,7 @@ export default function SquareAwayLanding() {
       {/* Success Notification Toast */}
       {showSuccessToast && (
         <div className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 animate-in slide-in-from-top-4 fade-in duration-500">
-          <div className="bg-green-500 text-white px-8 py-3 rounded-full font-medium shadow-lg shadow-green-500/30 flex items-center gap-2">
+          <div className="bg-green-600 text-white px-8 py-3 rounded-full font-medium shadow-lg shadow-green-500/30 flex items-center gap-2">
             <span>✓</span> {showSuccessToast}
           </div>
         </div>
@@ -599,7 +599,7 @@ export default function SquareAwayLanding() {
 
       {!notesContent && !isProcessing && (
         <>
-          <h1 className="text-5xl md:text-6xl font-light text-slate-900 text-center mb-8 relative z-10">Upload your Notes to Begin</h1>
+          <h1 className="text-5xl md:text-6xl font-light text-slate-800 text-center mb-8 relative z-10">Upload your Notes to Begin</h1>
 
           <div
             onDrop={handleDrop}
@@ -626,7 +626,7 @@ export default function SquareAwayLanding() {
       {!notesContent && files.length === 0 && pastNotes.length > 0 && (
         <div className="w-full max-w-5xl space-y-12 relative z-10 mt-12">
 
-          <div className="bg-white rounded-3xl p-8 shadow-lg border border-slate-200/50">
+          <div className="bg-white rounded-3xl p-8 shadow-lg border border-slate-200/50 backdrop-blur-sm">
             <h2 className="text-2xl font-semibold text-slate-800 mb-6">Past Uploads</h2>
 
             {(() => {

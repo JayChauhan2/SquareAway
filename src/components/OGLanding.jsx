@@ -42,7 +42,7 @@ export default function SquareAwayLanding() {
   const opacity = Math.max(0, 1 - scrollY / 600);
 
   return (
-    <div className="bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 min-h-screen overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden text-slate-900">
       {/* Animated background blobs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div
@@ -83,9 +83,9 @@ export default function SquareAwayLanding() {
             opacity: opacity
           }}
         >
-          <div className="inline-flex items-center gap-2 px-5 py-2 bg-white/60 backdrop-blur-sm rounded-full mb-8 border border-blue-200/40">
+          <div className="inline-flex items-center gap-2 px-5 py-2 bg-white/50 backdrop-blur-sm rounded-full mb-8 border border-white/40 shadow-sm">
             <Sparkles className="w-4 h-4 text-blue-600" />
-            <span className="text-sm font-medium text-blue-900">AI-Powered Learning Experience</span>
+            <span className="text-sm font-medium text-slate-600">AI-Powered Learning Experience</span>
           </div>
 
           <h1 className="text-6xl md:text-7xl lg:text-8xl font-light text-slate-900 mb-6 leading-tight">
@@ -131,7 +131,7 @@ export default function SquareAwayLanding() {
       <section id="section-how" className="relative py-32 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-light text-slate-900 mb-6">
+            <h2 className="text-5xl md:text-6xl font-light text-slate-800 mb-6">
               Learning That <span className="text-blue-600">Adapts</span>
             </h2>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto font-light">
@@ -163,7 +163,7 @@ export default function SquareAwayLanding() {
               <div
                 key={idx}
                 id={`section-feature-${idx}`}
-                className={`bg-white/70 backdrop-blur-sm rounded-3xl p-8 border border-slate-200/50 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-700 ${isVisible[`section-feature-${idx}`] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                className={`bg-white/60 backdrop-blur-sm rounded-3xl p-8 border border-white/40 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-700 ${isVisible[`section-feature-${idx}`] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
                   }`}
                 style={{
                   transitionDelay: `${idx * 150}ms`
@@ -172,7 +172,7 @@ export default function SquareAwayLanding() {
                 <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-6`}>
                   <feature.icon className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-normal text-slate-900 mb-4">{feature.title}</h3>
+                <h3 className="text-2xl font-normal text-slate-800 mb-4">{feature.title}</h3>
                 <p className="text-slate-600 font-light leading-relaxed">{feature.desc}</p>
               </div>
             ))}
@@ -181,14 +181,14 @@ export default function SquareAwayLanding() {
       </section>
 
       {/* Interactive Demo Section */}
-      <section id="section-demo" className="relative py-32 px-6 bg-gradient-to-b from-transparent to-blue-50/50">
+      <section id="section-demo" className="relative py-32 px-6">
         <div className="max-w-5xl mx-auto">
           <div
             className={`transition-all duration-1000 ${isVisible['section-demo'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
               }`}
           >
             <div className="text-center mb-16">
-              <h2 className="text-5xl md:text-6xl font-light text-slate-900 mb-6">
+              <h2 className="text-5xl md:text-6xl font-light text-slate-800 mb-6">
                 Experience <span className="text-purple-600">Fluid Learning</span>
               </h2>
               <p className="text-xl text-slate-600 max-w-2xl mx-auto font-light">
@@ -196,14 +196,14 @@ export default function SquareAwayLanding() {
               </p>
             </div>
 
-            <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-12 border border-slate-200/50 shadow-2xl shadow-purple-500/10">
+            <div className="bg-white/70 backdrop-blur-sm rounded-3xl p-12 border border-white/50 shadow-2xl shadow-purple-500/10">
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 <div>
                   <div className="space-y-6">
                     {['Visualize complex equations', 'Step-by-step guidance', 'Instant feedback loops', 'Personalized hints'].map((item, idx) => (
                       <div
                         key={idx}
-                        className="flex items-start gap-4 p-4 rounded-2xl bg-gradient-to-r from-blue-50 to-purple-50 hover:from-blue-100 hover:to-purple-100 transition-all duration-500"
+                        className="flex items-start gap-4 p-4 rounded-2xl bg-white/50 hover:bg-white transition-all duration-500 shadow-sm"
                       >
                         <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center flex-shrink-0 mt-1">
                           <CheckCircle className="w-5 h-5 text-white" />
@@ -215,11 +215,11 @@ export default function SquareAwayLanding() {
                 </div>
 
                 <div className="relative">
-                  <div className="aspect-square rounded-3xl bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 flex items-center justify-center relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-400/20 animate-pulse" />
+                  <div className="aspect-square rounded-3xl bg-gradient-to-br from-slate-50 via-white to-blue-50 flex items-center justify-center relative overflow-hidden border border-white/50 shadow-inner">
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 animate-pulse" />
                     <div className="relative z-10 text-center p-8">
                       <div className="text-6xl font-light text-slate-800 mb-4">∑ ∫ √</div>
-                      <p className="text-slate-600 font-light">Interactive problem-solving environment</p>
+                      <p className="text-slate-500 font-light">Interactive problem-solving environment</p>
                     </div>
                   </div>
                 </div>
@@ -233,7 +233,7 @@ export default function SquareAwayLanding() {
       <section id="section-testimonials" className="relative py-32 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-light text-slate-900 mb-6">
+            <h2 className="text-5xl md:text-6xl font-light text-slate-800 mb-6">
               Stories of <span className="text-cyan-600">Transformation</span>
             </h2>
           </div>
@@ -255,12 +255,12 @@ export default function SquareAwayLanding() {
             ].map((testimonial, idx) => (
               <div
                 key={idx}
-                className={`bg-white/70 backdrop-blur-sm rounded-3xl p-8 border border-slate-200/50 transition-all duration-1000 ${isVisible['section-testimonials'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                className={`bg-white/60 backdrop-blur-sm rounded-3xl p-8 border border-white/40 transition-all duration-1000 ${isVisible['section-testimonials'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
                   }`}
                 style={{ transitionDelay: `${idx * 200}ms` }}
               >
                 <div className={`w-12 h-1 rounded-full bg-gradient-to-r ${testimonial.gradient} mb-6`} />
-                <p className="text-lg text-slate-700 mb-6 font-light leading-relaxed italic">"{testimonial.text}"</p>
+                <p className="text-lg text-slate-600 mb-6 font-light leading-relaxed italic">"{testimonial.text}"</p>
                 <div>
                   <p className="font-medium text-slate-900">{testimonial.name}</p>
                   <p className="text-sm text-slate-500 font-light">{testimonial.role}</p>
@@ -293,7 +293,7 @@ export default function SquareAwayLanding() {
               <button onClick={() => navigate('/signup')} className="px-10 py-5 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full text-lg font-medium hover:shadow-2xl hover:shadow-blue-500/40 transition-all duration-500 hover:scale-105 w-full sm:w-auto">
                 Start Free Trial
               </button>
-              <button className="px-10 py-5 bg-white/80 backdrop-blur-sm text-slate-900 rounded-full text-lg font-medium border-2 border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all duration-500 w-full sm:w-auto">
+              <button className="px-10 py-5 bg-white/50 backdrop-blur-sm text-slate-700 rounded-full text-lg font-medium border border-slate-200 hover:bg-white/80 hover:shadow-xl transition-all duration-500 w-full sm:w-auto">
                 Watch Demo
               </button>
             </div>
@@ -306,17 +306,17 @@ export default function SquareAwayLanding() {
       </section>
 
       {/* Footer */}
-      <footer className="relative border-t border-slate-200/50 bg-white/50 backdrop-blur-sm py-12 px-6">
+      <footer className="relative border-t border-slate-200 bg-white/50 backdrop-blur-sm py-12 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="flex items-center gap-2">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center">
                 <Brain className="w-6 h-6 text-white" />
               </div>
-              <span className="text-2xl font-light text-slate-900">Square Away</span>
+              <span className="text-2xl font-light text-slate-800">Square Away</span>
             </div>
 
-            <div className="flex gap-8 text-sm text-slate-600 font-light">
+            <div className="flex gap-8 text-sm text-slate-500 font-light">
               <a href="#" className="hover:text-blue-600 transition-colors duration-300">About</a>
               <a href="#" className="hover:text-blue-600 transition-colors duration-300">Features</a>
               <a href="#" className="hover:text-blue-600 transition-colors duration-300">Pricing</a>
@@ -324,7 +324,7 @@ export default function SquareAwayLanding() {
             </div>
           </div>
 
-          <div className="mt-8 pt-8 border-t border-slate-200/50 text-center text-sm text-slate-500 font-light">
+          <div className="mt-8 pt-8 border-t border-slate-200 text-center text-sm text-slate-400 font-light">
             © 2025 Square Away. Made with ❤️ by Jay Chauhan.
           </div>
         </div>

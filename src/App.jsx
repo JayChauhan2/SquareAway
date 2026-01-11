@@ -1,6 +1,7 @@
 import './App.css'
 import { Routes, Route, Navigate } from "react-router-dom";
 import FloatingNavbar from './components/FloatingNavbar';
+import ParticleBackground from './components/ParticleBackground';
 
 import SquareAwayLanding from './components/SquareAwayLanding'
 import OGLanding from './components/OGLanding'
@@ -45,6 +46,7 @@ function App() {
 
   return (
     <div className="App relative bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 min-h-screen">
+      <ParticleBackground />
       {/* Navbar is fixed - only show if logged in */}
       {user && <FloatingNavbar />}
 

@@ -236,7 +236,7 @@ export default function FloatingNavbar() {
             // Teacher Navigation (Unchanged)
             <NavLink
               to="/teacher-dashboard"
-              className={({ isActive }) => `${linkBase} ${isActive ? 'bg-yellow-400 text-black shadow-sm font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-yellow-100'}`}
+              className={({ isActive }) => `${linkBase} ${isActive ? 'bg-yellow-400 text-black shadow-sm font-semibold' : 'text-slate-400 hover:text-white hover:bg-white/5'}`}
             >
               Dashboard
             </NavLink>
@@ -272,7 +272,7 @@ export default function FloatingNavbar() {
               {/* Multi-Class Dropdown */}
               <div className="relative group">
                 <button
-                  className={`${linkBase} ${activeClass ? 'bg-green-100 text-green-700 font-medium' : inactive} flex items-center gap-1 min-w-[120px] justify-between`}
+                  className={`${linkBase} ${activeClass ? 'bg-green-100/50 text-green-700 border border-green-200 font-medium' : inactive} flex items-center gap-1 min-w-[120px] justify-between`}
                 >
                   <div className="flex items-center gap-1 overflow-hidden">
                     <UserPlus className="w-4 h-4 flex-shrink-0" />
@@ -283,7 +283,7 @@ export default function FloatingNavbar() {
                   {activeClass && <ChevronDown className="w-3 h-3 opacity-50" />}
                 </button>
 
-                <div className="absolute left-0 top-full mt-2 w-72 bg-white rounded-xl shadow-xl border border-slate-100 p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform origin-top-left divide-y divide-slate-100">
+                <div className="absolute left-0 top-full mt-2 w-72 bg-white rounded-xl shadow-xl border border-slate-200 p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform origin-top-left divide-y divide-slate-100">
 
                   {/* Enrolled Classes List */}
                   {enrolledClasses.length > 0 && !showJoinInput && (
@@ -295,7 +295,7 @@ export default function FloatingNavbar() {
                             <button
                               onClick={() => switchClass(cls)}
                               className={`flex-1 flex items-center gap-2 text-left text-sm
-                              ${activeClass?.id === cls.id ? 'text-blue-600 font-medium' : 'text-slate-700'}
+                              ${activeClass?.id === cls.id ? 'text-blue-600 font-medium' : 'text-slate-600'}
                             `}
                             >
                               {activeClass?.id === cls.id && <Check className="w-3 h-3" />}
@@ -330,14 +330,14 @@ export default function FloatingNavbar() {
                     ) : (
                       <div className="px-2 pb-2">
                         <div className="flex justify-between items-center mb-2">
-                          <p className="text-sm font-medium text-slate-800">Enter Class Code</p>
+                          <p className="text-sm font-medium text-slate-700">Enter Class Code</p>
                           <button
                             onClick={() => {
                               setShowJoinInput(false);
                               setJoinError('');
                               setClassCode('');
                             }}
-                            className="text-xs text-slate-400 hover:text-slate-600"
+                            className="text-xs text-slate-500 hover:text-slate-700"
                           >
                             Cancel
                           </button>
@@ -349,14 +349,14 @@ export default function FloatingNavbar() {
                             onChange={(e) => setClassCode(e.target.value)}
                             maxLength={5}
                             placeholder="12345"
-                            className="w-full px-3 py-2 border border-slate-200 rounded-lg text-center text-lg font-mono mb-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-center text-lg font-mono mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900"
                             autoFocus
                           />
-                          {joinError && <p className="text-xs text-red-600 mb-2">{joinError}</p>}
+                          {joinError && <p className="text-xs text-red-500 mb-2">{joinError}</p>}
                           <button
                             type="submit"
                             disabled={joining}
-                            className="w-full px-3 py-2 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600 transition-colors disabled:opacity-50"
+                            className="w-full px-3 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-500 transition-colors disabled:opacity-50"
                           >
                             {joining ? 'Joining...' : 'Join Class'}
                           </button>
@@ -370,25 +370,25 @@ export default function FloatingNavbar() {
             </>
           )}
 
-          <div className="h-4 w-px bg-slate-200 mx-1" />
+          <div className="h-4 w-px bg-slate-300 mx-1" />
 
           {/* More Menu (Unchanged) */}
           <div className="relative group">
-            <button className="p-2 rounded-full text-slate-600 hover:bg-slate-100 transition-colors">
+            <button className="p-2 rounded-full text-slate-500 hover:bg-slate-100 hover:text-slate-900 transition-colors">
               <MoreHorizontal className="w-5 h-5" />
             </button>
 
-            <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-xl border border-slate-100 p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform origin-top-right">
+            <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-xl border border-slate-200 p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform origin-top-right">
               {user ? (
                 <>
                   <div className="px-3 py-2 border-b border-slate-100 mb-1">
                     <p className="text-xs text-slate-500 font-medium uppercase">Signed in as</p>
                     <p className="text-sm font-semibold text-slate-800 truncate">{user.email}</p>
-                    <p className="text-xs text-slate-400 capitalize">{isTeacher ? 'Teacher' : 'Student'}</p>
+                    <p className="text-xs text-slate-500 capitalize">{isTeacher ? 'Teacher' : 'Student'}</p>
                   </div>
                   <button
                     onClick={signOut}
-                    className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                    className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-500 hover:bg-red-50 rounded-lg transition-colors"
                   >
                     <LogOut className="w-4 h-4" />
                     Log Out
@@ -407,10 +407,10 @@ export default function FloatingNavbar() {
 
       {/* Leave Class Confirmation Modal */}
       {leaveModal.show && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/20 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl shadow-xl p-8 max-w-sm w-full transform scale-100 transition-all border border-slate-100">
-            <h3 className="text-xl font-bold text-slate-800 mb-2">Leave Class?</h3>
-            <p className="text-slate-500 mb-6">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white rounded-2xl shadow-xl p-8 max-w-sm w-full transform scale-100 transition-all border border-slate-200">
+            <h3 className="text-xl font-bold text-slate-900 mb-2">Leave Class?</h3>
+            <p className="text-slate-600 mb-6">
               Are you sure you want to leave this class? You'll need the code to join again.
             </p>
             <div className="flex justify-end gap-3">
@@ -422,7 +422,7 @@ export default function FloatingNavbar() {
               </button>
               <button
                 onClick={confirmLeaveClass}
-                className="px-4 py-2 bg-red-500 text-white font-medium rounded-lg hover:bg-red-600 shadow-md shadow-red-200 transition-all"
+                className="px-4 py-2 bg-red-600 text-white font-medium rounded-lg hover:bg-red-500 shadow-md shadow-red-500/20 transition-all"
               >
                 Leave
               </button>
