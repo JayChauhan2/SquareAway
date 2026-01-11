@@ -13,6 +13,10 @@ export default function SquareAwayLanding() {
   const [isVisible, setIsVisible] = useState({});
 
   useEffect(() => {
+    document.title = 'Square Away - AI-Powered Math Learning';
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);

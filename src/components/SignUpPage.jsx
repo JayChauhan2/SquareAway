@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
@@ -14,6 +14,10 @@ export default function SignUpPage() {
   const [role, setRole] = useState('student');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    document.title = 'Sign Up - Square Away';
+  }, []);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -92,8 +96,8 @@ export default function SignUpPage() {
                 type="button"
                 onClick={() => setRole('student')}
                 className={`flex-1 px-4 py-3 rounded-xl border-2 transition-all duration-300 ${role === 'student'
-                    ? 'border-blue-500 bg-blue-50 text-blue-700 font-semibold'
-                    : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
+                  ? 'border-blue-500 bg-blue-50 text-blue-700 font-semibold'
+                  : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
                   }`}
               >
                 Student
@@ -102,8 +106,8 @@ export default function SignUpPage() {
                 type="button"
                 onClick={() => setRole('teacher')}
                 className={`flex-1 px-4 py-3 rounded-xl border-2 transition-all duration-300 ${role === 'teacher'
-                    ? 'border-yellow-500 bg-yellow-50 text-yellow-700 font-semibold'
-                    : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
+                  ? 'border-yellow-500 bg-yellow-50 text-yellow-700 font-semibold'
+                  : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
                   }`}
               >
                 Teacher

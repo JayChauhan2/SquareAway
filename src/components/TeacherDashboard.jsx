@@ -34,6 +34,10 @@ export default function TeacherDashboard() {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
     useEffect(() => {
+        document.title = 'Teacher Dashboard - Square Away';
+    }, []);
+
+    useEffect(() => {
         if (user) {
             fetchClasses();
         }

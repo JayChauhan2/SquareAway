@@ -89,6 +89,10 @@ export default function VideosPage() {
 
 
     useEffect(() => {
+        document.title = 'Library - Square Away';
+    }, []);
+
+    useEffect(() => {
         if (user) {
             fetchVideos();
         }
@@ -148,11 +152,13 @@ export default function VideosPage() {
         try {
             const response = await fetch(videoCheckUrl, { method: 'HEAD' });
             if (response.ok) {
+                // Upload to storage and save URL first, passing the prompt content
+                await uploadVideoAndCreateNote(promptRef.current);
+
+                // Then display the video
                 setCurrentVideoUrl(videoCheckUrl);
                 setIsGenerating(false);
                 setPrompt(''); // Clear input on success
-                // Upload to storage and save URL, passing the prompt content
-                uploadVideoAndCreateNote(promptRef.current);
             } else {
                 setTimeout(pollVideo, 3000);
             }
@@ -165,39 +171,51 @@ export default function VideosPage() {
         if (!user) return;
 
         try {
-            const response = await fetch('http://127.0.0.1:5000/video');
-            if (!response.ok) throw new Error('Failed to fetch video blob');
-
-            const blob = await response.blob();
+            // The video is already available at localhost:5000/video
+            // We'll save this URL directly (it's served by the Flask backend)
             const timestamp = new Date().getTime();
-            const fileName = `${user.id}/video_${timestamp}.mp4`;
-            const file = new File([blob], fileName, { type: 'video/mp4' });
+            const videoUrl = `http://127.0.0.1:5000/video?t=${timestamp}`;
 
-            // 1. Upload Video First
-            const { error: uploadError } = await supabase.storage
-                .from('videos')
-                .upload(fileName, file, { upsert: true });
+            // Create note entry with the localhost video URL
+            const { data, error: insertError } = await supabase.from('notes').insert([{
+                user_id: user.id,
+                title: contentParams, // Use prompt as title
+                content: contentParams, // Use prompt as content
+                video_url: videoUrl // Save localhost URL
+            }]).select();
 
-            if (uploadError) throw uploadError;
-
-            const { data: publicData } = supabase.storage
-                .from('videos')
-                .getPublicUrl(fileName);
-
-            if (publicData.publicUrl) {
-                // 2. Create Note Entry ONLY after successful upload
-                await supabase.from('notes').insert([{
-                    user_id: user.id,
-                    title: contentParams, // Use prompt as title
-                    content: contentParams, // Use prompt as content
-                    video_url: publicData.publicUrl
-                }]);
-
-                // Refresh list to include new video
-                fetchVideos();
+            if (insertError) {
+                console.error('Error inserting note:', insertError);
+                throw insertError;
             }
+
+            console.log('Video note created successfully:', data);
+
+            // Save to localStorage for persistence
+            if (data && data[0]) {
+                const noteId = data[0].id;
+                saveVideoToLocal(user.id, noteId, videoUrl);
+            }
+
+            // Refresh list to include new video
+            await fetchVideos();
         } catch (error) {
             console.error('Error saving video:', error);
+            alert('Failed to save video: ' + error.message);
+        }
+    };
+
+    // Local Storage Helper for Videos (same as SquareAwayLanding)
+    const saveVideoToLocal = (userId, noteId, url) => {
+        if (!userId || !noteId || !url) return;
+        try {
+            const key = `video_storage_${userId}`;
+            const storage = JSON.parse(localStorage.getItem(key) || '{}');
+            storage[noteId] = url;
+            localStorage.setItem(key, JSON.stringify(storage));
+            console.log('Video URL saved to localStorage:', { noteId, url });
+        } catch (e) {
+            console.error("Error saving video to local storage:", e);
         }
     };
 

@@ -141,6 +141,10 @@ export default function Questions() {
     setIsGeneratingVideo(false);
   }, [currentIndex]);
 
+  useEffect(() => {
+    document.title = `Practice - ${decodeURIComponent(topic)} - Square Away`;
+  }, [topic]);
+
   const savePracticeSession = async () => {
     // Determine score
     const correctCount = questions.filter(q => isCorrect(q)).length;

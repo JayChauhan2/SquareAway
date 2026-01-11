@@ -137,6 +137,10 @@ export default function Practice() {
   const [assignments, setAssignments] = useState([]);
 
   useEffect(() => {
+    document.title = 'Practice - Square Away';
+  }, []);
+
+  useEffect(() => {
     if (user) {
       fetchPractices();
       fetchAssignments();

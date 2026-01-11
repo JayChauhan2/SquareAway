@@ -141,6 +141,10 @@ export default function SquareAwayLanding() {
   const [showSuccessToast, setShowSuccessToast] = useState('');
 
   useEffect(() => {
+    document.title = 'Home - Square Away';
+  }, []);
+
+  useEffect(() => {
     const hash = window.location.hash;
 
     // Check for explicit navigation success state
@@ -435,15 +439,9 @@ export default function SquareAwayLanding() {
         setVideoUrl(videoCheckUrl);
         setIsGeneratingVideo(false);
 
-        // Upload to Supabase Storage and update note
+        // Save video URL to database and localStorage
         // Use noteIdRef which was set when the note was created
-        uploadVideoToSupabase(noteIdRef.current);
-
-        // Save to local storage immediately as a backup/fast-load
-        if (user && noteIdRef.current) {
-          saveVideoToLocal(user.id, noteIdRef.current, videoCheckUrl);
-        }
-
+        uploadVideoAndSave(noteIdRef.current, videoCheckUrl);
       } else {
         setTimeout(pollVideo, 3000);
       }
@@ -452,64 +450,40 @@ export default function SquareAwayLanding() {
     }
   };
 
-  const uploadVideoToSupabase = async (noteId) => {
+  const uploadVideoAndSave = async (noteId, videoUrl) => {
     // Use the passed noteId parameter instead of relying on state
     const uploadNoteId = noteId || currentNoteId;
 
     if (!uploadNoteId || !user) {
-      console.log('Upload skipped: missing noteId or user', { noteId, currentNoteId, user: !!user });
+      console.log('Save skipped: missing noteId or user', { noteId, currentNoteId, user: !!user });
       return;
     }
 
     try {
-      console.log('Fetching video from backend...');
-      const response = await fetch('http://127.0.0.1:5000/video');
-      if (!response.ok) {
-        throw new Error(`Failed to fetch video: ${response.status}`);
+      console.log('Saving video URL to database:', videoUrl);
+
+      // Update note with the localhost video URL
+      await supabase
+        .from('notes')
+        .update({ video_url: videoUrl })
+        .eq('id', uploadNoteId);
+
+      // Save to local storage
+      if (user) {
+        saveVideoToLocal(user.id, uploadNoteId, videoUrl);
       }
 
-      const blob = await response.blob();
-      console.log(`Video blob size: ${blob.size} bytes`);
-      const file = new File([blob], `video_${uploadNoteId}.mp4`, { type: 'video/mp4' });
+      // Update local state so the useEffect doesn't see stale data and wipe the URL
+      setPastNotes(prev => prev.map(n =>
+        n.id === uploadNoteId ? { ...n, video_url: videoUrl } : n
+      ));
+      console.log('Video URL saved successfully');
 
-      const fileName = `${user.id}/${uploadNoteId}.mp4`;
-      console.log(`Uploading to Supabase storage: ${fileName}`);
-
-      const { data, error: uploadError } = await supabase.storage
-        .from('videos')
-        .upload(fileName, file, { upsert: true });
-
-      if (uploadError) {
-        console.error('Supabase upload error:', uploadError);
-        throw uploadError;
-      }
-
-      console.log('Upload successful, getting public URL...');
-      const { data: publicData } = supabase.storage
-        .from('videos')
-        .getPublicUrl(fileName);
-
-      if (publicData.publicUrl) {
-        console.log('Updating note with video URL:', publicData.publicUrl);
-        await supabase
-          .from('notes')
-          .update({ video_url: publicData.publicUrl })
-          .eq('id', uploadNoteId);
-
-        // Save to local storage as source of truth
-        if (user) {
-          saveVideoToLocal(user.id, uploadNoteId, publicData.publicUrl);
-        }
-
-        // CRITICAL FIX: Update local state so the useEffect doesn't see stale data and wipe the URL
-        setPastNotes(prev => prev.map(n =>
-          n.id === uploadNoteId ? { ...n, video_url: publicData.publicUrl } : n
-        ));
-        console.log('Video URL saved successfully');
-      }
+      // Refresh notes list to ensure video appears in Videos tab
+      fetchNotes();
     } catch (error) {
-      console.error('Error uploading video to Supabase:', error);
-      alert(`Failed to save video: ${error.message}. The video will be lost when you refresh.`);
+      console.error('Error saving video URL:', error);
+      alert(`Failed to save video: ${error.message}.`);
     }
   };
 
@@ -634,7 +608,7 @@ export default function SquareAwayLanding() {
 
       {!notesContent && (
         <>
-          <h1 className="text-4xl font-bold text-gray-800 mb-8 relative z-10">Upload your Notes to Begin</h1>
+          <h1 className="text-5xl md:text-6xl font-light text-slate-900 text-center mb-8 relative z-10">Upload your Notes to Begin</h1>
 
           <div
             onDrop={handleDrop}
