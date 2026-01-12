@@ -15,8 +15,7 @@ import { useAuth } from '../../context/AuthContext';
 import {
   generateVideo,
   checkVideoReady,
-  getVideoBlob,
-  uploadVideoAndCreateNote,
+  saveVideoToDevice,
 } from '../../services/videoService';
 import { useRouter } from 'expo-router';
 
@@ -30,6 +29,10 @@ export default function CreateVideoScreen() {
 
   const handleSend = async () => {
     if (!prompt.trim()) return;
+    // Removed user check as we are moving to local storage, but auth might still be needed for other things?
+    // User requested "mobile app Use on device storage". Auth might be optional or just local "user".
+    // For now, keeping auth check if the app structure demands it, but `videoService` now uses a placeholder user_id.
+    // However, existing AuthContext might still be in use.
     if (!user) {
       Alert.alert('Error', 'Please log in to create videos');
       return;
@@ -55,31 +58,34 @@ export default function CreateVideoScreen() {
     try {
       const isReady = await checkVideoReady();
       if (isReady) {
-        setLoadingMessage('Uploading video...');
-        await uploadVideoAndSave();
-        setIsGenerating(false);
-        setPrompt('');
-        Alert.alert('Success', 'Video created successfully!', [
-          { text: 'OK', onPress: () => router.push('/(tabs)/library') },
-        ]);
+        setLoadingMessage('Saving to library...');
+        try {
+          await saveVideoLocally();
+          setIsGenerating(false);
+          setPrompt('');
+          Alert.alert('Success', 'Video created successfully!', [
+            { text: 'OK', onPress: () => router.push('/(tabs)/library') },
+          ]);
+        } catch (saveError) {
+          // If saving fails, stop polling and show error
+          setIsGenerating(false);
+          Alert.alert('Error', 'Video generated but failed to save to device.');
+        }
       } else {
         setTimeout(pollVideo, 3000);
       }
     } catch (err) {
+      // If polling fails (network error etc), retry a few times or stop?
+      // For now, keep retry but maybe add a max attempts counter in future.
+      // But if it's a save error, we caught it above.
+      // This catch is for checkVideoReady failure.
       setTimeout(pollVideo, 3000);
     }
   };
 
-  const uploadVideoAndSave = async () => {
-    if (!user) return;
-
-    try {
-      const blob = await getVideoBlob();
-      await uploadVideoAndCreateNote(user.id, promptRef.current, blob);
-    } catch (error) {
-      console.error('Error saving video:', error);
-      Alert.alert('Error', 'Failed to save video');
-    }
+  const saveVideoLocally = async () => {
+    // This now just attempts to save, errors are handled by caller
+    await saveVideoToDevice(promptRef.current);
   };
 
   return (
@@ -138,7 +144,7 @@ export default function CreateVideoScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8fafc', // slate-50 base
+    // Background color handled by BackgroundLayout
   },
   scrollContent: {
     flexGrow: 1,
@@ -159,7 +165,7 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   inputContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)', // Slightly transparent
     borderRadius: 20,
     borderWidth: 1,
     borderColor: '#e2e8f0', // slate-200
@@ -178,7 +184,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   sendButton: {
-    backgroundColor: '#6366f1', // purple-500 (approximating blue-600 to purple-600 gradient)
+    backgroundColor: '#6366f1', // purple-500
     borderRadius: 12,
     padding: 12,
     alignItems: 'center',
@@ -191,7 +197,8 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   sendButtonDisabled: {
-    backgroundColor: '#e2e8f0', // slate-200
+    backgroundColor: '#cbd5e1', // slate-300
+    shadowOpacity: 0,
   },
   sendButtonText: {
     color: '#fff',

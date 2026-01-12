@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   View,
   Text,
@@ -9,9 +9,10 @@ import {
   ActivityIndicator,
   Alert,
 } from 'react-native';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext'; // Keeping auth context for now, even if storage is local
 import { fetchUserVideos, VideoNote } from '../../services/videoService';
 import VideoPlayer from '../../components/VideoPlayer';
+import { useFocusEffect } from 'expo-router';
 
 export default function LibraryScreen() {
   const { user } = useAuth();
@@ -20,17 +21,11 @@ export default function LibraryScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (user) {
-      loadVideos();
-    }
-  }, [user]);
-
   const loadVideos = async () => {
-    if (!user) return;
-
+    // We can load videos without user if we want, since it's local storage now.
+    // But sticking to the structure.
     try {
-      const data = await fetchUserVideos(user.id);
+      const data = await fetchUserVideos(user?.id || 'local');
       setVideos(data);
     } catch (error) {
       console.error('Error loading videos:', error);
@@ -40,6 +35,13 @@ export default function LibraryScreen() {
       setRefreshing(false);
     }
   };
+
+  // Reload when screen comes into focus (e.g. after creating a video)
+  useFocusEffect(
+    useCallback(() => {
+      loadVideos();
+    }, [])
+  );
 
   const onRefresh = () => {
     setRefreshing(true);
@@ -106,7 +108,7 @@ export default function LibraryScreen() {
             </TouchableOpacity>
           )}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#6366f1" />
           }
           contentContainerStyle={styles.listContent}
         />
@@ -118,7 +120,6 @@ export default function LibraryScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8fafc', // slate-50 base
     padding: 20,
   },
   centerContainer: {
@@ -137,7 +138,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   videoCard: {
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
     borderRadius: 24,
     padding: 24,
     marginBottom: 16,
@@ -189,7 +190,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 60,
-    backgroundColor: '#f1f5f9', // slate-50/50
+    backgroundColor: 'rgba(241, 245, 249, 0.5)', // slate-50/50 transparent
     borderRadius: 16,
     borderWidth: 1,
     borderStyle: 'dashed',

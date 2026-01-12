@@ -1,6 +1,8 @@
 import { Tabs, Redirect } from 'expo-router';
 import { useAuth } from '../../context/AuthContext';
 import { ActivityIndicator, View } from 'react-native';
+import CustomNavBar from '../../components/CustomNavBar';
+import BackgroundLayout from '../../components/BackgroundLayout';
 
 export default function TabsLayout() {
   const { user, loading } = useAuth();
@@ -13,38 +15,37 @@ export default function TabsLayout() {
     );
   }
 
+  // Auth check commented out or active depending on if we want strict auth for local features.
+  // Keeping strict for now as requested by initial structure, but user has local storage.
+  // Actually, standard app flow usually keeps auth.
   if (!user) {
     return <Redirect href="/(auth)/login" />;
   }
 
   return (
-    <Tabs
-      screenOptions={{
-        headerShown: false,
-        tabBarActiveTintColor: '#6366f1', // purple-500 to match button gradient
-        tabBarInactiveTintColor: '#94a3b8', // slate-400
-        tabBarStyle: {
-          backgroundColor: '#fff',
-          borderTopWidth: 1,
-          borderTopColor: '#e2e8f0', // slate-200
-        },
-      }}
-    >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Create',
-          tabBarIcon: () => null,
+    <BackgroundLayout>
+      <CustomNavBar />
+      <Tabs
+        screenOptions={{
+          headerShown: false,
+          tabBarStyle: { display: 'none' }, // Hide default bottom bar
+          sceneStyle: { backgroundColor: 'transparent' }, // Transparent background for screens
         }}
-      />
-      <Tabs.Screen
-        name="library"
-        options={{
-          title: 'Library',
-          tabBarIcon: () => null,
-        }}
-      />
-    </Tabs>
+      >
+        <Tabs.Screen
+          name="index"
+          options={{
+            title: 'Create',
+          }}
+        />
+        <Tabs.Screen
+          name="library"
+          options={{
+            title: 'Library',
+          }}
+        />
+      </Tabs>
+    </BackgroundLayout>
   );
 }
 
