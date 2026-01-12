@@ -176,19 +176,19 @@ def create_questions():
     )
     # ------------------------------------------------------------------
 
-    model_api_key = os.getenv("GROQ_API_KEY")
+    model_api_key = os.getenv("GOOGLE_API_KEY")
     if not model_api_key:
-        return jsonify({"error": "MISTRAL_API_KEY not set"}), 500
+        return jsonify({"error": "GOOGLE_API_KEY not set"}), 500
 
     try:
         response = requests.post(
-            url="https://api.groq.com/openai/v1/chat/completions",
+            url="https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
             headers={
                 "Authorization": f"Bearer {model_api_key}",
                 "Content-Type": "application/json",
             },
             data=json.dumps({
-                "model": "llama-3.3-70b-versatile",
+                "model": "gemini-2.5-flash-lite",
                 "messages": [
                 {
                     "role": "user",
@@ -542,6 +542,43 @@ def detect_overlaps(positions, threshold=1.5):
     
     return overlaps
 
+def safe_json_parse(json_string, fallback=None):
+    """
+    Safely parse JSON from LLM responses that may contain unescaped characters.
+    
+    Args:
+        json_string: The JSON string to parse
+        fallback: Default value to return if parsing fails (None by default)
+    
+    Returns:
+        Parsed JSON object or fallback value
+    """
+    try:
+        # Try standard JSON parsing first
+        return json.loads(json_string)
+    except json.JSONDecodeError as e:
+        print(f"Initial JSON parse failed: {e}")
+        
+        # Try to fix common issues
+        try:
+            # Remove any markdown code fences if present
+            cleaned = json_string.strip()
+            if cleaned.startswith("```"):
+                lines = cleaned.split("\n")
+                # Remove first line if it's a code fence
+                if lines[0].startswith("```"):
+                    lines = lines[1:]
+                # Remove last line if it's a code fence
+                if lines and lines[-1].strip() == "```":
+                    lines = lines[:-1]
+                cleaned = "\n".join(lines)
+            
+            # Try parsing the cleaned version
+            return json.loads(cleaned)
+        except json.JSONDecodeError:
+            print(f"Cleaned JSON parse also failed. Returning fallback: {fallback}")
+            return fallback
+
 def assess_visual_layout(script_content, positions, overlaps, model_api_key, iteration):
     """
     LLM assessment specifically for visual layout and spacing.
@@ -586,13 +623,13 @@ Respond in JSON format ONLY:
 """
     
     response = requests.post(
-        url="https://api.groq.com/openai/v1/chat/completions",
+        url="https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
         headers={
             "Authorization": f"Bearer {model_api_key}",
             "Content-Type": "application/json",
         },
         data=json.dumps({
-            "model": "llama-3.3-70b-versatile",
+            "model": "gemini-2.5-flash-lite",
             "messages": [{"role": "user", "content": layout_prompt}],
             "response_format": {"type": "json_object"}
         })
@@ -603,7 +640,10 @@ Respond in JSON format ONLY:
         print(f"Layout Assessment API Error: {layout_data['error']}")
         return {"layout_quality": "GOOD", "reasoning": "Assessment failed, proceeding"}
     
-    layout_result = json.loads(layout_data["choices"][0]["message"]["content"])
+    layout_result = safe_json_parse(
+        layout_data["choices"][0]["message"]["content"],
+        fallback={"layout_quality": "GOOD", "reasoning": "JSON parse failed, proceeding"}
+    )
     print(f"\n=== ITERATION {iteration} LAYOUT ASSESSMENT ===")
     print(f"Layout Quality: {layout_result.get('layout_quality')}")
     print(f"Layout Score: {layout_result.get('layout_score')}/10")
@@ -648,13 +688,13 @@ Respond in JSON format ONLY:
 """
     
     response = requests.post(
-        url="https://api.groq.com/openai/v1/chat/completions",
+        url="https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
         headers={
             "Authorization": f"Bearer {model_api_key}",
             "Content-Type": "application/json",
         },
         data=json.dumps({
-            "model": "llama-3.3-70b-versatile",
+            "model": "gemini-2.5-flash-lite",
             "messages": [{"role": "user", "content": assessment_prompt}],
             "response_format": {"type": "json_object"}
         })
@@ -666,7 +706,10 @@ Respond in JSON format ONLY:
         # Default to approval if assessment fails
         return {"decision": "APPROVE", "reasoning": "Assessment failed, proceeding with current script"}
     
-    assessment_result = json.loads(assessment_data["choices"][0]["message"]["content"])
+    assessment_result = safe_json_parse(
+        assessment_data["choices"][0]["message"]["content"],
+        fallback={"decision": "APPROVE", "reasoning": "JSON parse failed, proceeding with current script"}
+    )
     print(f"\n=== ITERATION {iteration} ASSESSMENT ===")
     print(f"Decision: {assessment_result.get('decision')}")
     print(f"Quality Score: {assessment_result.get('quality_score')}/10")
@@ -707,13 +750,13 @@ Generate the IMPROVED complete script with the same format as before. Output ONL
 """
     
     response = requests.post(
-        url="https://api.groq.com/openai/v1/chat/completions",
+        url="https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
         headers={
             "Authorization": f"Bearer {model_api_key}",
             "Content-Type": "application/json",
         },
         data=json.dumps({
-            "model": "llama-3.3-70b-versatile",
+            "model": "gemini-2.5-flash-lite",
             "messages": [{"role": "user", "content": refinement_prompt}]
         })
     )
@@ -732,19 +775,19 @@ def createVideo(user_text_here):
     with open("./src/assets/video_prompt.txt", "r") as file:
         content = file.read()
     
-    model_api_key = os.getenv("GROQ_API_KEY")
+    model_api_key = os.getenv("GOOGLE_API_KEY")
     latex_content = convert_to_latex(user_text_here)
     
     # Initial script generation
     print("\n=== GENERATING INITIAL SCRIPT ===")
     response = requests.post(
-        url="https://api.groq.com/openai/v1/chat/completions",
+        url="https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
         headers={
             "Authorization": f"Bearer {model_api_key}",
             "Content-Type": "application/json",
         },
         data=json.dumps({
-            "model": "llama-3.3-70b-versatile",
+            "model": "gemini-2.5-flash-lite",
             "messages": [
                 {
                     "role": "user",
@@ -947,10 +990,10 @@ def evaluate_answer():
         "{ \"correct\": boolean, \"feedback\": \"string\" }"
     )
 
-    model_api_key = os.getenv("MISTRAL_API_KEY")
+    model_api_key = os.getenv("GROQ_API_KEY")
     try:
         response = requests.post(
-            url="https://openrouter.ai/api/v1/chat/completions",
+            url="https://api.groq.com/openai/v1/chat/completions",
             headers={
                 "Authorization": f"Bearer {model_api_key}",
                 "Content-Type": "application/json",
