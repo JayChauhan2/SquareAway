@@ -1,0 +1,34 @@
+SquareAway - AI-Powered Study Companion
+
+SquareAway is an intelligent educational platform designed to transform how students engage with their study materials. By leveraging advanced AI technologies, it bridges the gap between static notes and interactive learning.
+
+Key Features:
+
+1. Note Digitization & AI Extraction:
+   - Users can upload images of handwritten notes or textbooks.
+   - The system (powered by Google Gemini) extracts text and converts it into structured, digital notes with mathematical formatting (LaTeX).
+
+2. Automated Explainer Videos:
+   - One of the core features is the "Agentic Video Workflow."
+   - The app analyzes the study material and automatically generates animated explainer videos using Manim (Mathematical Animation Engine).
+   - These videos include synthesized voiceovers to visually and audibly explain complex concepts.
+
+3. Interactive Practice & Assessment:
+   - Students can generate practice sets including Multiple Choice, True/False, and Short Answer questions based on their specific topics.
+   - The "Practice" mode allows for self-paced testing with immediate feedback.
+
+4. AI Study Assistant (Chatbot):
+   - A built-in chatbot acts as a personal tutor, allowing students to ask clarifying questions about their notes.
+   - The assistant is context-aware and can interpret complex mathematical notation.
+
+5. Teacher Dashboard & Classroom Management:
+   - Dedicated interface for teachers to manage classes and enrollments.
+   - Teachers can assign work and potentially monitor student engagement (features suggested by the codebase structure).
+
+Technical Overview:
+- Frontend: Built with React, Vite, and Tailwind CSS for a modern, responsive user interface.
+- Backend: Powered by Flask (Python), handling AI orchestration, video rendering, and API requests.
+- AI Services: Integrates Google Gemini (Vision), OpenRouter/Mistral (Text & Logic), and Manim (Animation).
+- Database & Auth: Uses Supabase for secure user authentication and data management.
+
+This application is ideal for STEM students looking to visualize deeper concepts and teachers aiming to provide automated, high-quality supplementary materials.
