@@ -72,15 +72,15 @@ def chatbot():
     # Add current user message
     conversation.append({"role": "user", "content": f"{user_message}\n\nNotes:\n{notes}"})
 
-    model_api_key = os.getenv("MISTRAL_API_KEY")
+    model_api_key = os.getenv("GROQ_API_KEY")
     response = requests.post(
-        url="https://openrouter.ai/api/v1/chat/completions",
+        url="https://api.groq.com/openai/v1/chat/completions",
         headers={
             "Authorization": f"Bearer {model_api_key}",
             "Content-Type": "application/json",
         },
         data=json.dumps({
-            "model": "mistralai/devstral-2512:free",
+            "model": "llama-3.3-70b-versatile",
             "messages": conversation
         })
     )
@@ -176,19 +176,19 @@ def create_questions():
     )
     # ------------------------------------------------------------------
 
-    model_api_key = os.getenv("MISTRAL_API_KEY")
+    model_api_key = os.getenv("GROQ_API_KEY")
     if not model_api_key:
         return jsonify({"error": "MISTRAL_API_KEY not set"}), 500
 
     try:
         response = requests.post(
-            url="https://openrouter.ai/api/v1/chat/completions",
+            url="https://api.groq.com/openai/v1/chat/completions",
             headers={
                 "Authorization": f"Bearer {model_api_key}",
                 "Content-Type": "application/json",
             },
             data=json.dumps({
-                "model": "mistralai/devstral-2512:free",
+                "model": "llama-3.3-70b-versatile",
                 "messages": [
                 {
                     "role": "user",
@@ -243,15 +243,15 @@ def create_questions():
     return jsonify(questions_json)
 
 def generate_title(text):
-    model_api_key = os.getenv("MISTRAL_API_KEY")
+    model_api_key = os.getenv("GROQ_API_KEY")
     response = requests.post(
-    url="https://openrouter.ai/api/v1/chat/completions",
+    url="https://api.groq.com/openai/v1/chat/completions",
     headers={
         "Authorization": f"Bearer {model_api_key}",
         "Content-Type": "application/json",
     },
     data=json.dumps({
-        "model": "mistralai/devstral-2512:free",
+        "model": "llama-3.3-70b-versatile",
         "messages": [
         {
             "role": "user",
@@ -269,15 +269,15 @@ def generate_title(text):
     return llm_output
 
 def convert_to_latex(text):
-    model_api_key = os.getenv("MISTRAL_API_KEY")
+    model_api_key = os.getenv("GROQ_API_KEY")
     response = requests.post(
-    url="https://openrouter.ai/api/v1/chat/completions",
+    url="https://api.groq.com/openai/v1/chat/completions",
     headers={
         "Authorization": f"Bearer {model_api_key}",
         "Content-Type": "application/json",
     },
     data=json.dumps({
-        "model": "mistralai/devstral-2512:free",
+        "model": "llama-3.3-70b-versatile",
         "messages": [
         {
             "role": "user",
@@ -586,13 +586,13 @@ Respond in JSON format ONLY:
 """
     
     response = requests.post(
-        url="https://openrouter.ai/api/v1/chat/completions",
+        url="https://api.groq.com/openai/v1/chat/completions",
         headers={
             "Authorization": f"Bearer {model_api_key}",
             "Content-Type": "application/json",
         },
         data=json.dumps({
-            "model": "mistralai/devstral-2512:free",
+            "model": "llama-3.3-70b-versatile",
             "messages": [{"role": "user", "content": layout_prompt}],
             "response_format": {"type": "json_object"}
         })
@@ -648,13 +648,13 @@ Respond in JSON format ONLY:
 """
     
     response = requests.post(
-        url="https://openrouter.ai/api/v1/chat/completions",
+        url="https://api.groq.com/openai/v1/chat/completions",
         headers={
             "Authorization": f"Bearer {model_api_key}",
             "Content-Type": "application/json",
         },
         data=json.dumps({
-            "model": "mistralai/devstral-2512:free",
+            "model": "llama-3.3-70b-versatile",
             "messages": [{"role": "user", "content": assessment_prompt}],
             "response_format": {"type": "json_object"}
         })
@@ -707,13 +707,13 @@ Generate the IMPROVED complete script with the same format as before. Output ONL
 """
     
     response = requests.post(
-        url="https://openrouter.ai/api/v1/chat/completions",
+        url="https://api.groq.com/openai/v1/chat/completions",
         headers={
             "Authorization": f"Bearer {model_api_key}",
             "Content-Type": "application/json",
         },
         data=json.dumps({
-            "model": "mistralai/devstral-2512:free",
+            "model": "llama-3.3-70b-versatile",
             "messages": [{"role": "user", "content": refinement_prompt}]
         })
     )
@@ -732,19 +732,19 @@ def createVideo(user_text_here):
     with open("./src/assets/video_prompt.txt", "r") as file:
         content = file.read()
     
-    model_api_key = os.getenv("MISTRAL_API_KEY")
+    model_api_key = os.getenv("GROQ_API_KEY")
     latex_content = convert_to_latex(user_text_here)
     
     # Initial script generation
     print("\n=== GENERATING INITIAL SCRIPT ===")
     response = requests.post(
-        url="https://openrouter.ai/api/v1/chat/completions",
+        url="https://api.groq.com/openai/v1/chat/completions",
         headers={
             "Authorization": f"Bearer {model_api_key}",
             "Content-Type": "application/json",
         },
         data=json.dumps({
-            "model": "mistralai/devstral-2512:free",
+            "model": "llama-3.3-70b-versatile",
             "messages": [
                 {
                     "role": "user",
@@ -956,7 +956,7 @@ def evaluate_answer():
                 "Content-Type": "application/json",
             },
             data=json.dumps({
-                "model": "mistralai/devstral-2512:free",
+                "model": "llama-3.3-70b-versatile",
                 "messages": [{"role": "user", "content": prompt}],
                 "response_format": {"type": "json_object"}
             })
