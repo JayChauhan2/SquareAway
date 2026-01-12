@@ -1,46 +1,43 @@
-# Estimating Area Between Curves
+**Estimating Area Between Curves**
 
-## Unit 8
-Date: Nov 3, 2022
+**Unit 8**
+**Date: Nov 3, 2022**
 
-## Calculating Area with Definite Integrals
 We can calculate the area between curves by estimating with rectangles and taking the limit to get the definite Integral.
 
-**Example: Area between $y = x^2$ and $y = 2-x$**
-*   **Intersection Points:** $x = -2$ and $x = 1.5$
-*   **Height of a rectangle:** $(2-x) - x^2$
-*   **Width of a rectangle ($\Delta X$):** $\frac{1.5 - (-2)}{n} = \frac{3.5}{n}$
-
-**Riemann Sum Approximation:**
-$\sum_{i=1}^{n} | \text{Height} | \cdot | \text{width} | = \sum_{i=1}^{n} ( (2 - X_{i-1}) - X_{i-1}^2 ) \Delta X$
-
-**Definite Integral:**
-$\int_{-2}^{1.5} [ (2-X) - X^2 ] dx$
-
----
-
-## Negative Integral Values
-When calculating a definite integral $\int_{a}^{b} F(t) dt$, areas above the x-axis are considered positive, and areas below the x-axis are considered negative.
-
-**Example:**
-For a function with regions A, B, C, D, E:
-$\int_{a}^{b} F(t) dt = A + C + E - B - D$
-*(Where A, C, E are areas above the x-axis, and B, D are areas below the x-axis)*
+**Example: Area between y = x² and y = 2-x**
+*   The region of interest is bounded by the curves y = x² and y = 2-x.
+*   The intersection points appear to be at x = -2 and x = 1.5.
+*   **Height** of a rectangle in the region = (Upper curve) - (Lower curve) = (2-x) - x²
+*   **Width** of each rectangle (ΔX) = (1.5 - (-2)) / n = 3.5 / n, where 'n' is the number of rectangles.
+*   **Riemann Sum Approximation:**
+    Σ (from i=1 to n) [ (2 - Xᵢ₋₁) - Xᵢ₋² ] ΔX
+*   **Definite Integral:**
+    ∫ (from -2 to 1.5) [ (2-x) - x² ] dx
 
 ---
 
-## Midpoint Rule
+**Negative Integral Values**
 
-*   Left Riemann Sum (Left(n)) and Right Riemann Sum (Right(n)) for approximating definite Integrals are inefficient and crude estimates.
-*   To get a more accurate and efficient estimate, use the Midpoint Rule.
+When integrating a function, the integral represents the signed area between the curve and the x-axis.
+*   Areas above the x-axis are positive.
+*   Areas below the x-axis are negative.
 
-**Visualizing Riemann Sums:**
-*   **Left Endpoint Rule:** Rectangles are drawn using the function value at the left end of each subinterval.
-*   **Right Endpoint Rule:** Rectangles are drawn using the function value at the right end of each subinterval.
-*   **Midpoint Rule:** Rectangles are drawn using the function value at the midpoint of each subinterval.
+**Example: ∫ (from a to b) F(t) dt**
+If the graph of F(t) has sections labeled A, B, C, D, E (where A, C, E are above the x-axis and B, D are below):
+∫ (from a to b) F(t) dt = A + C + E - B - D
 
-**Advantages of the Midpoint Rule:**
-*   The errors from overestimation and underestimation often cancel out, leading to a more accurate approximation.
-*   For linear functions, the Midpoint Rule yields the exact value of the integral:
-    *   Linear functions $\implies$ Midpoint Rule = $\int_a^b f(x)dx$
-    *   This means the value is exactly equal to the integral for linear functions.
+---
+
+**Midpoint Rule**
+
+*   **Left(n)** and **Right(n)** Riemann sums for approximating definite integrals are often inefficient and crude estimates.
+*   To achieve a more accurate and efficient approximation, the **Midpoint Rule** is used.
+
+**Comparison of Approximation Methods:**
+
+*   **Left Riemann Sum:** Rectangles use the height of the function at the left endpoint of each subinterval. (Often an underestimate for increasing functions, overestimate for decreasing functions).
+*   **Right Riemann Sum:** Rectangles use the height of the function at the right endpoint of each subinterval. (Often an overestimate for increasing functions, underestimate for decreasing functions).
+*   **Midpoint Riemann Sum:** Rectangles use the height of the function at the midpoint of each subinterval.
+    *   Errors often **cancel out**, leading to a more accurate estimate for general functions.
+    *   For **linear functions**, the Midpoint Rule provides a value **exactly equal to the definite integral**.

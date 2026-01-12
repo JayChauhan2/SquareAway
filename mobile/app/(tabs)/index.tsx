@@ -18,6 +18,7 @@ import {
   saveVideoToDevice,
 } from '../../services/videoService';
 import { useRouter } from 'expo-router';
+import VideoGenerationLoader from '../../components/VideoGenerationLoader';
 
 export default function CreateVideoScreen() {
   const { user } = useAuth();
@@ -131,8 +132,7 @@ export default function CreateVideoScreen() {
 
           {isGenerating && (
             <View style={styles.loadingContainer}>
-              <ActivityIndicator size="large" color="#6366f1" />
-              <Text style={styles.loadingText}>{loadingMessage}</Text>
+              <VideoGenerationLoader message={loadingMessage} />
             </View>
           )}
         </View>
