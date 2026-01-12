@@ -541,11 +541,11 @@ export default function Questions() {
     const accuracy = Math.round((correctCount / questions.length) * 100);
 
     return (
-      <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-sky-50 via-blue-50 to-violet-50 flex items-center justify-center p-6">
+      <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-sky-50 via-blue-50 to-violet-50 flex items-center justify-center p-6 pt-28">
 
-        {/* Floating liquid accents */}
-        <div className="absolute -top-32 -left-32 w-96 h-96 bg-blue-300/30 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-purple-300/30 rounded-full blur-3xl animate-pulse" />
+        {/* Floating liquid accents - positioned to not interfere with content */}
+        <div className="absolute top-20 -left-48 w-64 h-64 bg-blue-300/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 -right-48 w-64 h-64 bg-purple-300/20 rounded-full blur-3xl animate-pulse" />
 
         <div className="relative bg-white/70 backdrop-blur-xl w-full max-w-3xl rounded-3xl shadow-xl p-10">
 
