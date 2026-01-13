@@ -4,111 +4,49 @@ class Explainer(Scene):
     def construct(self):
         self.add_sound("voiceover.mp3")
 
-        # Step 1: Introduction
-        question_text = Tex("Which of the following is the Maclaurin series for $e^x$?")
-        question_text.to_edge(UP)
-        self.play(Write(question_text))
+        # Step 1: Introduction - 2nd Derivatives
+        title = Tex("2nd Derivatives").move_to(UP*3)
+        self.play(Write(title))
         self.wait(2)
-        self.play(FadeOut(question_text))
+        self.clear()
 
-        # Step 2: Maclaurin Series Definition
-        maclaurin_title = Tex("Maclaurin Series Definition")
-        maclaurin_title.move_to(UP * 2.5)
-        
-        maclaurin_formula = MathTex(
-            "f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(0)}{n!} x^n"
-        )
-        maclaurin_formula.move_to(ORIGIN)
-
-        self.play(Write(maclaurin_title))
-        self.play(Write(maclaurin_formula))
+        # Step 2: Concavity Explanation
+        concavity_text = Tex("Second derivative describes concavity").move_to(UP*2)
+        positive_concavity = Tex("Positive 2nd derivative: Concave Up").move_to(UP*0.5 + LEFT*3)
+        negative_concavity = Tex("Negative 2nd derivative: Concave Down").move_to(UP*0.5 + RIGHT*3)
+        self.play(Write(concavity_text))
+        self.play(Write(positive_concavity), Write(negative_concavity))
         self.wait(3)
-        self.play(FadeOut(maclaurin_title), FadeOut(maclaurin_formula))
+        self.clear()
 
-        # Step 3: Applying to e^x
-        function_text = Tex("For $f(x) = e^x$:").move_to(UP * 2.5)
-        derivatives_intro = Tex("Derivatives at $x=0$:").move_to(ORIGIN)
-        
-        self.play(Write(function_text))
-        self.play(Write(derivatives_intro))
-        self.wait(2)
-
-        # Displaying derivatives and their values at x=0
-        derivs_and_vals = VGroup()
-        f_x = MathTex("f(x) = e^x")
-        f_0 = MathTex("f(0) = e^0 = 1")
-        
-        f_prime = MathTex("f'(x) = e^x")
-        f_prime_0 = MathTex("f'(0) = e^0 = 1")
-        
-        f_double_prime = MathTex("f''(x) = e^x")
-        f_double_prime_0 = MathTex("f''(0) = e^0 = 1")
-
-        f_x.move_to(UP * 1)
-        f_0.move_to(DOWN * 0.5)
-        
-        f_prime.move_to(UP * 1.5) # Adjust position to be clear of f_x
-        f_prime_0.move_to(DOWN * 0) # Adjust position
-
-        f_double_prime.move_to(UP * 2) # Adjust position further up
-        f_double_prime_0.move_to(DOWN * 1) # Adjust position
-
-        # Positioning for clarity, avoiding overlap
-        f_x.move_to(UP * 1.5 + LEFT * 3)
-        f_0.move_to(DOWN * 0.5 + LEFT * 3)
-        
-        f_prime.move_to(UP * 1.5 + ORIGIN)
-        f_prime_0.move_to(DOWN * 0.5 + ORIGIN)
-
-        f_double_prime.move_to(UP * 1.5 + RIGHT * 3)
-        f_double_prime_0.move_to(DOWN * 0.5 + RIGHT * 3)
-
-        self.play(
-            FadeOut(derivatives_intro),
-            Write(f_x.move_to(UP*2.5 + LEFT*3)),
-            Write(f_0.move_to(UP*1.5 + LEFT*3))
-        )
-        self.wait(1)
-        self.play(
-            Write(f_prime.move_to(UP*2.5 + ORIGIN)),
-            Write(f_prime_0.move_to(UP*1.5 + ORIGIN))
-        )
-        self.wait(1)
-        self.play(
-            Write(f_double_prime.move_to(UP*2.5 + RIGHT*3)),
-            Write(f_double_prime_0.move_to(UP*1.5 + RIGHT*3))
-        )
+        # Step 3: Example f(x) = x^2
+        example_fx = MathTex("f(x) = x^2").move_to(UP*2)
+        first_derivative = MathTex("f'(x) = 2x").move_to(UP*0.5 + LEFT*3)
+        second_derivative = MathTex("f''(x) = 2").move_to(UP*0.5 + RIGHT*3)
+        graph_x2 = Axes(x_range=[-5, 5, 1], y_range=[-1, 26, 1], x_length=6, y_length=4).move_to(DOWN*1.5)
+        graph_x2_func = graph_x2.plot(lambda x: x**2, color=BLUE)
+        self.play(Write(example_fx))
+        self.play(Write(first_derivative), Write(second_derivative))
+        self.play(Create(graph_x2), Create(graph_x2_func))
         self.wait(3)
-        
-        self.play(FadeOut(function_text), FadeOut(f_x), FadeOut(f_0), FadeOut(f_prime), FadeOut(f_prime_0), FadeOut(f_double_prime), FadeOut(f_double_prime_0))
+        self.clear()
 
-        # Step 4: Resulting Series
-        result_title = Tex("Resulting Maclaurin Series for $e^x$").move_to(UP * 2.5)
-        
-        # The series: 1 + x + x^2/2! + x^3/3! + ...
-        series_terms = MathTex(
-            "1", "+", "x", "+", "\\frac{x^2}{2!}", "+", "\\frac{x^3}{3!}", "+", "\\cdots"
-        )
-        series_terms.move_to(ORIGIN)
+        # Step 4: Example f(x) = -x^2
+        example_neg_fx = MathTex("f(x) = -x^2").move_to(UP*2)
+        first_derivative_neg = MathTex("f'(x) = -2x").move_to(UP*0.5 + LEFT*3)
+        second_derivative_neg = MathTex("f''(x) = -2").move_to(UP*0.5 + RIGHT*3)
+        graph_neg_x2 = Axes(x_range=[-5, 5, 1], y_range=[-26, 1, 1], x_length=6, y_length=4).move_to(DOWN*1.5)
+        graph_neg_x2_func = graph_neg_x2.plot(lambda x: -x**2, color=RED)
+        self.play(Write(example_neg_fx))
+        self.play(Write(first_derivative_neg), Write(second_derivative_neg))
+        self.play(Create(graph_neg_x2), Create(graph_neg_x2_func))
+        self.wait(3)
+        self.clear()
 
-        # Correct positioning to avoid overlap
-        terms_group = VGroup()
-        terms_group.add(series_terms[0:9]) # All terms from series_terms
-
-        # Distribute terms across regions
-        series_terms[0].move_to(LEFT * 3) # 1
-        series_terms[1].move_to(LEFT * 1.5) # +
-        series_terms[2].move_to(ORIGIN) # x
-        series_terms[3].move_to(RIGHT * 1.5) # +
-        series_terms[4].move_to(RIGHT * 3) # x^2/2!
-        series_terms[5].move_to(LEFT * 2) # + (for x^3/3!)
-        series_terms[6].move_to(ORIGIN + DOWN * 1) # x^3/3!
-        series_terms[7].move_to(RIGHT * 2) # + (for ...)
-        series_terms[8].move_to(RIGHT * 4) # ...
-
-        self.play(Write(result_title))
-        self.play(Write(series_terms))
-        self.wait(5)
-        self.play(FadeOut(result_title), FadeOut(series_terms))
-        
-        self.wait(1) # Final pause
+        # Step 5: Inflection Points
+        inflection_text = Tex("Inflection Points: where concavity changes").move_to(UP*2)
+        inflection_condition = Tex("f''(x) = 0 or undefined").move_to(UP*0.5)
+        self.play(Write(inflection_text))
+        self.play(Write(inflection_condition))
+        self.wait(3)
+        self.clear()

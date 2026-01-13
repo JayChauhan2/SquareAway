@@ -204,6 +204,8 @@ def create_questions():
             return jsonify({"error": f"LLM API returned {response.status_code}", "details": response.text}), 500
 
         data = response.json()
+        if isinstance(data, list):
+            data = data[0]
     except requests.exceptions.RequestException as e:
         print(f"Request failed: {e}")
         return jsonify({"error": "Failed to contact LLM API", "details": str(e)}), 500
@@ -636,6 +638,8 @@ Respond in JSON format ONLY:
     )
     
     layout_data = response.json()
+    if isinstance(layout_data, list):
+        layout_data = layout_data[0]
     if "error" in layout_data:
         print(f"Layout Assessment API Error: {layout_data['error']}")
         return {"layout_quality": "GOOD", "reasoning": "Assessment failed, proceeding"}
@@ -701,6 +705,8 @@ Respond in JSON format ONLY:
     )
     
     assessment_data = response.json()
+    if isinstance(assessment_data, list):
+        assessment_data = assessment_data[0]
     if "error" in assessment_data:
         print(f"Assessment API Error: {assessment_data['error']}")
         # Default to approval if assessment fails
@@ -762,6 +768,8 @@ Generate the IMPROVED complete script with the same format as before. Output ONL
     )
     
     refinement_data = response.json()
+    if isinstance(refinement_data, list):
+        refinement_data = refinement_data[0]
     if "error" in refinement_data:
         raise ValueError(f"Refinement API Error: {refinement_data['error']}")
     
@@ -797,6 +805,8 @@ def createVideo(user_text_here):
         })
     )
     data = response.json()
+    if isinstance(data, list):
+        data = data[0]
 
     print("API Response:", json.dumps(data, indent=2))
 
@@ -981,6 +991,14 @@ def createVideo(user_text_here):
         script_path.unlink()  # delete old file
 
     # Write new script
+    # Sanitize unicode math symbols that Manim/LaTeX might not handle gracefully
+    script_text = script_text.replace("≡", "\\\\equiv")
+    script_text = script_text.replace("≠", "\\\\neq")
+    script_text = script_text.replace("≤", "\\\\le")
+    script_text = script_text.replace("≥", "\\\\ge")
+    script_text = script_text.replace("×", "\\\\times")
+    script_text = script_text.replace("÷", "\\\\div")
+    
     with open(script_path, "w", encoding="utf-8") as f:
         f.write(script_text)
 
