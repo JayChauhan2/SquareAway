@@ -13,8 +13,8 @@ import requests
 import mimetypes
 import shutil
 import threading
+import wave
 from dotenv import load_dotenv
-from gtts import gTTS
 
 load_dotenv()
 
@@ -188,7 +188,7 @@ def create_questions():
                 "Content-Type": "application/json",
             },
             data=json.dumps({
-                "model": "gemini-2.5-flash-lite",
+                "model": "gemma-3-27b-it",
                 "messages": [
                 {
                     "role": "user",
@@ -342,7 +342,7 @@ def extractText():
             image_bytes = f.read()
 
         response = client.models.generate_content(
-            model='gemini-2.5-flash',
+            model='gemini-2.0-flash',
             contents=[
                 types.Part.from_bytes(
                     data=image_bytes,
@@ -629,7 +629,7 @@ Respond in JSON format ONLY:
             "Content-Type": "application/json",
         },
         data=json.dumps({
-            "model": "gemini-2.5-flash-lite",
+            "model": "gemma-3-27b-it",
             "messages": [{"role": "user", "content": layout_prompt}],
             "response_format": {"type": "json_object"}
         })
@@ -694,7 +694,7 @@ Respond in JSON format ONLY:
             "Content-Type": "application/json",
         },
         data=json.dumps({
-            "model": "gemini-2.5-flash-lite",
+            "model": "gemma-3-27b-it",
             "messages": [{"role": "user", "content": assessment_prompt}],
             "response_format": {"type": "json_object"}
         })
@@ -756,7 +756,7 @@ Generate the IMPROVED complete script with the same format as before. Output ONL
             "Content-Type": "application/json",
         },
         data=json.dumps({
-            "model": "gemini-2.5-flash-lite",
+            "model": "gemma-3-27b-it",
             "messages": [{"role": "user", "content": refinement_prompt}]
         })
     )
@@ -787,7 +787,7 @@ def createVideo(user_text_here):
             "Content-Type": "application/json",
         },
         data=json.dumps({
-            "model": "gemini-2.5-flash-lite",
+            "model": "gemma-3-27b-it",
             "messages": [
                 {
                     "role": "user",
@@ -848,23 +848,63 @@ def createVideo(user_text_here):
             voice_part = llm_output.split("VOICEOVER_SCRIPT", 1)[1]
             voice_text = voice_part.split("END_VOICEOVER", 1)[0].strip()
             
-            # Generate MP3 using gTTS
-            print(f"Generating voiceover ({len(voice_text)} chars) with gTTS...")
+            # Generate WAV using Gemini TTS
+            print(f"Generating voiceover ({len(voice_text)} chars) with Gemini TTS...")
             
-            # Generate base audio with gTTS
-            tts = gTTS(text=voice_text, lang='en', slow=False)
-            tts.save('voiceover_temp.mp3')
+            # Set up the wave file helper function
+            def wave_file(filename, pcm, channels=1, rate=24000, sample_width=2):
+                with wave.open(filename, "wb") as wf:
+                    wf.setnchannels(channels)
+                    wf.setsampwidth(sample_width)
+                    wf.setframerate(rate)
+                    wf.writeframes(pcm)
+            
+            # Generate audio with Gemini TTS
+            client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
+            response = client.models.generate_content(
+                model="gemini-2.5-flash-preview-tts",
+                contents=voice_text,
+                config=types.GenerateContentConfig(
+                    response_modalities=["AUDIO"],
+                    speech_config=types.SpeechConfig(
+                        voice_config=types.VoiceConfig(
+                            prebuilt_voice_config=types.PrebuiltVoiceConfig(
+                                voice_name='Kore',  # You can change this to other voices
+                            )
+                        )
+                    ),
+                )
+            )
+            
+            # Save the audio data
+            try:
+                # Extract audio data from response
+                if hasattr(response, 'candidates') and len(response.candidates) > 0:
+                    candidate = response.candidates[0]
+                    if hasattr(candidate, 'content') and hasattr(candidate.content, 'parts'):
+                        for part in candidate.content.parts:
+                            if hasattr(part, 'inline_data'):
+                                audio_data = part.inline_data.data
+                                wave_file('voiceover_temp.wav', audio_data)
+                                break
+                else:
+                    raise ValueError("No audio data in response")
+            except (AttributeError, IndexError, TypeError) as e:
+                print(f"Error extracting audio: {e}")
+                print(f"Response type: {type(response)}")
+                print(f"Response: {response}")
+                raise
             
             # Speed up audio to 1.5x using ffmpeg
             subprocess.run([
-                'ffmpeg', '-y', '-i', 'voiceover_temp.mp3',
+                'ffmpeg', '-y', '-i', 'voiceover_temp.wav',
                 '-filter:a', 'atempo=1.5',
                 'voiceover.mp3'
             ], check=True, capture_output=True)
             
             # Clean up temp file
-            if os.path.exists('voiceover_temp.mp3'):
-                os.remove('voiceover_temp.mp3')
+            if os.path.exists('voiceover_temp.wav'):
+                os.remove('voiceover_temp.wav')
             
             # Verify file exists and has content
             if os.path.exists("voiceover.mp3") and os.path.getsize("voiceover.mp3") > 0:
