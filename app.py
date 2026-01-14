@@ -14,6 +14,7 @@ import mimetypes
 import shutil
 import threading
 import wave
+import uuid
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -377,20 +378,31 @@ def extractText():
         "notes_title" : notes_title,
     })
 
-def background_video_creation(user_text):
+def background_video_creation(user_text, job_id=None):
     # Sanitize user input to prevent LaTeX errors
     if user_text:
         user_text = user_text.replace("&", "and").replace("%", " percent ")
 
     try:
         # Correct path where Manim saves the output
-        video_path = Path("media/videos/generated_manim_script/1080p60/Explainer.mp4")
-        if video_path.exists():
-            video_path.unlink()
-            print(f"Deleted old video at: {video_path}")
-        else:
-            print("No old video to delete.")
+        output_dir = Path("media/videos/generated_manim_script/1080p60")
+        default_video_path = output_dir / "Explainer.mp4"
+        
+        # We don't necessarily need to delete the old one if we are copying, 
+        # but good for cleanup of the main file.
+        if default_video_path.exists():
+            default_video_path.unlink()
+            print(f"Deleted old video at: {default_video_path}")
+        
         createVideo(user_text)
+        
+        # After generation, if we have a job_id, copy the file to a unique name
+        if job_id and default_video_path.exists():
+            unique_filename = f"video_{job_id}.mp4"
+            unique_path = output_dir / unique_filename
+            shutil.copy(default_video_path, unique_path)
+            print(f"Saved unique video to: {unique_path}")
+            
         print("Video generation finished!")
     except Exception as e:
         print("Error generating video:", e)
@@ -402,16 +414,19 @@ def generate_video():
     if not user_text:
         return jsonify({"error": "No text provided"}), 400
     
+    # Generate unique ID for this job
+    job_id = str(uuid.uuid4())
+
     # Start the video generation in a separate thread
-    thread = threading.Thread(target=background_video_creation, args=(user_text,))
+    thread = threading.Thread(target=background_video_creation, args=(user_text, job_id))
     thread.start()
     
-    # Immediately respond to the client
-    return jsonify({"status": "started"})
+    # Immediately respond to the client with the job_id
+    return jsonify({"status": "started", "job_id": job_id})
 
 @app.route('/video', methods=['GET'])
 def get_video():
-    """Serve the generated video file"""
+    """Serve the generated video file (Latest/Legacy)"""
     video_path = Path("media/videos/generated_manim_script/1080p60/Explainer.mp4")
     
     if not video_path.exists():
@@ -422,6 +437,25 @@ def get_video():
         mimetype='video/mp4',
         as_attachment=False,
         download_name='Explainer.mp4'
+    )
+
+@app.route('/videos/<filename>', methods=['GET'])
+def serve_specific_video(filename):
+    """Serve a specific video file by name"""
+    # Define directory where unique videos are stored
+    # We will store them in the same directory as the main output for simplicity, or a dedicated one.
+    # Let's use media/videos/generated_manim_script/1080p60/ for now
+    video_dir = Path("media/videos/generated_manim_script/1080p60")
+    video_path = video_dir / filename
+    
+    if not video_path.exists():
+        return jsonify({"error": "Video not found"}), 404
+        
+    return send_file(
+        video_path,
+        mimetype='video/mp4',
+        as_attachment=False,
+        download_name=filename
     )
 
 def extract_manim_positions(script_text):

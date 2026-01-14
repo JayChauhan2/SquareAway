@@ -132,7 +132,7 @@ export default function VideosPage() {
                 const result = await response.json();
                 if (result.status === 'started') {
                     setLoadingMessage('Generating explanation...');
-                    pollVideo();
+                    pollVideo(result.job_id);
                 }
             } else {
                 alert('Error starting video generation');
@@ -145,36 +145,43 @@ export default function VideosPage() {
         }
     };
 
-    const pollVideo = async () => {
-        const timestamp = new Date().getTime();
-        const videoCheckUrl = `http://127.0.0.1:5000/video?t=${timestamp}`;
+    const pollVideo = async (jobId) => {
+        let videoCheckUrl;
+        if (jobId) {
+            videoCheckUrl = `http://127.0.0.1:5000/videos/video_${jobId}.mp4`;
+        } else {
+            const timestamp = new Date().getTime();
+            videoCheckUrl = `http://127.0.0.1:5000/video?t=${timestamp}`;
+        }
 
         try {
             const response = await fetch(videoCheckUrl, { method: 'HEAD' });
             if (response.ok) {
-                // Upload to storage and save URL first, passing the prompt content
-                await uploadVideoAndCreateNote(promptRef.current);
+                // Upload to storage and save URL first, passing the prompt content AND the correct URL
+                await uploadVideoAndCreateNote(promptRef.current, videoCheckUrl);
 
                 // Then display the video
                 setCurrentVideoUrl(videoCheckUrl);
                 setIsGenerating(false);
                 setPrompt(''); // Clear input on success
             } else {
-                setTimeout(pollVideo, 3000);
+                setTimeout(() => pollVideo(jobId), 3000);
             }
         } catch (err) {
-            setTimeout(pollVideo, 3000);
+            setTimeout(() => pollVideo(jobId), 3000);
         }
     };
 
-    const uploadVideoAndCreateNote = async (contentParams) => {
+    const uploadVideoAndCreateNote = async (contentParams, specificVideoUrl) => {
         if (!user) return;
 
         try {
-            // The video is already available at localhost:5000/video
-            // We'll save this URL directly (it's served by the Flask backend)
-            const timestamp = new Date().getTime();
-            const videoUrl = `http://127.0.0.1:5000/video?t=${timestamp}`;
+            // Use the specific unique URL if provided, otherwise fallback (though fallback shouldn't happen for new vids)
+            let videoUrl = specificVideoUrl;
+            if (!videoUrl) {
+                const timestamp = new Date().getTime();
+                videoUrl = `http://127.0.0.1:5000/video?t=${timestamp}`;
+            }
 
             // Create note entry with the localhost video URL
             const { data, error: insertError } = await supabase.from('notes').insert([{
@@ -216,6 +223,18 @@ export default function VideosPage() {
             console.log('Video URL saved to localStorage:', { noteId, url });
         } catch (e) {
             console.error("Error saving video to local storage:", e);
+        }
+    };
+
+    const getVideoFromLocal = (userId, noteId) => {
+        if (!userId || !noteId) return null;
+        try {
+            const key = `video_storage_${userId}`;
+            const storage = JSON.parse(localStorage.getItem(key) || '{}');
+            return storage[noteId] || null;
+        } catch (e) {
+            console.error("Error reading video from local storage:", e);
+            return null;
         }
     };
 
@@ -309,7 +328,14 @@ export default function VideosPage() {
                                 {pastVideos.map((video) => (
                                     <div
                                         key={video.id}
-                                        onClick={() => setCurrentVideoUrl(video.video_url)}
+                                        onClick={() => {
+                                            const localVideo = getVideoFromLocal(user.id, video.id);
+                                            // Prefer local video if available (as requested by user), otherwise fallback to DB
+                                            // But actually, both should be unique now.
+                                            // Let's use local if it exists, else DB.
+                                            const finalUrl = localVideo || video.video_url;
+                                            setCurrentVideoUrl(finalUrl);
+                                        }}
                                         className="bg-white/50 p-6 rounded-2xl border border-slate-200 hover:border-blue-400 hover:shadow-lg hover:bg-white transition-all duration-300 cursor-pointer group relative"
                                     >
                                         <div className="flex justify-between items-start mb-3">
