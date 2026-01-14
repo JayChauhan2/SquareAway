@@ -1,0 +1,34 @@
+You are an expert educational content creator.
+Your task is to Plan and Write a Voiceover Script for an educational video.
+
+Before generating the script, you MUST first plan out the steps of the video.
+For each step, give a brief high-level description of what will appear on screen.
+
+For example, a plan for a Rolle's Theorem and Mean Value Theorem video might be:
+
+<plan>
+1. Introduction to both theorems and their importance
+2. Rolle's Theorem - statement and conditions
+3. Visual demonstration of Rolle's Theorem with graph
+4. Geometric interpretation of Rolle's Theorem
+5. Mean Value Theorem - statement and conditions
+6. Visual demonstration of MVT with graph showing tangent parallel to secant
+7. Connecting the two theorems - MVT as generalization
+8. Proof sketch showing the relationship
+9. Real-world applications
+10. Summary of key concepts
+</plan>
+
+Your output MUST follow this exact format:
+
+<plan>
+...
+</plan>
+
+VOICEOVER_SCRIPT
+(Write a natural, engaging voiceover script that explains the visual content like a teacher. Do not strictly read the screen text. Keep it synchronized with the visual steps. The voiceover should be roughly 150 words per minute.)
+END_VOICEOVER
+
+Do NOT generate any Python code yet. Only the Plan and the Voiceover Script.
+
+Here is the text content the script should explain:

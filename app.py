@@ -666,8 +666,7 @@ Respond in JSON format ONLY:
         },
         data=json.dumps({
             "model": "gemma-3-27b-it",
-            "messages": [{"role": "user", "content": layout_prompt}],
-            "response_format": {"type": "json_object"}
+            "messages": [{"role": "user", "content": layout_prompt}]
         })
     )
     
@@ -733,8 +732,7 @@ Respond in JSON format ONLY:
         },
         data=json.dumps({
             "model": "gemma-3-27b-it",
-            "messages": [{"role": "user", "content": assessment_prompt}],
-            "response_format": {"type": "json_object"}
+            "messages": [{"role": "user", "content": assessment_prompt}]
         })
     )
     
@@ -782,7 +780,7 @@ ASSESSMENT FEEDBACK:
 Your task:
 1. Fix all accuracy issues mentioned
 2. Implement the suggested improvements
-3. Maintain the same output format (VOICEOVER_SCRIPT...END_VOICEOVER and Manim code)
+3. Maintain the same output format (VOICEOVER_SCRIPT...END_VOICEOVER)
 4. Ensure the script is factually correct and pedagogically sound
 5. DO NOT add any explanatory text, comments, or notes after the script - output ONLY the script itself
 
@@ -814,7 +812,7 @@ Generate the IMPROVED complete script with the same format as before. Output ONL
     return refined_script
 
 def createVideo(user_text_here):
-    with open("./src/assets/video_prompt.txt", "r") as file:
+    with open("./src/assets/script_only_prompt.txt", "r") as file:
         content = file.read()
     
     model_api_key = os.getenv("GOOGLE_API_KEY")
@@ -882,9 +880,50 @@ def createVideo(user_text_here):
             llm_output = current_script
             break
     
+
     print("\n" + "=" * 60)
     print("AGENTIC WORKFLOW COMPLETE - PROCEEDING WITH VIDEO GENERATION")
     print("=" * 60 + "\n")
+
+    # ---------------------------------------------------------
+    # NEW: Generate Manim Code with Groq
+    # ---------------------------------------------------------
+    print("\n=== GENERATING MANIM CODE WITH GROQ ===")
+    with open("./src/assets/manim_only_prompt.txt", "r") as file:
+        manim_prompt_content = file.read()
+    
+    groq_api_key = os.getenv("GROQ_API_KEY")
+    groq_prompt = manim_prompt_content + "\n\nVOICEOVER SCRIPT:\n" + llm_output + "\n\nORIGINAL TEXT:\n" + latex_content
+    
+    try:
+        manim_response = requests.post(
+            url="https://api.groq.com/openai/v1/chat/completions",
+            headers={
+                "Authorization": f"Bearer {groq_api_key}",
+                "Content-Type": "application/json",
+            },
+            data=json.dumps({
+                "model": "llama-3.3-70b-versatile",
+                "messages": [{"role": "user", "content": groq_prompt}]
+            })
+        )
+        manim_data = manim_response.json()
+        if "error" in manim_data:
+             print(f"Groq API Error: {manim_data['error']}")
+             raise ValueError(f"Groq API Error: {manim_data['error']}")
+             
+        manim_code_output = manim_data["choices"][0]["message"]["content"]
+        
+        # Combine them so downstream logic works
+        # Original logic expects VO in llm_output and Manim in llm_output
+        llm_output = llm_output + "\n\n" + manim_code_output
+        
+        print("Manim Code generated successfully.")
+        
+    except Exception as e:
+        print(f"Failed to generate Manim code with Groq: {e}")
+        raise
+
 
     # 1. Parse Voiceover
     if "VOICEOVER_SCRIPT" in llm_output and "END_VOICEOVER" in llm_output:
