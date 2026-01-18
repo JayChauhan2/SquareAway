@@ -910,40 +910,36 @@ def createVideo(user_text_here):
     llm_output = data["choices"][0]["message"]["content"]
     
     
-    # Agentic workflow: Iterative refinement - DISABLED BY USER REQUEST
-    # Just use the initial output directly
+    # AGENTIC WORKFLOW: Iterative refinement
+    
+    max_iterations = 3  # Prevent infinite loops
+    iteration = 1
+    current_script = llm_output
+    
     print("\n" + "=" * 60)
-    print("SKIPPING REFINEMENT - USING INITIAL SCRIPT")
+    print("STARTING AGENTIC SCRIPT REFINEMENT WORKFLOW")
     print("=" * 60)
     
-    # max_iterations = 5  # Prevent infinite loops
-    # iteration = 1
-    # current_script = llm_output
-    
-    # print("\n" + "=" * 60)
-    # print("STARTING AGENTIC SCRIPT REFINEMENT WORKFLOW")
-    # print("=" * 60)
-    
-    # while iteration <= max_iterations:
-    #     # Assess the current script
-    #     assessment = assess_script(current_script, user_text_here, model_api_key, iteration)
+    while iteration <= max_iterations:
+        # Assess the current script
+        assessment = assess_script(current_script, user_text_here, model_api_key, iteration)
         
-    #     # Check if script is approved
-    #     if assessment.get("decision") == "APPROVE":
-    #         print(f"\n✓ Script APPROVED after {iteration} iteration(s)")
-    #         print(f"Final Quality Score: {assessment.get('quality_score')}/10")
-    #         llm_output = current_script
-    #         break
+        # Check if script is approved
+        if assessment.get("decision") == "APPROVE":
+            print(f"\n✓ Script APPROVED after {iteration} iteration(s)")
+            print(f"Final Quality Score: {assessment.get('quality_score')}/10")
+            llm_output = current_script
+            break
         
-    #     # If not approved and we haven't hit max iterations, refine
-    #     if iteration < max_iterations:
-    #         print(f"\n→ Refining script (Iteration {iteration + 1})...")
-    #         current_script = refine_script(current_script, assessment, user_text_here, model_api_key)
-    #         iteration += 1
-    #     else:
-    #         print(f"\n⚠ Max iterations ({max_iterations}) reached. Using current script.")
-    #         llm_output = current_script
-    #         break
+        # If not approved and we haven't hit max iterations, refine
+        if iteration < max_iterations:
+            print(f"\n→ Refining script (Iteration {iteration + 1})...")
+            current_script = refine_script(current_script, assessment, user_text_here, model_api_key)
+            iteration += 1
+        else:
+            print(f"\n⚠ Max iterations ({max_iterations}) reached. Using current script.")
+            llm_output = current_script
+            break
     
 
     print("\n" + "=" * 60)

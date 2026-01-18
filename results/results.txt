@@ -1,47 +1,54 @@
-**Extracted Text:**
+# Calculus BC
+## Intro to Taylor Polynomials
 
-```
-∫⁸₁⁄₂(2 - 1/x) dx
-[2x - ln x]⁸₁⁄₂
-15 - ln 8 - ln 0.5
-15 - ln 16
-```
+1.  Let $f(x) = e^x$.
 
----
+    a) Find the line that best describes $f(x)$ at $x = 0$. That is, find the equation of the tangent line.
 
-**Formatted Notes:**
+    *   $f(x) = e^x$
+    *   $f'(x) = e^x$
+    *   $f'(0) = e^0 = 1$
+    *   $f(0) = e^0 = 1$
+    *   Equation of tangent line: $y - f(0) = f'(0)(x-0)$
+        $y - 1 = 1(x-0)$
+        $y = x+1$
+    *   The line is $f(x) = x+1$.
 
-**Problem:** Evaluate the definite integral:
-$$ \int_{1/2}^{8} \left(2 - \frac{1}{x}\right) dx $$
+    b) Find the quadratic that best describes $f(x)$ at $x = 0$. That is, find A, B, and C such that if $q(x) = A + Bx + Cx^2$, then $f(0) = q(0)$, $f'(0) = q'(0)$, and $f''(0) = q''(0)$.
 
-**Step 1: Find the antiderivative of the integrand.**
-The antiderivative of $2$ is $2x$.
-The antiderivative of $-\frac{1}{x}$ is $-\ln|x|$.
-Since the interval of integration ($1/2$ to $8$) only contains positive values, we can write $-\ln x$.
+    *   Given $q(x) = A + Bx + Cx^2$
+    *   $q'(x) = B + 2Cx$
+    *   $q''(x) = 2C$
 
-Thus, the antiderivative is:
-$$ [2x - \ln x] $$
+    *   From $f(x) = e^x$:
+        *   $f(0) = e^0 = 1$
+        *   $f'(0) = e^0 = 1$
+        *   $f''(0) = e^0 = 1$
 
-**Step 2: Apply the Fundamental Theorem of Calculus.**
-Evaluate the antiderivative at the upper limit ($8$) and subtract the evaluation at the lower limit ($1/2$).
+    *   Matching conditions:
+        *   $q(0) = A = f(0) \Rightarrow A = 1$
+        *   $q'(0) = B = f'(0) \Rightarrow B = 1$
+        *   $q''(0) = 2C = f''(0) \Rightarrow 2C = 1 \Rightarrow C = \frac{1}{2}$
 
-$$ [2x - \ln x]_{1/2}^{8} = (2 \cdot 8 - \ln 8) - \left(2 \cdot \frac{1}{2} - \ln \frac{1}{2}\right) $$
-$$ = (16 - \ln 8) - (1 - \ln 0.5) $$
-$$ = 16 - \ln 8 - 1 + \ln 0.5 $$
-$$ = 15 - \ln 8 + \ln 0.5 $$
+    *   The quadratic is $q(x) = 1 + x + \frac{1}{2}x^2$.
 
-**Step 3: Simplify the logarithmic terms.**
-We know that $\ln 0.5 = \ln \left(\frac{1}{2}\right) = -\ln 2$.
+    c) Find the cubic that best describes $f(x)$ at $x = 0$. That is, find A, B, C, and D such that if $c(x) = A + Bx + Cx^2 + Dx^3$, then $f(0) = c(0)$, $f'(0) = c'(0)$, $f''(0) = c''(0)$, and $f'''(0) = c'''(0)$.
 
-Substitute this into the expression:
-$$ 15 - \ln 8 + (-\ln 2) $$
-$$ = 15 - \ln 8 - \ln 2 $$
+    *   Given $c(x) = A + Bx + Cx^2 + Dx^3$
+    *   $c'(x) = B + 2Cx + 3Dx^2$
+    *   $c''(x) = 2C + 6Dx$
+    *   $c'''(x) = 6D$
 
-**Step 4: Combine the logarithmic terms.**
-Using the logarithm property $\ln a + \ln b = \ln(ab)$:
-$$ = 15 - (\ln 8 + \ln 2) $$
-$$ = 15 - \ln (8 \cdot 2) $$
-$$ = 15 - \ln 16 $$
+    *   From $f(x) = e^x$:
+        *   $f(0) = 1$
+        *   $f'(0) = 1$
+        *   $f''(0) = 1$
+        *   $f'''(0) = e^0 = 1$
 
-**Final Answer:**
-$$ 15 - \ln 16 $$
+    *   Matching conditions:
+        *   $c(0) = A = f(0) \Rightarrow A = 1$
+        *   $c'(0) = B = f'(0) \Rightarrow B = 1$
+        *   $c''(0) = 2C = f''(0) \Rightarrow 2C = 1 \Rightarrow C = \frac{1}{2}$
+        *   $c'''(0) = 6D = f'''(0) \Rightarrow 6D = 1 \Rightarrow D = \frac{1}{6}$
+
+    *   The cubic is $c(x) = 1 + x + \frac{1}{2}x^2 + \frac{1}{6}x^3$.
