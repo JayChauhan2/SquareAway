@@ -14,6 +14,7 @@ import time
 from gtts import gTTS
 from pathlib import Path
 import uuid
+import tempfile
 
 import threading
 from dotenv import load_dotenv
@@ -424,8 +425,25 @@ def background_video_creation(user_text, job_id=None):
             print(f"Saved unique video to: {unique_path}")
             
         print("Video generation finished!")
+        
+        # DEBUG LOGGING
+        print(f"Checking for default video at: {default_video_path.resolve()}")
+        if default_video_path.exists():
+            print("Default video EXISTS.")
+        else:
+            print("Default video does NOT exist.")
+            # List directory contents to see where it might be
+            try:
+                print(f"Contents of {output_dir}:")
+                for p in output_dir.iterdir():
+                    print(f" - {p.name}")
+            except Exception as e:
+                print(f"Could not list directory {output_dir}: {e}")
+
     except Exception as e:
         print("Error generating video:", e)
+        import traceback
+        traceback.print_exc()
     
 @app.route('/generate-video', methods=['POST'])
 def generate_video():
@@ -468,7 +486,22 @@ def serve_specific_video(filename):
     video_dir = Path("media/videos/generated_manim_script/1080p60")
     video_path = video_dir / filename
     
+    print(f"Request for video: {filename}")
+    print(f"Looking for file at: {video_path.resolve()}")
+    
     if not video_path.exists():
+        print(f"ERROR: Video file not found: {video_path}")
+        # List available files to help debug
+        try:
+            print(f"Available files in {video_dir}:")
+            if video_dir.exists():
+                for p in video_dir.iterdir():
+                    print(f" - {p.name}")
+            else:
+                print(f"Directory {video_dir} does not exist!")
+        except Exception as e:
+            print(f"Error listing directory: {e}")
+            
         return jsonify({"error": "Video not found"}), 404
         
     return send_file(
@@ -957,50 +990,50 @@ def createVideo(user_text_here):
         raise
 
 
-    # 1. Parse Voiceover - DISABLED BY USER REQUEST
-    # if "VOICEOVER_SCRIPT" in llm_output and "END_VOICEOVER" in llm_output:
-    #     try:
-    #         voice_part = llm_output.split("VOICEOVER_SCRIPT", 1)[1]
-    #         voice_text = voice_part.split("END_VOICEOVER", 1)[0].strip()
-    #         
-    #         # Generate voiceover with gTTS
-    #         print(f"Generating voiceover ({len(voice_text)} chars) with gTTS...")
-    #         
-    #         try:
-    #             # Generate audio with gTTS
-    #             tts = gTTS(text=voice_text, lang='en')
-    #             tts.save('voiceover_temp.mp3')
-    #             
-    #             # Speed up audio to 1.5x using ffmpeg
-    #             # Note: gTTS outputs mp3 directly, so we use that as input
-    #             subprocess.run([
-    #                 'ffmpeg', '-y', '-i', 'voiceover_temp.mp3',
-    #                 '-filter:a', 'atempo=1.5',
-    #                 'voiceover.mp3'
-    #             ], check=True, capture_output=True)
-    #             
-    #             # Clean up temp file
-    #             if os.path.exists('voiceover_temp.mp3'):
-    #                 os.remove('voiceover_temp.mp3')
-    #             
-    #             # Verify file exists and has content
-    #             if os.path.exists("voiceover.mp3") and os.path.getsize("voiceover.mp3") > 0:
-    #                  print(f"voiceover.mp3 saved successfully. Size: {os.path.getsize('voiceover.mp3')} bytes")
-    #             else:
-    #                  print("Error: voiceover.mp3 is empty or missing.")
-
-    #         except Exception as e:
-    #             print(f"Error generating voiceover with gTTS: {e}")
-    #             raise
-
-    #     except Exception as e:
-    #         print(f"Error generating voiceover: {e}")
-    # else:
-    #     print("No VOICEOVER_SCRIPT found in LLM output. Saving raw output to debug_llm_output.txt")
-    #     # Save raw output for debugging
-    #     with open("debug_llm_output.txt", "w", encoding="utf-8") as f:
-    #         f.write(llm_output)
         
+    # 1. Parse Voiceover - RE-ENABLED
+    if "VOICEOVER_SCRIPT" in llm_output and "END_VOICEOVER" in llm_output:
+        try:
+            voice_part = llm_output.split("VOICEOVER_SCRIPT", 1)[1]
+            voice_text = voice_part.split("END_VOICEOVER", 1)[0].strip()
+            
+            # Generate voiceover with gTTS
+            print(f"Generating voiceover ({len(voice_text)} chars) with gTTS...")
+            
+            try:
+                # Generate audio with gTTS
+                tts = gTTS(text=voice_text, lang='en')
+                tts.save('voiceover_temp.mp3')
+                
+                # Speed up audio to 1.5x using ffmpeg
+                # Note: gTTS outputs mp3 directly, so we use that as input
+                try:
+                    subprocess.run([
+                        'ffmpeg', '-y', '-i', 'voiceover_temp.mp3',
+                        '-filter:a', 'atempo=1.5',
+                        'voiceover.mp3'
+                    ], check=True, capture_output=True)
+                except FileNotFoundError:
+                     print("WARNING: ffmpeg not found. Using original speed voiceover.")
+                     os.rename('voiceover_temp.mp3', 'voiceover.mp3')
+                
+                # Clean up temp file
+                if os.path.exists('voiceover_temp.mp3'):
+                    os.remove('voiceover_temp.mp3')
+                
+                # Verify file exists and has content
+                if os.path.exists("voiceover.mp3") and os.path.getsize("voiceover.mp3") > 0:
+                     print(f"voiceover.mp3 saved successfully. Size: {os.path.getsize('voiceover.mp3')} bytes")
+                else:
+                     print("Error: voiceover.mp3 is empty or missing.")
+
+            except Exception as e:
+                print(f"Error generating voiceover with gTTS: {e}")
+                raise
+
+        except Exception as e:
+            print(f"Error generating voiceover: {e}")
+
     #     # Fallback attempt: if markers are missing, maybe lines 20-end are the script?
     #     # Or look for <plan> ... </plan> and take everything after?
     #     if "</plan>" in llm_output:
@@ -1077,8 +1110,10 @@ def createVideo(user_text_here):
     # -------------------------------------------------------------
     # 2. Use a fixed script name — delete if it already exists
     # -------------------------------------------------------------
+    # Use system temp dir to avoid Flask auto-reload when file is written
     script_name = "generated_manim_script.py"
-    script_path = Path(script_name)
+    script_path = Path(tempfile.gettempdir()) / script_name
+
 
     if script_path.exists():
         script_path.unlink()  # delete old file
@@ -1093,22 +1128,30 @@ def createVideo(user_text_here):
     script_text = script_text.replace("×", "\\\\times")
     script_text = script_text.replace("÷", "\\\\div")
     
-    # REMOVE any calls to add_sound as per user request
-    if 'self.add_sound' in script_text:
-        print("Removing self.add_sound calls from script...")
-        # Simple line filtering
-        lines = script_text.split('\n')
-        lines = [line for line in lines if 'self.add_sound' not in line]
-        script_text = '\n'.join(lines)
+    
+    # Define project root early for absolute paths
+    project_root = Path(__file__).parent
+    voiceover_path = project_root / "voiceover.mp3"
+    # Use forward slashes for Manim string to avoid potential escape issues (though pathlib handles it, the string injection might not)
+    voiceover_path_str = str(voiceover_path).replace("\\", "/")
 
-    # CRITICAL FIX: Ensure add_sound is present -- DISABLED
-    # if 'self.add_sound("voiceover.mp3")' not in script_text:
-    #     print("Injecting missing self.add_sound('voiceover.mp3') into script...")
-    #     # Inject it at the beginning of construct method
-    #     script_text = script_text.replace(
-    #         "def construct(self):", 
-    #         'def construct(self):\n        self.add_sound("voiceover.mp3")'
-    #     )
+    # Ensure add_sound is present with ABSOLUTE path
+    if 'self.add_sound' not in script_text:
+        print(f"Injecting self.add_sound('{voiceover_path_str}') into script...")
+        # Inject it at the beginning of construct method
+        script_text = script_text.replace(
+            "def construct(self):", 
+            f'def construct(self):\n        self.add_sound(r"{voiceover_path_str}")'
+        )
+    else:
+         # If it exists but might be using relative path, we should ideally replace it, but for now assuming injection is the main path
+         # Or if the LLM generated it, it probably used "voiceover.mp3", which fails in temp dir.
+         # So let's replace `self.add_sound("voiceover.mp3")` with absolute path
+         script_text = script_text.replace('self.add_sound("voiceover.mp3")', f'self.add_sound(r"{voiceover_path_str}")')
+         script_text = script_text.replace("self.add_sound('voiceover.mp3')", f"self.add_sound(r'{voiceover_path_str}')")
+
+
+
     
     with open(script_path, "w", encoding="utf-8") as f:
         f.write(script_text)
@@ -1120,21 +1163,49 @@ def createVideo(user_text_here):
     if not venv_manim.exists():
         raise RuntimeError("Manim is not installed inside .venv.")
 
-    # Verify voiceover exists before running Manim -- DISABLED
-    # if not os.path.exists("voiceover.mp3"):
-    #      print("WARNING: voiceover.mp3 does not exist! Video will meet silence.")
+    # Verify voiceover exists before running Manim
+    if not os.path.exists("voiceover.mp3"):
+         print("WARNING: voiceover.mp3 does not exist! Video will meet silence.")
 
 
-    subprocess.run(
-        [
-            str(venv_manim),
-            "-qh",
-            script_name,
-            "Explainer"
-        ],
-        cwd=project_root,
-        check=True
-    )
+    try:
+        result = subprocess.run(
+            [
+                str(venv_manim),
+                "-qh",
+                str(script_path),
+                "Explainer",
+                "--media_dir", str(project_root / "media")
+            ],
+            cwd=project_root,
+            check=True,
+            capture_output=True,
+            text=True
+        )
+        print("Manim execution successful.")
+        # print("Manim Output:", result.stdout) # Optional: too verbose?
+    except subprocess.CalledProcessError as e:
+        print(f"CRITICAL: Manim execution failed with return code {e.returncode}")
+        print("STDOUT:", e.stdout)
+        print("STDERR:", e.stderr)
+        # Verify if the script actually has 'class Explainer'
+        if "class Explainer" not in script_text:
+             print("ERROR: 'class Explainer' not found in the generated script!")
+        raise RuntimeError(f"Manim failed: {e.stderr}")
+
+    # Verify output immediately
+    expected_output = project_root / "media/videos/generated_manim_script/1080p60/Explainer.mp4"
+    if expected_output.exists():
+        print(f"SUCCESS: Manim created {expected_output}")
+    else:
+        print(f"FAILURE: Manim finished but {expected_output} does NOT exist.")
+        print(f"Listing {expected_output.parent}:")
+        if expected_output.parent.exists():
+            for f in expected_output.parent.iterdir():
+                print(f" - {f.name}")
+        else:
+            print(f"Parent directory {expected_output.parent} does not exist.")
+
     print("==== Extracted Script Start ====")
     print(script_text[:200])  # first 200 chars
     print("==== Extracted Script End ====")

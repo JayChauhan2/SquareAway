@@ -421,15 +421,9 @@ export default function SquareAwayLanding() {
   };
 
   const pollVideo = async (jobId) => {
-    // If we have a jobId, check for the specific video file
-    // Otherwise fallback to the generic check (legacy behavior)
-    let videoCheckUrl;
-    if (jobId) {
-      videoCheckUrl = `http://127.0.0.1:5000/videos/video_${jobId}.mp4`;
-    } else {
-      const timestamp = new Date().getTime();
-      videoCheckUrl = `http://127.0.0.1:5000/video?t=${timestamp}`;
-    }
+    // ALWAYS use the generic endpoint with timestamp
+    const timestamp = new Date().getTime();
+    const videoCheckUrl = `http://127.0.0.1:5000/video?t=${timestamp}`;
 
     try {
       const response = await fetch(videoCheckUrl, { method: 'HEAD' });
