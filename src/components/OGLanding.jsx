@@ -13,7 +13,7 @@ export default function SquareAwayLanding() {
   const [isVisible, setIsVisible] = useState({});
 
   useEffect(() => {
-    document.title = 'Square Away - AI-Powered Math Learning';
+    document.title = 'SquareAway - AI-Powered Math Learning';
   }, []);
 
   useEffect(() => {
@@ -96,7 +96,7 @@ export default function SquareAwayLanding() {
           </h1>
 
           <p className="text-xl md:text-2xl text-slate-600 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
-            Square Away adapts to your rhythm, guides your growth, and transforms mathematical concepts into fluid understanding
+            SquareAway adapts to your rhythm, guides your growth, and transforms mathematical concepts into fluid understanding
           </p>
 
           <button onClick={() => navigate('/signup')} className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full text-lg font-medium hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-500 hover:scale-105">
@@ -241,15 +241,15 @@ export default function SquareAwayLanding() {
           <div className="grid md:grid-cols-2 gap-8">
             {[
               {
-                name: 'Sarah Chen',
-                role: 'High School Junior',
-                text: 'Square Away transformed my relationship with calculus. The way concepts flow together finally makes sense.',
+                name: 'Mr. James Bolen',
+                role: 'High School Math Teacher',
+                text: 'One specific strength of SquareAway [was] the ability to create problems, with video instruction, and solutions for a variety of topics.',
                 gradient: 'from-blue-500 to-cyan-500'
               },
               {
-                name: 'Marcus Johnson',
-                role: 'College Freshman',
-                text: 'The AI feels like a patient tutor who understands exactly where I need help. My confidence has soared.',
+                name: 'Corwin Epp',
+                role: 'AP Calculus BC Student',
+                text: 'Square Away helped me generate problems in real time without having to scour the internet.',
                 gradient: 'from-purple-500 to-pink-500'
               }
             ].map((testimonial, idx) => (
@@ -286,21 +286,15 @@ export default function SquareAwayLanding() {
             </h2>
 
             <p className="text-xl md:text-2xl text-slate-600 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
-              Join thousands of students who've discovered the joy of mathematical mastery through organic, AI-guided learning
+              Join students who've discovered the joy of mathematical mastery through organic, AI-guided learning
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <button onClick={() => navigate('/signup')} className="px-10 py-5 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full text-lg font-medium hover:shadow-2xl hover:shadow-blue-500/40 transition-all duration-500 hover:scale-105 w-full sm:w-auto">
-                Start Free Trial
-              </button>
-              <button className="px-10 py-5 bg-white/50 backdrop-blur-sm text-slate-700 rounded-full text-lg font-medium border border-slate-200 hover:bg-white/80 hover:shadow-xl transition-all duration-500 w-full sm:w-auto">
-                Watch Demo
+              <button onClick={() => navigate('/signup')} className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full text-lg font-medium hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-500 hover:scale-105">
+                Begin Your Journey
+                <ArrowRight className="inline-block ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
               </button>
             </div>
-
-            <p className="text-sm text-slate-500 font-light">
-              No credit card required • 14-day free trial • Cancel anytime
-            </p>
           </div>
         </div>
       </section>
@@ -319,13 +313,12 @@ export default function SquareAwayLanding() {
             <div className="flex gap-8 text-sm text-slate-500 font-light">
               <a href="#" className="hover:text-blue-600 transition-colors duration-300">About</a>
               <a href="#" className="hover:text-blue-600 transition-colors duration-300">Features</a>
-              <a href="#" className="hover:text-blue-600 transition-colors duration-300">Pricing</a>
               <a href="#" className="hover:text-blue-600 transition-colors duration-300">Contact</a>
             </div>
           </div>
 
           <div className="mt-8 pt-8 border-t border-slate-200 text-center text-sm text-slate-400 font-light">
-            © 2025 Square Away. Made with ❤️ by Jay Chauhan.
+            © 2026 SquareAway. Made with ❤️ by Jay Chauhan.
           </div>
         </div>
       </footer>

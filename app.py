@@ -3,19 +3,22 @@
 from flask import Flask, request, jsonify, send_file
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
-from google import genai
-from google.genai import types
-from pathlib import Path
+
 import subprocess
 import os
 import json
 import requests
 import mimetypes
 import shutil
-import threading
-import wave
+import time
+from gtts import gTTS
+from pathlib import Path
 import uuid
+
+import threading
 from dotenv import load_dotenv
+from google import genai
+from google.genai import types
 
 load_dotenv()
 
@@ -344,22 +347,39 @@ def extractText():
         with open(file_path, 'rb') as f:
             image_bytes = f.read()
 
-        response = client.models.generate_content(
-            model='gemini-2.0-flash',
-            contents=[
-                types.Part.from_bytes(
-                    data=image_bytes,
-                    mime_type=mime_type,
-                ),
-                (
-                    "Extract all the text from this image and "
-                    "After extracting, carefully review the text and correct any mistakes "
-                    "or misread characters. THEN, CONVERT the text into a neatly formatted notes with logical understanding."
-                    " Do not include any other extra text like 'okay here's your message' or something similar. ONLY include the neatly formatted output."
+        retries = 0
+        max_retries = 5  # Increased from 3
+        while retries < max_retries:
+            try:
+                response = client.models.generate_content(
+                    model='gemini-2.5-flash',
+                    contents=[
+                        types.Part.from_bytes(
+                            data=image_bytes,
+                            mime_type=mime_type,
+                        ),
+                        (
+                            "Extract all the text from this image and "
+                            "After extracting, carefully review the text and correct any mistakes "
+                            "or misread characters. THEN, CONVERT the text into a neatly formatted notes with logical understanding."
+                            " Do not include any other extra text like 'okay here's your message' or something similar. ONLY include the neatly formatted output."
+                        )
+                    ]
                 )
-            ]
-        )
-        extracted_text += response.text + "\n"
+                extracted_text += response.text + "\n"
+                break
+            except Exception as e:
+                if "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e):
+                    retries += 1
+                    wait_time = 30 * retries  # Exponential backoff: 30s, 60s, 90s...
+                    print(f"Rate limit exceeded. Retrying in {wait_time} seconds... (Attempt {retries}/{max_retries})")
+                    time.sleep(wait_time)
+                else:
+                    print(f"Error processing {filename}: {e}")
+                    raise e
+        else:
+            print(f"Failed to process {filename} after {max_retries} retries.")
+            extracted_text += f"\n[Error: Failed to process {filename} due to rate limits]\n"
     
     # Save to file
     results_file_path = os.path.join(RESULTS_FOLDER, "results.txt")
@@ -812,6 +832,12 @@ Generate the IMPROVED complete script with the same format as before. Output ONL
     return refined_script
 
 def createVideo(user_text_here):
+    # Cleanup old voiceovers to ensure no stale audio is used
+    if os.path.exists("voiceover.mp3"):
+        os.remove("voiceover.mp3")
+    if os.path.exists("voiceover_temp.mp3"):
+        os.remove("voiceover_temp.mp3")
+
     with open("./src/assets/script_only_prompt.txt", "r") as file:
         content = file.read()
     
@@ -850,39 +876,45 @@ def createVideo(user_text_here):
 
     llm_output = data["choices"][0]["message"]["content"]
     
-    # Agentic workflow: Iterative refinement
-    max_iterations = 5  # Prevent infinite loops
-    iteration = 1
-    current_script = llm_output
     
+    # Agentic workflow: Iterative refinement - DISABLED BY USER REQUEST
+    # Just use the initial output directly
     print("\n" + "=" * 60)
-    print("STARTING AGENTIC SCRIPT REFINEMENT WORKFLOW")
+    print("SKIPPING REFINEMENT - USING INITIAL SCRIPT")
     print("=" * 60)
     
-    while iteration <= max_iterations:
-        # Assess the current script
-        assessment = assess_script(current_script, user_text_here, model_api_key, iteration)
+    # max_iterations = 5  # Prevent infinite loops
+    # iteration = 1
+    # current_script = llm_output
+    
+    # print("\n" + "=" * 60)
+    # print("STARTING AGENTIC SCRIPT REFINEMENT WORKFLOW")
+    # print("=" * 60)
+    
+    # while iteration <= max_iterations:
+    #     # Assess the current script
+    #     assessment = assess_script(current_script, user_text_here, model_api_key, iteration)
         
-        # Check if script is approved
-        if assessment.get("decision") == "APPROVE":
-            print(f"\n✓ Script APPROVED after {iteration} iteration(s)")
-            print(f"Final Quality Score: {assessment.get('quality_score')}/10")
-            llm_output = current_script
-            break
+    #     # Check if script is approved
+    #     if assessment.get("decision") == "APPROVE":
+    #         print(f"\n✓ Script APPROVED after {iteration} iteration(s)")
+    #         print(f"Final Quality Score: {assessment.get('quality_score')}/10")
+    #         llm_output = current_script
+    #         break
         
-        # If not approved and we haven't hit max iterations, refine
-        if iteration < max_iterations:
-            print(f"\n→ Refining script (Iteration {iteration + 1})...")
-            current_script = refine_script(current_script, assessment, user_text_here, model_api_key)
-            iteration += 1
-        else:
-            print(f"\n⚠ Max iterations ({max_iterations}) reached. Using current script.")
-            llm_output = current_script
-            break
+    #     # If not approved and we haven't hit max iterations, refine
+    #     if iteration < max_iterations:
+    #         print(f"\n→ Refining script (Iteration {iteration + 1})...")
+    #         current_script = refine_script(current_script, assessment, user_text_here, model_api_key)
+    #         iteration += 1
+    #     else:
+    #         print(f"\n⚠ Max iterations ({max_iterations}) reached. Using current script.")
+    #         llm_output = current_script
+    #         break
     
 
     print("\n" + "=" * 60)
-    print("AGENTIC WORKFLOW COMPLETE - PROCEEDING WITH VIDEO GENERATION")
+    print("PROCEEDING WITH VIDEO GENERATION")
     print("=" * 60 + "\n")
 
     # ---------------------------------------------------------
@@ -903,7 +935,7 @@ def createVideo(user_text_here):
                 "Content-Type": "application/json",
             },
             data=json.dumps({
-                "model": "llama-3.3-70b-versatile",
+                "model": "meta-llama/llama-4-maverick-17b-128e-instruct",
                 "messages": [{"role": "user", "content": groq_prompt}]
             })
         )
@@ -925,80 +957,68 @@ def createVideo(user_text_here):
         raise
 
 
-    # 1. Parse Voiceover
-    if "VOICEOVER_SCRIPT" in llm_output and "END_VOICEOVER" in llm_output:
-        try:
-            voice_part = llm_output.split("VOICEOVER_SCRIPT", 1)[1]
-            voice_text = voice_part.split("END_VOICEOVER", 1)[0].strip()
-            
-            # Generate WAV using Gemini TTS
-            print(f"Generating voiceover ({len(voice_text)} chars) with Gemini TTS...")
-            
-            # Set up the wave file helper function
-            def wave_file(filename, pcm, channels=1, rate=24000, sample_width=2):
-                with wave.open(filename, "wb") as wf:
-                    wf.setnchannels(channels)
-                    wf.setsampwidth(sample_width)
-                    wf.setframerate(rate)
-                    wf.writeframes(pcm)
-            
-            # Generate audio with Gemini TTS
-            client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
-            response = client.models.generate_content(
-                model="gemini-2.5-flash-preview-tts",
-                contents=voice_text,
-                config=types.GenerateContentConfig(
-                    response_modalities=["AUDIO"],
-                    speech_config=types.SpeechConfig(
-                        voice_config=types.VoiceConfig(
-                            prebuilt_voice_config=types.PrebuiltVoiceConfig(
-                                voice_name='Kore',  # You can change this to other voices
-                            )
-                        )
-                    ),
-                )
-            )
-            
-            # Save the audio data
-            try:
-                # Extract audio data from response
-                if hasattr(response, 'candidates') and len(response.candidates) > 0:
-                    candidate = response.candidates[0]
-                    if hasattr(candidate, 'content') and hasattr(candidate.content, 'parts'):
-                        for part in candidate.content.parts:
-                            if hasattr(part, 'inline_data'):
-                                audio_data = part.inline_data.data
-                                wave_file('voiceover_temp.wav', audio_data)
-                                break
-                else:
-                    raise ValueError("No audio data in response")
-            except (AttributeError, IndexError, TypeError) as e:
-                print(f"Error extracting audio: {e}")
-                print(f"Response type: {type(response)}")
-                print(f"Response: {response}")
-                raise
-            
-            # Speed up audio to 1.5x using ffmpeg
-            subprocess.run([
-                'ffmpeg', '-y', '-i', 'voiceover_temp.wav',
-                '-filter:a', 'atempo=1.5',
-                'voiceover.mp3'
-            ], check=True, capture_output=True)
-            
-            # Clean up temp file
-            if os.path.exists('voiceover_temp.wav'):
-                os.remove('voiceover_temp.wav')
-            
-            # Verify file exists and has content
-            if os.path.exists("voiceover.mp3") and os.path.getsize("voiceover.mp3") > 0:
-                 print(f"voiceover.mp3 saved successfully. Size: {os.path.getsize('voiceover.mp3')} bytes")
-            else:
-                 print("Error: voiceover.mp3 is empty or missing.")
+    # 1. Parse Voiceover - DISABLED BY USER REQUEST
+    # if "VOICEOVER_SCRIPT" in llm_output and "END_VOICEOVER" in llm_output:
+    #     try:
+    #         voice_part = llm_output.split("VOICEOVER_SCRIPT", 1)[1]
+    #         voice_text = voice_part.split("END_VOICEOVER", 1)[0].strip()
+    #         
+    #         # Generate voiceover with gTTS
+    #         print(f"Generating voiceover ({len(voice_text)} chars) with gTTS...")
+    #         
+    #         try:
+    #             # Generate audio with gTTS
+    #             tts = gTTS(text=voice_text, lang='en')
+    #             tts.save('voiceover_temp.mp3')
+    #             
+    #             # Speed up audio to 1.5x using ffmpeg
+    #             # Note: gTTS outputs mp3 directly, so we use that as input
+    #             subprocess.run([
+    #                 'ffmpeg', '-y', '-i', 'voiceover_temp.mp3',
+    #                 '-filter:a', 'atempo=1.5',
+    #                 'voiceover.mp3'
+    #             ], check=True, capture_output=True)
+    #             
+    #             # Clean up temp file
+    #             if os.path.exists('voiceover_temp.mp3'):
+    #                 os.remove('voiceover_temp.mp3')
+    #             
+    #             # Verify file exists and has content
+    #             if os.path.exists("voiceover.mp3") and os.path.getsize("voiceover.mp3") > 0:
+    #                  print(f"voiceover.mp3 saved successfully. Size: {os.path.getsize('voiceover.mp3')} bytes")
+    #             else:
+    #                  print("Error: voiceover.mp3 is empty or missing.")
 
-        except Exception as e:
-            print(f"Error generating voiceover: {e}")
-    else:
-        print("No VOICEOVER_SCRIPT found in LLM output.")
+    #         except Exception as e:
+    #             print(f"Error generating voiceover with gTTS: {e}")
+    #             raise
+
+    #     except Exception as e:
+    #         print(f"Error generating voiceover: {e}")
+    # else:
+    #     print("No VOICEOVER_SCRIPT found in LLM output. Saving raw output to debug_llm_output.txt")
+    #     # Save raw output for debugging
+    #     with open("debug_llm_output.txt", "w", encoding="utf-8") as f:
+    #         f.write(llm_output)
+        
+    #     # Fallback attempt: if markers are missing, maybe lines 20-end are the script?
+    #     # Or look for <plan> ... </plan> and take everything after?
+    #     if "</plan>" in llm_output:
+    #         print("Attempting fallback extraction after </plan>...")
+    #         potential_script = llm_output.split("</plan>", 1)[1].strip()
+    #         # Remove Manim code if present
+    #         if "Manim" in potential_script:
+    #             potential_script = potential_script.split("Manim", 1)[0].strip()
+    #         
+    #         if len(potential_script) > 50:
+    #              print("Fallback: Found potential script content after plan.")
+    #              # Try generating voiceover with this content
+    #              try:
+    #                 tts = gTTS(text=potential_script, lang='en')
+    #                 tts.save('voiceover.mp3') # No speedup for fallback to be safe/simple first
+    #                 print("Fallback: voiceover.mp3 generated from post-plan content.")
+    #              except Exception as ex:
+    #                 print(f"Fallback voiceover generation failed: {ex}")
 
     # Try to find the Manim script - be flexible about the marker
     if "Manim" in llm_output:
@@ -1070,7 +1090,25 @@ def createVideo(user_text_here):
     script_text = script_text.replace("≤", "\\\\le")
     script_text = script_text.replace("≥", "\\\\ge")
     script_text = script_text.replace("×", "\\\\times")
+    script_text = script_text.replace("×", "\\\\times")
     script_text = script_text.replace("÷", "\\\\div")
+    
+    # REMOVE any calls to add_sound as per user request
+    if 'self.add_sound' in script_text:
+        print("Removing self.add_sound calls from script...")
+        # Simple line filtering
+        lines = script_text.split('\n')
+        lines = [line for line in lines if 'self.add_sound' not in line]
+        script_text = '\n'.join(lines)
+
+    # CRITICAL FIX: Ensure add_sound is present -- DISABLED
+    # if 'self.add_sound("voiceover.mp3")' not in script_text:
+    #     print("Injecting missing self.add_sound('voiceover.mp3') into script...")
+    #     # Inject it at the beginning of construct method
+    #     script_text = script_text.replace(
+    #         "def construct(self):", 
+    #         'def construct(self):\n        self.add_sound("voiceover.mp3")'
+    #     )
     
     with open(script_path, "w", encoding="utf-8") as f:
         f.write(script_text)
@@ -1081,6 +1119,11 @@ def createVideo(user_text_here):
 
     if not venv_manim.exists():
         raise RuntimeError("Manim is not installed inside .venv.")
+
+    # Verify voiceover exists before running Manim -- DISABLED
+    # if not os.path.exists("voiceover.mp3"):
+    #      print("WARNING: voiceover.mp3 does not exist! Video will meet silence.")
+
 
     subprocess.run(
         [

@@ -4,31 +4,53 @@ SquareAway is an intelligent educational platform designed to transform how stud
 
 Key Features:
 
-1. Note Digitization & AI Extraction:
-   - Users can upload images of handwritten notes or textbooks.
-   - The system (powered by Google Gemini) extracts text and converts it into structured, digital notes with mathematical formatting (LaTeX).
+1. Agentic AI Video Creation (The Core Innovation):
+   - This feature utilizes a sophisticated **Agentic Workflow** to autonomously create educational videos.
+   - **Step 1: Vision Analysis**: Google Gemini 2.5 Flash analyzes uploaded notes to understand the core concepts.
+   - **Step 2: Script Generation**: Google Gemma 2 (27B) drafts an initial educational script.
+   - **Step 3: Agentic Refinement (Self-Correction)**: An specialized "Critic" AI agent assesses the script for pedagogical quality and factual accuracy. If needed, a "Refiner" agent iteratively improves the script until it meets high standards.
+   - **Step 4: Code Generation**: Groq (Llama 4 Maverick) translates the refined script into complex Manim (Python) animation code.
+   - **Step 5: Rendering**: The Manim engine renders the final video.
+   - **Result**: A complete, high-quality explainer video generated entirely by autonomous AI agents working in concert.
 
-2. Automated Explainer Videos:
-   - One of the core features is the "Agentic Video Workflow."
-   - The app analyzes the study material and automatically generates animated explainer videos using Manim (Mathematical Animation Engine).
-   - These videos include synthesized voiceovers to visually and audibly explain complex concepts.
+2. Note Digitization & AI Extraction:
+   - Users can upload images of handwritten notes or textbooks.
+   - The system extracts text and converts it into structured, digital notes with mathematical formatting (LaTeX) using **Google Gemini Vision**.
 
 3. Interactive Practice & Assessment:
-   - Students can generate practice sets including Multiple Choice, True/False, and Short Answer questions based on their specific topics.
-   - The "Practice" mode allows for self-paced testing with immediate feedback.
+   - Students can generate customized practice sets (MCQ, True/False, Word Problems).
+   - Powered by **Google Gemma 2**, which creates context-aware questions based on the specific study material.
+   - **Groq (Llama 3.3)** acts as a virtual grader, evaluating student answers and providing instant, constructive feedback.
 
 4. AI Study Assistant (Chatbot):
-   - A built-in chatbot acts as a personal tutor, allowing students to ask clarifying questions about their notes.
-   - The assistant is context-aware and can interpret complex mathematical notation.
+   - A built-in chatbot acts as a personal tutor, allowing students to ask clarifying questions.
+   - Powered by **Groq (Llama 3.3 70B)**, enabling deep understanding of complex mathematical notation and logic.
 
 5. Teacher Dashboard & Classroom Management:
    - Dedicated interface for teachers to manage classes and enrollments.
-   - Teachers can assign work and potentially monitor student engagement (features suggested by the codebase structure).
+   - Backend managed by **Supabase** for secure, scalable data handling.
 
-Technical Overview:
-- Frontend: Built with React, Vite, and Tailwind CSS for a modern, responsive user interface.
-- Backend: Powered by Flask (Python), handling AI orchestration, video rendering, and API requests.
-- AI Services: Integrates Google Gemini (Vision), OpenRouter/Mistral (Text & Logic), and Manim (Animation).
-- Database & Auth: Uses Supabase for secure user authentication and data management.
+6. Mobile Companion App:
+   - A dedicated mobile application built with React Native and Expo.
+   - Focuses on video creation and viewing, allowing students to learn on the go.
+   - Seamlessly integrates with the main platform's backend and database.
+
+Technical Overview & API Usage:
+
+- **Google Gemini API**:
+  - `gemini-2.5-flash`: High-speed computer vision for extracting text/math from images.
+  - `gemma-2-27b-it`: The "brain" behind the Agentic Workflow (Scripting, Assessment, Refinement) and Question Generation.
+- **Groq API**:
+  - `llama-3.3-70b-versatile`: Powers the Chatbot, Title Generation, LaTeX Conversion, and Answer Grading.
+  - `meta-llama/llama-4-maverick-17b-128e-instruct`: Specialized for generating Manim Python code for animations.
+- **Manim (Mathematical Animation Engine)**:
+  - Programmatic video generation engine used to render the visual explanations.
+- **Supabase**:
+  - Handles Authentication, Database (PostgreSQL), and Real-time subscriptions.
+- **Frontend / Mobile**:
+  - React, Vite, Tailwind CSS (Web)
+  - React Native, Expo (Mobile)
+- **Backend**:
+  - Flask (Python) server orchestrating the multi-agent AI pipeline.
 
 This application is ideal for STEM students looking to visualize deeper concepts and teachers aiming to provide automated, high-quality supplementary materials.

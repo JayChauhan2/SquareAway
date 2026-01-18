@@ -14,8 +14,8 @@ Below the `Manim` marker, you MUST generate ONLY the Python code — a single fi
 • A Manim Scene class that uses:
         self.wait(...)  # placeholder duration
 
-IMPORTANT: In your `construct` method, the VERY FIRST LINE must be:
-        self.add_sound("voiceover.mp3")
+IMPORTANT: In your `construct` method, do NOT add any sound or voiceover calls.
+
 
 No explanations or text outside the code block after the "Manim" signal.
 The video should be as long as necessary to fully cover the script content.

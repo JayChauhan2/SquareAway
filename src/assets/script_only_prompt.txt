@@ -25,6 +25,8 @@ Your output MUST follow this exact format:
 ...
 </plan>
 
+CRITICAL: You MUST include the exact markers "VOICEOVER_SCRIPT" and "END_VOICEOVER". Do not change them.
+
 VOICEOVER_SCRIPT
 (Write a natural, engaging voiceover script that explains the visual content like a teacher. Do not strictly read the screen text. Keep it synchronized with the visual steps. The voiceover should be roughly 150 words per minute.)
 END_VOICEOVER

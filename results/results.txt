@@ -1,0 +1,47 @@
+**Extracted Text:**
+
+```
+∫⁸₁⁄₂(2 - 1/x) dx
+[2x - ln x]⁸₁⁄₂
+15 - ln 8 - ln 0.5
+15 - ln 16
+```
+
+---
+
+**Formatted Notes:**
+
+**Problem:** Evaluate the definite integral:
+$$ \int_{1/2}^{8} \left(2 - \frac{1}{x}\right) dx $$
+
+**Step 1: Find the antiderivative of the integrand.**
+The antiderivative of $2$ is $2x$.
+The antiderivative of $-\frac{1}{x}$ is $-\ln|x|$.
+Since the interval of integration ($1/2$ to $8$) only contains positive values, we can write $-\ln x$.
+
+Thus, the antiderivative is:
+$$ [2x - \ln x] $$
+
+**Step 2: Apply the Fundamental Theorem of Calculus.**
+Evaluate the antiderivative at the upper limit ($8$) and subtract the evaluation at the lower limit ($1/2$).
+
+$$ [2x - \ln x]_{1/2}^{8} = (2 \cdot 8 - \ln 8) - \left(2 \cdot \frac{1}{2} - \ln \frac{1}{2}\right) $$
+$$ = (16 - \ln 8) - (1 - \ln 0.5) $$
+$$ = 16 - \ln 8 - 1 + \ln 0.5 $$
+$$ = 15 - \ln 8 + \ln 0.5 $$
+
+**Step 3: Simplify the logarithmic terms.**
+We know that $\ln 0.5 = \ln \left(\frac{1}{2}\right) = -\ln 2$.
+
+Substitute this into the expression:
+$$ 15 - \ln 8 + (-\ln 2) $$
+$$ = 15 - \ln 8 - \ln 2 $$
+
+**Step 4: Combine the logarithmic terms.**
+Using the logarithm property $\ln a + \ln b = \ln(ab)$:
+$$ = 15 - (\ln 8 + \ln 2) $$
+$$ = 15 - \ln (8 \cdot 2) $$
+$$ = 15 - \ln 16 $$
+
+**Final Answer:**
+$$ 15 - \ln 16 $$
