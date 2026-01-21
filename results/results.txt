@@ -1,54 +1,26 @@
-# Calculus BC
-## Intro to Taylor Polynomials
+## Unit 7 Lesson 1: Algebraic Expressions
 
-1.  Let $f(x) = e^x$.
+### Vocabulary
 
-    a) Find the line that best describes $f(x)$ at $x = 0$. That is, find the equation of the tangent line.
+*   **Algebraic Expression:** An expression that may have **numbers**, **operations**, and one or more **variables**.
+*   **Variable:** A **symbol** that represents one or more **numbers**.
+*   **Term:** Each **number**, **variable**, or groups of **numbers** and **variables**, separated by an **operation sign** (+, -, x).
+*   **Coefficient:** The **numerical** factor of a term that contains a **variable**.
+*   **Constant:** A term **without** a **variable**.
 
-    *   $f(x) = e^x$
-    *   $f'(x) = e^x$
-    *   $f'(0) = e^0 = 1$
-    *   $f(0) = e^0 = 1$
-    *   Equation of tangent line: $y - f(0) = f'(0)(x-0)$
-        $y - 1 = 1(x-0)$
-        $y = x+1$
-    *   The line is $f(x) = x+1$.
+### Steps
 
-    b) Find the quadratic that best describes $f(x)$ at $x = 0$. That is, find A, B, and C such that if $q(x) = A + Bx + Cx^2$, then $f(0) = q(0)$, $f'(0) = q'(0)$, and $f''(0) = q''(0)$.
+1.  Write the expression as a **SUM**.
+2.  Identify the terms, coefficients, and constants.
 
-    *   Given $q(x) = A + Bx + Cx^2$
-    *   $q'(x) = B + 2Cx$
-    *   $q''(x) = 2C$
+### Example
 
-    *   From $f(x) = e^x$:
-        *   $f(0) = e^0 = 1$
-        *   $f'(0) = e^0 = 1$
-        *   $f''(0) = e^0 = 1$
+**Expression:** `2z² - 5y + 3`
 
-    *   Matching conditions:
-        *   $q(0) = A = f(0) \Rightarrow A = 1$
-        *   $q'(0) = B = f'(0) \Rightarrow B = 1$
-        *   $q''(0) = 2C = f''(0) \Rightarrow 2C = 1 \Rightarrow C = \frac{1}{2}$
+1.  **Write as a sum:** `2z² + (-5y) + 3`
+    *   This is an **expression as a sum**.
 
-    *   The quadratic is $q(x) = 1 + x + \frac{1}{2}x^2$.
-
-    c) Find the cubic that best describes $f(x)$ at $x = 0$. That is, find A, B, C, and D such that if $c(x) = A + Bx + Cx^2 + Dx^3$, then $f(0) = c(0)$, $f'(0) = c'(0)$, $f''(0) = c''(0)$, and $f'''(0) = c'''(0)$.
-
-    *   Given $c(x) = A + Bx + Cx^2 + Dx^3$
-    *   $c'(x) = B + 2Cx + 3Dx^2$
-    *   $c''(x) = 2C + 6Dx$
-    *   $c'''(x) = 6D$
-
-    *   From $f(x) = e^x$:
-        *   $f(0) = 1$
-        *   $f'(0) = 1$
-        *   $f''(0) = 1$
-        *   $f'''(0) = e^0 = 1$
-
-    *   Matching conditions:
-        *   $c(0) = A = f(0) \Rightarrow A = 1$
-        *   $c'(0) = B = f'(0) \Rightarrow B = 1$
-        *   $c''(0) = 2C = f''(0) \Rightarrow 2C = 1 \Rightarrow C = \frac{1}{2}$
-        *   $c'''(0) = 6D = f'''(0) \Rightarrow 6D = 1 \Rightarrow D = \frac{1}{6}$
-
-    *   The cubic is $c(x) = 1 + x + \frac{1}{2}x^2 + \frac{1}{6}x^3$.
+2.  **Identify components:**
+    *   **TERMS:** `2z²`, `-5y`, `3`
+    *   **COEFFICIENTS:** `2`, `-5`
+    *   **CONSTANTS:** `3`

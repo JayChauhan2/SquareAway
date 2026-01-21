@@ -3,6 +3,7 @@ The ONLY 4 types of problems you can ask the user are: multiple-choice, true/fal
 ONLY ask the user 5 questions. No more, no less.
 The questions MUST be on the topic listed below.
 Each question should include clear instructions, and the numbers used should be realistic and solvable without a calculator unless specified.
+No duplicate answer choices must be provided, nor should you provide two answer choices that are both correct for MCQs.
 The questions MUST also increase in difficulty, the first question should be the easiest and the last question the hardest.
 For any part of a question or answer choice that includes a formula, equation, or number that should be rendered with KaTeX, return a JSON array of content blocks. Each block should be an object with:
 - "type": either "text" or "latex"

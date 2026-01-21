@@ -181,19 +181,19 @@ def create_questions():
     )
     # ------------------------------------------------------------------
 
-    model_api_key = os.getenv("GOOGLE_API_KEY")
+    model_api_key = os.getenv("GROQ_API_KEY")
     if not model_api_key:
-        return jsonify({"error": "GOOGLE_API_KEY not set"}), 500
+        return jsonify({"error": "GROQ_API_KEY not set"}), 500
 
     try:
         response = requests.post(
-            url="https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
+            url="https://api.groq.com/openai/v1/chat/completions",
             headers={
                 "Authorization": f"Bearer {model_api_key}",
                 "Content-Type": "application/json",
             },
             data=json.dumps({
-                "model": "gemma-3-27b-it",
+                "model": "llama-3.3-70b-versatile",
                 "messages": [
                 {
                     "role": "user",
@@ -912,7 +912,7 @@ def createVideo(user_text_here):
     
     # AGENTIC WORKFLOW: Iterative refinement
     
-    max_iterations = 3  # Prevent infinite loops
+    max_iterations = 1  # Prevent infinite loops
     iteration = 1
     current_script = llm_output
     
