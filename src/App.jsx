@@ -12,6 +12,8 @@ import SignUpPage from './components/SignUpPage';
 import TeacherDashboard from './components/TeacherDashboard';
 import { useAuth } from './context/AuthContext';
 import VideosPage from './components/VideosPage';
+import ForgotPasswordPage from './components/ForgotPasswordPage';
+import ResetPasswordPage from './components/ResetPasswordPage';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -56,6 +58,8 @@ function App() {
           <Route path="/" element={<AuthRoot />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
 
           <Route path="/teacher-dashboard" element={
             <TeacherRoute>

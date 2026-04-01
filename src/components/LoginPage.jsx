@@ -88,6 +88,15 @@ export default function LoginPage() {
             className="w-full mb-6 px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-slate-400 shadow-sm transition-all duration-300"
           />
 
+          <div className="flex justify-end mb-6 -mt-4">
+            <span 
+              className="text-xs text-blue-600 hover:text-blue-700 cursor-pointer transition-colors duration-300"
+              onClick={() => navigate('/forgot-password')}
+            >
+              Forgot Password?
+            </span>
+          </div>
+
           <button
             type="submit"
             className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full text-lg font-medium hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-500 hover:scale-105"

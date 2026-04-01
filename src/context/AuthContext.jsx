@@ -33,6 +33,10 @@ export const AuthProvider = ({ children }) => {
         signUp: (data) => supabase.auth.signUp(data),
         signIn: (data) => supabase.auth.signInWithPassword(data),
         signOut: () => supabase.auth.signOut(),
+        resetPasswordForEmail: (email) => supabase.auth.resetPasswordForEmail(email, {
+            redirectTo: `${window.location.origin}/reset-password`,
+        }),
+        updatePassword: (newPassword) => supabase.auth.updateUser({ password: newPassword }),
         user,
     };
 
