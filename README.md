@@ -1,109 +1,295 @@
-# SquareAway - AI-Powered Study Companion
+# SquareAway — AI-Powered Study Companion
 
-SquareAway is an intelligent educational platform designed to transform how students engage with their study materials. By leveraging advanced AI technologies, it bridges the gap between static notes and interactive learning, offering features like autonomous video generation, smart note digitization, and an AI-powered study assistant.
+SquareAway is a full-stack educational platform built to close the gap between passive studying and actual understanding. Students can upload their handwritten notes or textbook pages, and SquareAway will digitize them, generate practice problems, answer questions through a built-in chatbot, and even produce a fully animated explainer video — all powered by AI.
 
-## 🚀 Key Features
+The project was built with STEM students in mind, particularly those who struggle to visualize abstract concepts like calculus, physics, or chemistry. Teachers also have access to a dedicated dashboard to manage their classes and track student enrollments.
 
-1.  **Agentic AI Video Creation**: Utilizing a sophisticated multi-agent workflow, SquareAway autonomously analyzes uploaded notes, scripts educational content, refining it via a "Critic" agent, and generates high-quality explainer videos using the **Manim** engine.
-2.  **Note Digitization & AI Extraction**: Converts handwritten notes and textbook images into structured, digital formulations with LaTeX support using **Google Gemini Vision**.
-3.  **Interactive Practice & Assessment**: Generates context-aware practice sets (MCQs, word problems) effectively tailored to the user's material.
-4.  **AI Study Assistant**: A built-in chatbot powered by **Groq (Llama 3.3)** that acts as a personal tutor, capable of understanding complex mathematical logic.
-5.  **Teacher Dashboard**: A dedicated interface for educators to manage classes and enrollments.
-6.  **Mobile Companion App**: A React Native application for on-the-go learning.
+---
 
-## 🛠️ Technical Architecture
+## Table of Contents
 
-### AI & APIs
--   **Google Gemini API**:
-    -   `gemini-2.5-flash`: Vision analysis for extracting text and math from images.
-    -   `gemma-2-27b-it`: Powers the Agentic Workflow (Scripting, Assessment, Refinement).
--   **Groq API**:
-    -   `llama-3.3-70b-versatile`: Drives the Chatbot, Title Generation, and Answer Grading.
-    -   `meta-llama/llama-4-maverick-17b-128e-instruct`: Specialized for generating Manim Python code.
--   **Manim**: A programmatic video generation engine used to render visual explanations.
+- [Project Overview](#project-overview)
+- [Who Is This For?](#who-is-this-for)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Environment Setup](#environment-setup)
+- [Running the App](#running-the-app)
+- [How to Use SquareAway](#how-to-use-squareaway)
+- [Project Structure](#project-structure)
+- [Screenshots & Examples](#screenshots--examples)
 
-### Stack
--   **Frontend**: React, Vite, Tailwind CSS.
--   **Backend**: Flask (Python).
--   **Database**: Supabase (PostgreSQL).
--   **Text-to-Speech**: gTTS (Google Text-to-Speech).
+---
 
-## 📦 Getting Started
+## Project Overview
 
-### Prerequisites
--   **Python 3.8+**
--   **Node.js & npm**
--   **FFmpeg** (Required for Manim video rendering)
--   **LaTeX** (Required for Manim mathematical rendering)
+Most students take notes during class, then never really engage with them again. SquareAway changes that. The core idea is: you upload a photo of your notes, and the app turns them into an interactive study session — with AI-generated questions, a chatbot you can actually ask follow-up questions to, and even a narrated animated video explaining the concept.
 
-### Installation
+The most technically interesting part is the **Agentic Video Generation** pipeline. Rather than a single API call, the system uses multiple AI agents working together — one drafts the script, a separate "Critic" agent reviews it for accuracy, a "Refiner" agent improves it if needed, and finally a code generation model writes the animation code. The Manim engine then renders it into a real MP4 video. This whole loop runs autonomously without any human input.
 
-1.  **Clone the repository**
-    ```bash
-    git clone <repository-url>
-    cd tts-attempt-squareaway
-    ```
+---
 
-2.  **Backend Setup**
-    ```bash
-    # Create a virtual environment
-    python -m venv .venv
-    
-    # Activate the virtual environment
-    # On Windows:
-    .venv\Scripts\activate
-    # On macOS/Linux:
-    source .venv/bin/activate
-    
-    # Install dependencies
-    pip install -r requirements.txt
-    ```
+## Who Is This For?
 
-3.  **Frontend Setup**
-    ```bash
-    # Install Node dependencies
-    npm install
-    ```
+- **Students** in math and science courses who want a more active way to review their notes
+- **Visual learners** who benefit from animated explanations of complex topics
+- **Teachers** looking for a tool to manage class enrollment and provide students with supplementary materials
+- **Anyone** who wants to turn a wall of handwritten notes into something actually useful
 
-4.  **Configuration**
-    Create a `.env` file in the root directory with the following variables:
-    ```env
-    GROQ_API_KEY=your_groq_api_key
-    GOOGLE_API_KEY=your_google_gemini_api_key
-    SUPABASE_URL=your_supabase_url
-    SUPABASE_KEY=your_supabase_anon_key
-    SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_key
-    ```
+---
 
-## 🏃‍♂️ Usage
+## Features
 
-### Running the Backend
-From the root directory (with virtual environment activated):
+### 1. Agentic AI Video Creation
+This is the core feature. Upload your notes and the system will autonomously generate a narrated, animated explainer video. The pipeline works in five stages:
+
+1. **Vision Analysis** — Gemini 2.5 Flash reads and understands your notes
+2. **Script Generation** — Gemma 2 (27B) writes an educational script based on the content
+3. **Agentic Refinement** — A Critic agent reviews the script for accuracy; a Refiner agent improves it if needed
+4. **Code Generation** — Llama 4 Maverick translates the refined script into Manim animation code
+5. **Rendering** — The Manim engine renders everything into a final MP4
+
+### 2. Note Digitization
+Upload a photo of handwritten notes or a textbook scan. Gemini Vision extracts the text, cleans it up, and formats it with proper mathematical notation (LaTeX). It also generates a title for the notes automatically.
+
+### 3. Practice & Assessment
+Once your notes are digitized, you can generate a custom practice set. You can choose:
+- Number of questions
+- Question types: multiple choice, true/false, short answer, or word problems
+
+After submitting your answers, Groq's Llama 3.3 model grades them and gives you instant feedback.
+
+### 4. AI Study Assistant (Chatbot)
+A built-in chatbot that understands your specific notes and can answer questions about them. It handles LaTeX math formatting, so complex formulas render correctly in the chat window.
+
+### 5. Teacher Dashboard
+Teachers get a dedicated interface to create and manage classes, handle student enrollments, and remove students as needed. All data is stored in Supabase with role-based access control.
+
+### 6. Mobile App
+A companion React Native app (Expo) focused on video creation and playback, so students can generate and watch their explainer videos from their phone.
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend (Web) | React, Vite, Tailwind CSS |
+| Backend | Flask (Python) |
+| Database & Auth | Supabase (PostgreSQL) |
+| Mobile | React Native, Expo |
+| Vision AI | Google Gemini 2.5 Flash |
+| Script & Review AI | Google Gemma 2 (27B) |
+| Chatbot & Grading | Groq — Llama 3.3 70B |
+| Animation Code Gen | Groq — Llama 4 Maverick |
+| Video Rendering | Manim (Mathematical Animation Engine) |
+| Text-to-Speech | gTTS (Google Text-to-Speech) |
+
+---
+
+## Prerequisites
+
+Make sure you have all of the following installed before you get started:
+
+- **Python 3.8 or higher** — for the Flask backend
+- **Node.js (v18+) and npm** — for the React frontend
+- **FFmpeg** — required by Manim to process and combine video/audio
+- **LaTeX** (TeX Live or MiKTeX) — required by Manim to render mathematical symbols
+- **Manim** — the animation engine (installed via pip in setup)
+- API keys for **Groq**, **Google Gemini**, and **Supabase** (see [Environment Setup](#environment-setup))
+
+> **Note:** FFmpeg and LaTeX are system-level installs. On macOS, you can install FFmpeg with `brew install ffmpeg` and MacTeX from [tug.org/mactex](https://tug.org/mactex/). On Windows, download FFmpeg from ffmpeg.org and MiKTeX from miktex.org.
+
+---
+
+## Installation
+
+Follow these steps in order. The backend and frontend are set up separately.
+
+### Step 1 — Clone the repository
+
+```bash
+git clone <repository-url>
+cd SquareAway
+```
+
+### Step 2 — Set up the Python virtual environment
+
+```bash
+# Create the virtual environment
+python -m venv .venv
+
+# Activate it (macOS/Linux)
+source .venv/bin/activate
+
+# Activate it (Windows)
+.venv\Scripts\activate
+```
+
+### Step 3 — Install Python dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+The `requirements.txt` includes: Flask, Flask-Cors, requests, python-dotenv, google-genai, and gTTS. Manim must be installed separately:
+
+```bash
+pip install manim
+```
+
+### Step 4 — Install frontend dependencies
+
+Open a new terminal window and from the project root run:
+
+```bash
+npm install
+```
+
+### Step 5 — Set up your environment variables
+
+See the [Environment Setup](#environment-setup) section below.
+
+---
+
+## Environment Setup
+
+Create a file named `.env` in the root of the project directory and fill in your API keys:
+
+```env
+GROQ_API_KEY=your_groq_api_key_here
+GOOGLE_API_KEY=your_google_gemini_api_key_here
+SUPABASE_URL=your_supabase_project_url_here
+SUPABASE_KEY=your_supabase_anon_key_here
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key_here
+```
+
+Here's where to get each one:
+
+- **GROQ_API_KEY** — Sign up at [console.groq.com](https://console.groq.com) and generate an API key
+- **GOOGLE_API_KEY** — Get a Gemini API key from [aistudio.google.com](https://aistudio.google.com)
+- **SUPABASE_URL / SUPABASE_KEY / SUPABASE_SERVICE_ROLE_KEY** — Found in your Supabase project under Settings → API
+
+> ⚠️ Never commit your `.env` file to version control. It's already listed in `.gitignore`, so you're covered as long as you don't rename it.
+
+---
+
+## Running the App
+
+You'll need two terminals running at the same time — one for the backend, one for the frontend.
+
+### Terminal 1 — Start the Flask backend
+
+Make sure your virtual environment is activated first, then:
+
 ```bash
 python app.py
 ```
-The backend server will start (defaulting typically to port 5000).
 
-### Running the Frontend
-In a new terminal window:
+The backend starts on `http://localhost:5000` by default.
+
+### Terminal 2 — Start the React frontend
+
 ```bash
 npm run dev
 ```
-Access the application at `http://localhost:5173`.
 
-## 📂 Project Structure
+Open your browser and go to `http://localhost:5173`.
+
+Both processes need to be running for the app to work. The frontend talks to the backend via API calls, so if the Flask server isn't up, nothing will load correctly.
+
+---
+
+## How to Use SquareAway
+
+### Uploading Notes and Digitizing Them
+
+1. On the main screen, click the **Upload Notes** button
+2. Select one or more images of your handwritten notes or textbook pages (JPEG or PNG only)
+3. Click **Extract** — the system will process the images and return clean, formatted digital notes
+4. Your notes will appear on screen with a generated title, ready to use
+
+### Generating Practice Questions
+
+1. With your digitized notes loaded, navigate to the **Practice** tab
+2. Choose how many questions you want (default is 5) and which question types to include
+3. Click **Generate** — the questions will appear one by one
+4. Fill in your answers and submit; feedback is returned instantly
+
+**Example output for a question on Newton's Second Law:**
+> *Question (Multiple Choice):* A 5 kg object accelerates at 3 m/s². What is the net force?
+> - A) 8 N
+> - B) 15 N ✓
+> - C) 2 N
+> - D) 1.67 N
+
+### Using the AI Chatbot
+
+1. Open the **Chat** tab with your notes loaded
+2. Type any question related to your notes — for example: *"Can you explain the difference between velocity and acceleration?"*
+3. The chatbot will respond with a concise explanation, including LaTeX-formatted math where relevant
+
+**Example:**
+> *You:* What is the formula for kinetic energy?
+> *SquareAway:* Kinetic energy is given by $KE = \frac{1}{2}mv^2$, where $m$ is the mass in kilograms and $v$ is the velocity in meters per second.
+
+### Generating an Explainer Video
+
+1. Go to the **Video** tab
+2. Paste in or have your notes loaded — the system uses this as the source material
+3. Click **Generate Video**
+4. The system will begin the agentic pipeline (this takes a few minutes — the AI is drafting, reviewing, and refining the script before generating the animation)
+5. Once complete, the video player will appear and you can watch your explainer
+
+**Tip:** The video generation runs in the background. You don't need to stay on the page for it to finish — the backend handles it in a separate thread.
+
+### Teacher Dashboard
+
+1. Sign in with a teacher account
+2. Use the **Dashboard** tab to create new classes
+3. Manage enrollments — students can join via class code, and you can remove them from the dashboard
+
+---
+
+## Project Structure
 
 ```
-tts-attempt-squareaway/
-├── app.py                  # Main Flask backend application
-├── src/                    # React frontend source code
-├── media/                  # Generated Manim videos and assets
-├── uploads/                # Temporary storage for uploaded user files
-├── api/                    # API route definitions (if separated)
-├── generated_manim_script.py # Dynamically generated script for video creation
-└── requirements.txt        # Python dependencies
+SquareAway/
+├── app.py                      # Main Flask backend — all API routes live here
+├── src/                        # React frontend source
+│   ├── App.jsx                 # Root component and routing
+│   ├── components/             # Individual UI components (chat, upload, video, etc.)
+│   ├── context/                # React context for global state
+│   └── assets/                 # Prompt templates and static assets
+├── mobile/                     # React Native mobile app
+├── media/                      # Where Manim saves generated videos
+│   └── videos/generated_manim_script/1080p60/
+├── uploads/                    # Temporary storage for uploaded images
+├── results/                    # Temporary storage for extraction results
+├── generated_manim_script.py   # Dynamically written by the backend before rendering
+├── requirements.txt            # Python dependencies
+├── package.json                # Node.js dependencies
+├── Dockerfile                  # Docker config for containerized deployment
+└── .env                        # Your local environment variables (not committed)
 ```
 
-## 📄 License
+---
+
+## Screenshots & Examples
+
+> 📸 **[ADD SCREENSHOT HERE]** — Main dashboard / home screen showing the note upload interface. Should show the upload button, any currently loaded notes, and the navigation tabs (Practice, Chat, Video).
+
+> 📸 **[ADD SCREENSHOT HERE]** — The note digitization result. Show a side-by-side or before/after: a photo of handwritten notes on the left and the clean, formatted digital output on the right (with LaTeX math rendered).
+
+> 📸 **[ADD SCREENSHOT HERE]** — Practice question screen. Show a generated MCQ or word problem with the answer input field and the feedback/grading response returned after submission.
+
+> 📸 **[ADD SCREENSHOT HERE]** — The AI chatbot in action. Show a multi-turn conversation where the student asks a question and the chatbot responds with a math formula properly rendered.
+
+> 📸 **[ADD SCREENSHOT HERE]** — The video player with a generated explainer video loaded. Ideally show a frame from the Manim animation (e.g., an equation being written on screen or a diagram animating in).
+
+---
+
+## License
 
 [MIT License](LICENSE)
