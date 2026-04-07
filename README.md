@@ -1,6 +1,6 @@
-# SquareAway — AI-Powered Study Companion
+# SquareAway: AI-Powered Study Companion
 
-SquareAway is a full-stack educational platform built to close the gap between passive studying and actual understanding. Students can upload their handwritten notes or textbook pages, and SquareAway will digitize them, generate practice problems, answer questions through a built-in chatbot, and even produce a fully animated explainer video — all powered by AI.
+SquareAway is a full-stack educational platform built to close the gap between passive studying and actual understanding. Students can upload their handwritten notes or textbook pages, and SquareAway will digitize them, generate practice problems, answer questions through a built-in chatbot, and even produce a fully animated explainer video, all powered by AI.
 
 The project was built with STEM students in mind, particularly those who struggle to visualize abstract concepts like calculus, physics, or chemistry. Teachers also have access to a dedicated dashboard to manage their classes and track student enrollments.
 
@@ -24,9 +24,9 @@ The project was built with STEM students in mind, particularly those who struggl
 
 ## Project Overview
 
-Most students take notes during class, then never really engage with them again. SquareAway changes that. The core idea is: you upload a photo of your notes, and the app turns them into an interactive study session — with AI-generated questions, a chatbot you can actually ask follow-up questions to, and even a narrated animated video explaining the concept.
+Most students take notes during class, then never really engage with them again. SquareAway changes that. The core idea is: you upload a photo of your notes, and the app turns them into an interactive study session with AI-generated questions, a chatbot you can ask follow-up questions to, and even a narrated animated video explaining the concept.
 
-The most technically interesting part is the **Agentic Video Generation** pipeline. Rather than a single API call, the system uses multiple AI agents working together — one drafts the script, a separate "Critic" agent reviews it for accuracy, a "Refiner" agent improves it if needed, and finally a code generation model writes the animation code. The Manim engine then renders it into a real MP4 video. This whole loop runs autonomously without any human input.
+The most technically interesting part is the **Agentic Video Generation** pipeline. Rather than a single API call, the system uses multiple AI agents working together: one drafts the script, a separate "Critic" agent reviews it for accuracy, a "Refiner" agent improves it if needed, and finally a code generation model writes the animation code. The Manim engine then renders it into a real MP4 video. This whole loop runs autonomously without any human input.
 
 ---
 
@@ -44,11 +44,11 @@ The most technically interesting part is the **Agentic Video Generation** pipeli
 ### 1. Agentic AI Video Creation
 This is the core feature. Upload your notes and the system will autonomously generate a narrated, animated explainer video. The pipeline works in five stages:
 
-1. **Vision Analysis** — Gemini 2.5 Flash reads and understands your notes
-2. **Script Generation** — Gemma 2 (27B) writes an educational script based on the content
-3. **Agentic Refinement** — A Critic agent reviews the script for accuracy; a Refiner agent improves it if needed
-4. **Code Generation** — Llama 4 Maverick translates the refined script into Manim animation code
-5. **Rendering** — The Manim engine renders everything into a final MP4
+1. **Vision Analysis:** Gemini 2.5 Flash reads and understands your notes
+2. **Script Generation:** Gemma 2 (27B) writes an educational script based on the content
+3. **Agentic Refinement:** A Critic agent reviews the script for accuracy; a Refiner agent improves it if needed
+4. **Code Generation:** Llama 4 Maverick translates the refined script into Manim animation code
+5. **Rendering:** The Manim engine renders everything into a final MP4
 
 ### 2. Note Digitization
 Upload a photo of handwritten notes or a textbook scan. Gemini Vision extracts the text, cleans it up, and formats it with proper mathematical notation (LaTeX). It also generates a title for the notes automatically.
@@ -81,8 +81,8 @@ A companion React Native app (Expo) focused on video creation and playback, so s
 | Mobile | React Native, Expo |
 | Vision AI | Google Gemini 2.5 Flash |
 | Script & Review AI | Google Gemma 2 (27B) |
-| Chatbot & Grading | Groq — Llama 3.3 70B |
-| Animation Code Gen | Groq — Llama 4 Maverick |
+| Chatbot & Grading | Groq (Llama 3.3 70B) |
+| Animation Code Gen | Groq (Llama 4 Maverick) |
 | Video Rendering | Manim (Mathematical Animation Engine) |
 | Text-to-Speech | gTTS (Google Text-to-Speech) |
 
@@ -92,11 +92,11 @@ A companion React Native app (Expo) focused on video creation and playback, so s
 
 Make sure you have all of the following installed before you get started:
 
-- **Python 3.8 or higher** — for the Flask backend
-- **Node.js (v18+) and npm** — for the React frontend
-- **FFmpeg** — required by Manim to process and combine video/audio
-- **LaTeX** (TeX Live or MiKTeX) — required by Manim to render mathematical symbols
-- **Manim** — the animation engine (installed via pip in setup)
+- **Python 3.8 or higher** (for the Flask backend)
+- **Node.js (v18+) and npm** (for the React frontend)
+- **FFmpeg** (required by Manim to process and combine video/audio)
+- **LaTeX** such as TeX Live or MiKTeX (required by Manim to render mathematical symbols)
+- **Manim** (the animation engine, installed via pip in setup)
 - API keys for **Groq**, **Google Gemini**, and **Supabase** (see [Environment Setup](#environment-setup))
 
 > **Note:** FFmpeg and LaTeX are system-level installs. On macOS, you can install FFmpeg with `brew install ffmpeg` and MacTeX from [tug.org/mactex](https://tug.org/mactex/). On Windows, download FFmpeg from ffmpeg.org and MiKTeX from miktex.org.
@@ -107,14 +107,14 @@ Make sure you have all of the following installed before you get started:
 
 Follow these steps in order. The backend and frontend are set up separately.
 
-### Step 1 — Clone the repository
+### Step 1: Clone the repository
 
 ```bash
 git clone <repository-url>
 cd SquareAway
 ```
 
-### Step 2 — Set up the Python virtual environment
+### Step 2: Set up the Python virtual environment
 
 ```bash
 # Create the virtual environment
@@ -127,7 +127,7 @@ source .venv/bin/activate
 .venv\Scripts\activate
 ```
 
-### Step 3 — Install Python dependencies
+### Step 3: Install Python dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -139,7 +139,7 @@ The `requirements.txt` includes: Flask, Flask-Cors, requests, python-dotenv, goo
 pip install manim
 ```
 
-### Step 4 — Install frontend dependencies
+### Step 4: Install frontend dependencies
 
 Open a new terminal window and from the project root run:
 
@@ -147,7 +147,7 @@ Open a new terminal window and from the project root run:
 npm install
 ```
 
-### Step 5 — Set up your environment variables
+### Step 5: Set up your environment variables
 
 See the [Environment Setup](#environment-setup) section below.
 
@@ -167,9 +167,9 @@ SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key_here
 
 Here's where to get each one:
 
-- **GROQ_API_KEY** — Sign up at [console.groq.com](https://console.groq.com) and generate an API key
-- **GOOGLE_API_KEY** — Get a Gemini API key from [aistudio.google.com](https://aistudio.google.com)
-- **SUPABASE_URL / SUPABASE_KEY / SUPABASE_SERVICE_ROLE_KEY** — Found in your Supabase project under Settings → API
+- **GROQ_API_KEY:** Sign up at [console.groq.com](https://console.groq.com) and generate an API key
+- **GOOGLE_API_KEY:** Get a Gemini API key from [aistudio.google.com](https://aistudio.google.com)
+- **SUPABASE_URL / SUPABASE_KEY / SUPABASE_SERVICE_ROLE_KEY:** Found in your Supabase project under Settings > API
 
 > ⚠️ Never commit your `.env` file to version control. It's already listed in `.gitignore`, so you're covered as long as you don't rename it.
 
@@ -177,9 +177,9 @@ Here's where to get each one:
 
 ## Running the App
 
-You'll need two terminals running at the same time — one for the backend, one for the frontend.
+You'll need two terminals running at the same time: one for the backend and one for the frontend.
 
-### Terminal 1 — Start the Flask backend
+### Terminal 1: Start the Flask backend
 
 Make sure your virtual environment is activated first, then:
 
@@ -189,7 +189,7 @@ python app.py
 
 The backend starts on `http://localhost:5000` by default.
 
-### Terminal 2 — Start the React frontend
+### Terminal 2: Start the React frontend
 
 ```bash
 npm run dev
@@ -207,14 +207,14 @@ Both processes need to be running for the app to work. The frontend talks to the
 
 1. On the main screen, click the **Upload Notes** button
 2. Select one or more images of your handwritten notes or textbook pages (JPEG or PNG only)
-3. Click **Extract** — the system will process the images and return clean, formatted digital notes
+3. Click **Extract** and the system will process the images and return clean, formatted digital notes
 4. Your notes will appear on screen with a generated title, ready to use
 
 ### Generating Practice Questions
 
 1. With your digitized notes loaded, navigate to the **Practice** tab
 2. Choose how many questions you want (default is 5) and which question types to include
-3. Click **Generate** — the questions will appear one by one
+3. Click **Generate** and the questions will appear one by one
 4. Fill in your answers and submit; feedback is returned instantly
 
 **Example output for a question on Newton's Second Law:**
@@ -227,7 +227,7 @@ Both processes need to be running for the app to work. The frontend talks to the
 ### Using the AI Chatbot
 
 1. Open the **Chat** tab with your notes loaded
-2. Type any question related to your notes — for example: *"Can you explain the difference between velocity and acceleration?"*
+2. Type any question related to your notes, for example: *"Can you explain the difference between velocity and acceleration?"*
 3. The chatbot will respond with a concise explanation, including LaTeX-formatted math where relevant
 
 **Example:**
@@ -237,18 +237,18 @@ Both processes need to be running for the app to work. The frontend talks to the
 ### Generating an Explainer Video
 
 1. Go to the **Video** tab
-2. Paste in or have your notes loaded — the system uses this as the source material
+2. Paste in or have your notes loaded (the system uses this as the source material)
 3. Click **Generate Video**
-4. The system will begin the agentic pipeline (this takes a few minutes — the AI is drafting, reviewing, and refining the script before generating the animation)
+4. The system will begin the agentic pipeline. This takes a few minutes since the AI is drafting, reviewing, and refining the script before generating the animation.
 5. Once complete, the video player will appear and you can watch your explainer
 
-**Tip:** The video generation runs in the background. You don't need to stay on the page for it to finish — the backend handles it in a separate thread.
+**Tip:** The video generation runs in the background. You don't need to stay on the page for it to finish; the backend handles it in a separate thread.
 
 ### Teacher Dashboard
 
 1. Sign in with a teacher account
 2. Use the **Dashboard** tab to create new classes
-3. Manage enrollments — students can join via class code, and you can remove them from the dashboard
+3. Manage enrollments: students can join via class code and you can remove them from the dashboard
 
 ---
 
@@ -256,7 +256,7 @@ Both processes need to be running for the app to work. The frontend talks to the
 
 ```
 SquareAway/
-├── app.py                      # Main Flask backend — all API routes live here
+├── app.py                      # Main Flask backend (all API routes live here)
 ├── src/                        # React frontend source
 │   ├── App.jsx                 # Root component and routing
 │   ├── components/             # Individual UI components (chat, upload, video, etc.)
@@ -278,15 +278,15 @@ SquareAway/
 
 ## Screenshots & Examples
 
-> 📸 **[ADD SCREENSHOT HERE]** — Main dashboard / home screen showing the note upload interface. Should show the upload button, any currently loaded notes, and the navigation tabs (Practice, Chat, Video).
+> 📸 **[ADD SCREENSHOT HERE]** Main dashboard / home screen showing the note upload interface. Should show the upload button, any currently loaded notes, and the navigation tabs (Practice, Chat, Video).
 
-> 📸 **[ADD SCREENSHOT HERE]** — The note digitization result. Show a side-by-side or before/after: a photo of handwritten notes on the left and the clean, formatted digital output on the right (with LaTeX math rendered).
+> 📸 **[ADD SCREENSHOT HERE]** The note digitization result. Show a side-by-side or before/after: a photo of handwritten notes on the left and the clean, formatted digital output on the right (with LaTeX math rendered).
 
-> 📸 **[ADD SCREENSHOT HERE]** — Practice question screen. Show a generated MCQ or word problem with the answer input field and the feedback/grading response returned after submission.
+> 📸 **[ADD SCREENSHOT HERE]** Practice question screen. Show a generated MCQ or word problem with the answer input field and the feedback/grading response returned after submission.
 
-> 📸 **[ADD SCREENSHOT HERE]** — The AI chatbot in action. Show a multi-turn conversation where the student asks a question and the chatbot responds with a math formula properly rendered.
+> 📸 **[ADD SCREENSHOT HERE]** The AI chatbot in action. Show a multi-turn conversation where the student asks a question and the chatbot responds with a math formula properly rendered.
 
-> 📸 **[ADD SCREENSHOT HERE]** — The video player with a generated explainer video loaded. Ideally show a frame from the Manim animation (e.g., an equation being written on screen or a diagram animating in).
+> 📸 **[ADD SCREENSHOT HERE]** The video player with a generated explainer video loaded. Ideally show a frame from the Manim animation (e.g., an equation being written on screen or a diagram animating in).
 
 ---
 
