@@ -1,8 +1,8 @@
 # SquareAway: AI-Powered Study Companion
 
-SquareAway is a full-stack educational platform built to close the gap between passive studying and actual understanding. Students can upload their handwritten notes or textbook pages, and SquareAway will digitize them, generate practice problems, answer questions through a built-in chatbot, and even produce a fully animated explainer video, all powered by AI.
+SquareAway is a full-stack educational platform built to close the gap between passive studying and content understanding. Students can upload their handwritten notes or textbook pages, and SquareAway will digitize them, generate practice problems, answer questions through a built-in chatbot, and even produce a fully animated explainer video, all powered by AI.
 
-The project was built with STEM students in mind, particularly those who struggle to visualize abstract concepts like calculus, physics, or chemistry. Teachers also have access to a dedicated dashboard to manage their classes and track student enrollments.
+The project was built with STEM students in mind, particularly those from underprivileged and homeschooled backgrounds. Teachers also have access to a dedicated dashboard to manage their classes and track student enrollments.
 
 ---
 
@@ -24,9 +24,9 @@ The project was built with STEM students in mind, particularly those who struggl
 
 ## Project Overview
 
-Most students take notes during class, then never really engage with them again. SquareAway changes that. The core idea is: you upload a photo of your notes, and the app turns them into an interactive study session with AI-generated questions, a chatbot you can ask follow-up questions to, and even a narrated animated video explaining the concept.
+Most students take notes during class but never really engage with them again. SquareAway changes that. The core idea is that you upload a photo of your notes, and the app turns them into an interactive study session with AI-generated questions, a chatbot you can ask follow-up questions to, and even a narrated animated video explaining the concept.
 
-The most technically interesting part is the **Agentic Video Generation** pipeline. Rather than a single API call, the system uses multiple AI agents working together: one drafts the script, a separate "Critic" agent reviews it for accuracy, a "Refiner" agent improves it if needed, and finally a code generation model writes the animation code. The Manim engine then renders it into a real MP4 video. This whole loop runs autonomously without any human input.
+The most technically interesting part is the Agentic Video Generation pipeline. Rather than a single API call, the system uses multiple AI agents working together: one drafts the script, a separate "Critic" agent reviews it for accuracy, a "Refiner" agent improves it if needed, and finally a code generation model writes the animation code. The Manim engine then renders it into a real MP4 video. This whole loop runs autonomously without any human input.
 
 ---
 
@@ -48,7 +48,7 @@ This is the core feature. Upload your notes and the system will autonomously gen
 2. **Script Generation:** Gemma 2 (27B) writes an educational script based on the content
 3. **Agentic Refinement:** A Critic agent reviews the script for accuracy; a Refiner agent improves it if needed
 4. **Code Generation:** Llama 4 Maverick translates the refined script into Manim animation code
-5. **Rendering:** The Manim engine renders everything into a final MP4
+5. **Rendering:** The (local running) Manim engine renders everything into a final MP4
 
 ### 2. Note Digitization
 Upload a photo of handwritten notes or a textbook scan. Gemini Vision extracts the text, cleans it up, and formats it with proper mathematical notation (LaTeX). It also generates a title for the notes automatically.
@@ -171,13 +171,13 @@ Here's where to get each one:
 - **GOOGLE_API_KEY:** Get a Gemini API key from [aistudio.google.com](https://aistudio.google.com)
 - **SUPABASE_URL / SUPABASE_KEY / SUPABASE_SERVICE_ROLE_KEY:** Found in your Supabase project under Settings > API
 
-> ⚠️ Never commit your `.env` file to version control. It's already listed in `.gitignore`, so you're covered as long as you don't rename it.
+> ⚠️ The `.gitignore` ensures that the `.env` file (spelled exactly like that) is never exposed publicly.
 
 ---
 
 ## Running the App
 
-You'll need two terminals running at the same time: one for the backend and one for the frontend.
+You will need two terminals running at the same time: one for the backend and one for the frontend.
 
 ### Terminal 1: Start the Flask backend
 
