@@ -278,15 +278,25 @@ SquareAway/
 
 ## Screenshots & Examples
 
-> 📸 **[ADD SCREENSHOT HERE]** Main dashboard / home screen showing the note upload interface. Should show the upload button, any currently loaded notes, and the navigation tabs (Practice, Chat, Video).
+**Home Page**
 
-> 📸 **[ADD SCREENSHOT HERE]** The note digitization result. Show a side-by-side or before/after: a photo of handwritten notes on the left and the clean, formatted digital output on the right (with LaTeX math rendered).
+![Home page showing the main dashboard and note upload interface](HomePage.png)
 
-> 📸 **[ADD SCREENSHOT HERE]** Practice question screen. Show a generated MCQ or word problem with the answer input field and the feedback/grading response returned after submission.
+**Note Digitization (Before and After)**
 
-> 📸 **[ADD SCREENSHOT HERE]** The AI chatbot in action. Show a multi-turn conversation where the student asks a question and the chatbot responds with a math formula properly rendered.
+![Side-by-side comparison of handwritten notes and the clean digitized output with LaTeX formatting](Comparison.png)
 
-> 📸 **[ADD SCREENSHOT HERE]** The video player with a generated explainer video loaded. Ideally show a frame from the Manim animation (e.g., an equation being written on screen or a diagram animating in).
+**Practice Questions and Grading**
+
+![Practice question screen showing a generated question and the grading feedback after an incorrect answer](GettingQuestionWrong.png)
+
+**AI Study Chatbot**
+
+![Multi-turn chatbot conversation with a student asking a question and the assistant responding with a rendered math formula](Chatbot.png)
+
+**Manim Explainer Video**
+
+![The video player showing a generated Manim animation frame with an equation being rendered on screen](ManimVideo.png)
 
 ---
 
