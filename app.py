@@ -18,6 +18,24 @@ import tempfile
 
 import threading
 from dotenv import load_dotenv
+
+# Ensure Homebrew and TeX binaries are in the PATH for Manim and other subprocesses
+def update_path():
+    homebrew_bin = "/opt/homebrew/bin"
+    tex_bin = "/Library/TeX/texbin"
+    current_path = os.environ.get("PATH", "")
+    
+    new_paths = []
+    if homebrew_bin not in current_path:
+        new_paths.append(homebrew_bin)
+    if tex_bin not in current_path:
+        new_paths.append(tex_bin)
+        
+    if new_paths:
+        os.environ["PATH"] = ":".join(new_paths) + ":" + current_path
+        print(f"Updated PATH with: {new_paths}")
+
+update_path()
 from google import genai
 from google.genai import types
 
@@ -964,7 +982,7 @@ def createVideo(user_text_here):
                 "Content-Type": "application/json",
             },
             data=json.dumps({
-                "model": "meta-llama/llama-4-maverick-17b-128e-instruct",
+                "model": "meta-llama/llama-4-scout-17b-16e-instruct",
                 "messages": [{"role": "user", "content": groq_prompt}]
             })
         )
@@ -1366,4 +1384,4 @@ def get_users():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5000)

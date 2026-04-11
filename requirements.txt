@@ -3,5 +3,5 @@ Flask-Cors
 requests
 python-dotenv
 google-genai
-
+manim
 gTTS

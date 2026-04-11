@@ -6,8 +6,12 @@ import { supabase } from "../supabaseClient";
 export default function DropTheBall({ size = 'small' }) {
     const { user } = useAuth();
     const [gameState, setGameState] = useState("start"); // start, playing, gameover
+    const [isPaused, setIsPaused] = useState(false);
     const [finalScore, setFinalScore] = useState(0); // Score state for game over screen only
     const [highScore, setHighScore] = useState(0);
+
+    const containerRef = useRef(null);
+    const isPausedRef = useRef(false);
 
     // Game Refs for loop
     const canvasRef = useRef(null);
@@ -55,6 +59,8 @@ export default function DropTheBall({ size = 'small' }) {
 
     const startGame = () => {
         setGameState("playing");
+        setIsPaused(false);
+        isPausedRef.current = false;
         setFinalScore(0);
         scoreRef.current = 0;
         playerY.current = 150;
@@ -68,8 +74,21 @@ export default function DropTheBall({ size = 'small' }) {
         requestRef.current = requestAnimationFrame(gameLoop);
     };
 
+    const resumeGame = () => {
+        if (gameState === "playing" && isPausedRef.current) {
+            setIsPaused(false);
+            isPausedRef.current = false;
+            if (requestRef.current) cancelAnimationFrame(requestRef.current);
+            requestRef.current = requestAnimationFrame(gameLoop);
+        }
+    };
+
     const jump = useCallback(() => {
         if (gameState === "playing") {
+            if (isPausedRef.current) {
+                resumeGame();
+                return;
+            }
             // Double Jump Logic: Allow jump if count < 2
             if (jumpCount.current < 2) {
                 playerVelocity.current = JUMP_FORCE;
@@ -78,10 +97,21 @@ export default function DropTheBall({ size = 'small' }) {
         } else if (gameState !== "playing") {
             startGame();
         }
-    }, [gameState]);
+    }, [gameState]); // Removed isPaused dependency as we use ref
 
     const handleKeyDown = useCallback((e) => {
+        // Prevent game interaction if typing in an input or textarea
+        if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA" || e.target.isContentEditable) {
+            return;
+        }
+
         if (e.code === "Space" || e.code === "ArrowUp") {
+            // User explicitly requested to ONLY resume via click.
+            // If the game is paused, ignore keyboard inputs.
+            if (gameState === "playing" && isPausedRef.current) {
+                return;
+            }
+            
             e.preventDefault();
             jump();
         }
@@ -89,10 +119,34 @@ export default function DropTheBall({ size = 'small' }) {
 
     useEffect(() => {
         window.addEventListener("keydown", handleKeyDown);
+        
+        const handleClickOutside = (event) => {
+            if (containerRef.current && !containerRef.current.contains(event.target)) {
+                if (gameState === "playing") {
+                    setIsPaused(true);
+                    isPausedRef.current = true;
+                    if (requestRef.current) cancelAnimationFrame(requestRef.current);
+                }
+            }
+        };
+
+        const handleBlur = () => {
+            if (gameState === "playing") {
+                setIsPaused(true);
+                isPausedRef.current = true;
+                if (requestRef.current) cancelAnimationFrame(requestRef.current);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        window.addEventListener("blur", handleBlur);
+
         return () => {
             window.removeEventListener("keydown", handleKeyDown);
+            document.removeEventListener("mousedown", handleClickOutside);
+            window.removeEventListener("blur", handleBlur);
         };
-    }, [handleKeyDown]);
+    }, [handleKeyDown, gameState]);
 
     // Cleanup game loop on unmount only
     useEffect(() => {
@@ -102,6 +156,9 @@ export default function DropTheBall({ size = 'small' }) {
     }, []);
 
     const gameLoop = () => {
+        // Use Ref for instant check that doesn't suffer from React batching/closure issues
+        if (isPausedRef.current) return;
+
         const canvas = canvasRef.current;
         if (!canvas) return;
         const ctx = canvas.getContext("2d");
@@ -198,7 +255,7 @@ export default function DropTheBall({ size = 'small' }) {
     };
 
     return (
-        <div className={`flex flex-col items-center justify-center animate-in fade-in zoom-in duration-500 ${size === 'large' ? 'w-[800px]' : 'w-[500px]'}`}>
+        <div ref={containerRef} className={`flex flex-col items-center justify-center animate-in fade-in zoom-in duration-500 ${size === 'large' ? 'w-[800px]' : 'w-[500px]'}`}>
 
             {/* White UI Blob Container */}
             <div className="bg-white rounded-3xl shadow-xl border border-slate-200/50 p-6 w-full relative overflow-hidden">
@@ -247,6 +304,22 @@ export default function DropTheBall({ size = 'small' }) {
                             >
                                 <RotateCcw className="w-4 h-4" /> Try Again
                             </button>
+                        </div>
+                    )}
+
+                    {/* Paused Screen Overlay */}
+                    {isPaused && gameState === "playing" && (
+                        <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/40 backdrop-blur-md">
+                            <div className="bg-white p-6 rounded-3xl shadow-2xl border border-slate-100 flex flex-col items-center gap-4 animate-in zoom-in duration-300">
+                                <p className="text-xl font-bold text-slate-800">Game Paused</p>
+                                <button
+                                    onClick={(e) => { e.stopPropagation(); resumeGame(); }}
+                                    className="px-8 py-3 bg-blue-600 text-white rounded-full shadow-lg hover:scale-105 hover:bg-blue-700 transition-all flex items-center gap-2 font-bold"
+                                >
+                                    <Play className="w-5 h-5 fill-current" /> Resume
+                                </button>
+                                <p className="text-xs text-slate-400 font-medium">Click the button or game to continue</p>
+                            </div>
                         </div>
                     )}
                 </div>

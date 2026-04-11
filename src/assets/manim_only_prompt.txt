@@ -38,6 +38,8 @@ Animation Requirements:
 • **CRITICAL: Ensure no two Manim elements overlap—adjust positions appropriately.**
 • All elements must be fully visible on screen.
 • Each step should behave like a mini-scene (use self.clear() if needed).
+• Use Text() for standard descriptive text without math to ensure maximum compatibility and speed.
+• Use MathTex() or Tex() ONLY when mathematical notation or specific LaTeX features are required.
 • Use Write(), FadeIn(), Transform(), MathTex(), Tex(), Axes(), Circle(),
     Line(), Plot(), etc.
 • Sync the animations roughly with the provided voiceover script segments.
@@ -89,7 +91,8 @@ example = MathTex("x^2")  # defaults to center
 
 IMPORTANT MANIM TEXT RULES
 --------------------------
-All Manim text (Tex or MathTex) MUST avoid raw Unicode math symbols entirely.  
+90a. Always use Text("...") instead of Tex("...") for standard descriptive text that doesn't contain mathematical notation. This avoids unnecessary LaTeX compilation overhead and potential failures.
+90b. All Manim text (Tex or MathTex) MUST avoid raw Unicode math symbols entirely.  
 Never use characters like ∃, ∈, ≤, ≥, →, ⇔, ℝ, etc. directly.  
 If necessary, replace them with descriptive text or LaTeX-safe alternatives.
 
