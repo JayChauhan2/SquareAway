@@ -1,0 +1,277 @@
+input_text,output_text
+I'm struggling to understand Work-Energy Theorem. What is it?,The work-energy theorem states that the net work done on an object is equal to its change in kinetic energy: $W = \Delta K$.
+What is the formula for Pythagorean theorem?,The Pythagorean theorem relates the sides of a right triangle. It is written as: $a^2 + b^2 = c^2$.
+I'm struggling to understand Binomial theorem. What is it?,The binomial theorem states that $(x+y)^n = \sum_{k=0}^n \binom{n}{k} x^{n-k} y^k$.
+Refresh my memory on cellular respiration equation.,The overall equation for cellular respiration is $C_6H_{12}O_6 + 6O_2 \rightarrow 6CO_2 + 6H_2O + \text{ATP}$.
+What does Ohm's law mean in this context?,Ohm's law states that the current through a conductor between two points is directly proportional to the voltage across the two points: $V = IR$.
+Tell me about area of a circle.,The area of a circle with radius $r$ is given by the formula: $A = \pi r^2$.
+Tell me about Geometric progression sum.,The sum of the first $n$ terms of a geometric progression is $S_n = a\frac{1-r^n}{1-r}$ for $r \neq 1$.
+I'm struggling to understand photosynthesis equation. What is it?,The overall equation for photosynthesis is $6CO_2 + 6H_2O \rightarrow C_6H_{12}O_6 + 6O_2$.
+Tell me about time complexity of quicksort.,"The average-case time complexity of quicksort is $O(n \log n)$, but its worst-case is $O(n^2)$."
+What is the formula for cellular respiration equation?,The overall equation for cellular respiration is $C_6H_{12}O_6 + 6O_2 \rightarrow 6CO_2 + 6H_2O + \text{ATP}$.
+Please define derivative of x^2.,The derivative of $f(x) = x^2$ with respect to $x$ is $f'(x) = 2x$.
+Refresh my memory on definition of a limit.,"The limit of $f(x)$ as $x$ approaches $c$ is $L$ if for every $\epsilon > 0$ there is a $\delta > 0$ such that if $0 < |x - c| < \delta$, then $|f(x) - L| < \epsilon$."
+Refresh my memory on Einstein's mass-energy equivalence.,The mass-energy equivalence principle is expressed by the famous equation $E = mc^2$.
+Refresh my memory on Euler's identity.,Euler's identity connects five fundamental mathematical constants: $e^{i\pi} + 1 = 0$.
+I'm struggling to understand Ohm's law. What is it?,Ohm's law states that the current through a conductor between two points is directly proportional to the voltage across the two points: $V = IR$.
+Do you know the equation for Ohm's law?,Ohm's law states that the current through a conductor between two points is directly proportional to the voltage across the two points: $V = IR$.
+What is the formula for Momentum?,The linear momentum of an object is the product of its mass and velocity: $p = mv$.
+Refresh my memory on Fibonacci sequence.,"The Fibonacci sequence is defined by the recurrence relation $F_n = F_{n-1} + F_{n-2}$, with $F_0 = 0$ and $F_1 = 1$."
+What does kinetic energy mean in this context?,The kinetic energy of an object of mass $m$ and velocity $v$ is $K = \frac{1}{2}mv^2$.
+Tell me about time complexity of binary search.,The worst-case time complexity of binary search is $O(\log n)$.
+Tell me about Law of Sines.,The Law of Sines states that the ratio of the length of a side to the sine of its opposite angle is constant: $\frac{a}{\sin(A)} = \frac{b}{\sin(B)} = \frac{c}{\sin(C)}$.
+Please define time complexity of binary search.,The worst-case time complexity of binary search is $O(\log n)$.
+What does integral of 1/x mean in this context?,The indefinite integral of $1/x$ is $\ln|x| + C$.
+Refresh my memory on integral of 1/x.,The indefinite integral of $1/x$ is $\ln|x| + C$.
+What is the formula for definition of a limit?,"The limit of $f(x)$ as $x$ approaches $c$ is $L$ if for every $\epsilon > 0$ there is a $\delta > 0$ such that if $0 < |x - c| < \delta$, then $|f(x) - L| < \epsilon$."
+Tell me about pH formula.,The pH of a solution is the negative base-10 logarithm of the hydrogen ion concentration: $\text{pH} = -\log_{10}[H^+]$.
+Can you explain Coulomb's Law?,"Coulomb's Law quantifies the amount of force between two stationary, electrically charged particles: $F = k_e \frac{q_1 q_2}{r^2}$."
+What does Work-Energy Theorem mean in this context?,The work-energy theorem states that the net work done on an object is equal to its change in kinetic energy: $W = \Delta K$.
+Refresh my memory on Molarity.,"Molarity is a measure of the concentration of a chemical species, in particular of a solute in a solution, expressed as moles of solute per liter of solution: $M = \frac{n}{V}$."
+Can you explain Newton's second law?,Newton's second law states that the force acting on an object is equal to the mass of that object times its acceleration: $F = ma$.
+Do you know the equation for kinetic energy?,The kinetic energy of an object of mass $m$ and velocity $v$ is $K = \frac{1}{2}mv^2$.
+Do you know the equation for Work-Energy Theorem?,The work-energy theorem states that the net work done on an object is equal to its change in kinetic energy: $W = \Delta K$.
+What does Euler's identity mean in this context?,Euler's identity connects five fundamental mathematical constants: $e^{i\pi} + 1 = 0$.
+Tell me about Hooke's law.,Hooke's law states that the force needed to extend or compress a spring by some distance scales linearly with respect to that distance: $F = -kx$.
+What does Coulomb's Law mean in this context?,"Coulomb's Law quantifies the amount of force between two stationary, electrically charged particles: $F = k_e \frac{q_1 q_2}{r^2}$."
+What does time complexity of mergesort mean in this context?,The worst-case time complexity of merge sort is $O(n \log n)$.
+Do you know the equation for slope-intercept form?,"The slope-intercept form of a linear equation is $y = mx + b$, where $m$ is the slope and $b$ is the y-intercept."
+Can you explain Geometric progression sum?,The sum of the first $n$ terms of a geometric progression is $S_n = a\frac{1-r^n}{1-r}$ for $r \neq 1$.
+I'm struggling to understand Gravitational potential energy. What is it?,The gravitational potential energy near Earth's surface is $U = mgh$.
+What is the formula for area of a circle?,The area of a circle with radius $r$ is given by the formula: $A = \pi r^2$.
+What is the formula for Arithmetic progression sum?,The sum of the first $n$ terms of an arithmetic progression is $S_n = \frac{n}{2}(2a + (n-1)d)$.
+Do you know the equation for definition of a limit?,"The limit of $f(x)$ as $x$ approaches $c$ is $L$ if for every $\epsilon > 0$ there is a $\delta > 0$ such that if $0 < |x - c| < \delta$, then $|f(x) - L| < \epsilon$."
+What is the formula for Geometric progression sum?,The sum of the first $n$ terms of a geometric progression is $S_n = a\frac{1-r^n}{1-r}$ for $r \neq 1$.
+What does Molarity mean in this context?,"Molarity is a measure of the concentration of a chemical species, in particular of a solute in a solution, expressed as moles of solute per liter of solution: $M = \frac{n}{V}$."
+What does Hooke's law mean in this context?,Hooke's law states that the force needed to extend or compress a spring by some distance scales linearly with respect to that distance: $F = -kx$.
+What is the formula for Molarity?,"Molarity is a measure of the concentration of a chemical species, in particular of a solute in a solution, expressed as moles of solute per liter of solution: $M = \frac{n}{V}$."
+I'm struggling to understand Momentum. What is it?,The linear momentum of an object is the product of its mass and velocity: $p = mv$.
+Refresh my memory on Pythagorean theorem.,The Pythagorean theorem relates the sides of a right triangle. It is written as: $a^2 + b^2 = c^2$.
+Tell me about Euler's identity.,Euler's identity connects five fundamental mathematical constants: $e^{i\pi} + 1 = 0$.
+Please define Fibonacci sequence.,"The Fibonacci sequence is defined by the recurrence relation $F_n = F_{n-1} + F_{n-2}$, with $F_0 = 0$ and $F_1 = 1$."
+I'm struggling to understand Newton's second law. What is it?,Newton's second law states that the force acting on an object is equal to the mass of that object times its acceleration: $F = ma$.
+Tell me about Coulomb's Law.,"Coulomb's Law quantifies the amount of force between two stationary, electrically charged particles: $F = k_e \frac{q_1 q_2}{r^2}$."
+What is the formula for Ideal gas law?,The ideal gas law is the equation of state of a hypothetical ideal gas: $PV = nRT$.
+Tell me about cellular respiration equation.,The overall equation for cellular respiration is $C_6H_{12}O_6 + 6O_2 \rightarrow 6CO_2 + 6H_2O + \text{ATP}$.
+What does area of a circle mean in this context?,The area of a circle with radius $r$ is given by the formula: $A = \pi r^2$.
+Can you explain Law of Sines?,The Law of Sines states that the ratio of the length of a side to the sine of its opposite angle is constant: $\frac{a}{\sin(A)} = \frac{b}{\sin(B)} = \frac{c}{\sin(C)}$.
+Tell me about kinetic energy.,The kinetic energy of an object of mass $m$ and velocity $v$ is $K = \frac{1}{2}mv^2$.
+What is the formula for Ohm's law?,Ohm's law states that the current through a conductor between two points is directly proportional to the voltage across the two points: $V = IR$.
+I'm struggling to understand Hooke's law. What is it?,Hooke's law states that the force needed to extend or compress a spring by some distance scales linearly with respect to that distance: $F = -kx$.
+Can you explain Ideal gas law?,The ideal gas law is the equation of state of a hypothetical ideal gas: $PV = nRT$.
+I'm struggling to understand Ideal gas law. What is it?,The ideal gas law is the equation of state of a hypothetical ideal gas: $PV = nRT$.
+Can you explain cellular respiration equation?,The overall equation for cellular respiration is $C_6H_{12}O_6 + 6O_2 \rightarrow 6CO_2 + 6H_2O + \text{ATP}$.
+Hey! How do I stay focused while studying?,"To stay focused, try the Pomodoro technique: study for 25 minutes, then take a 5-minute break. Eliminate distractions by placing your phone in another room."
+I'm struggling to understand Pythagorean theorem. What is it?,The Pythagorean theorem relates the sides of a right triangle. It is written as: $a^2 + b^2 = c^2$.
+What is the formula for Fibonacci sequence?,"The Fibonacci sequence is defined by the recurrence relation $F_n = F_{n-1} + F_{n-2}$, with $F_0 = 0$ and $F_1 = 1$."
+What does Newton's second law mean in this context?,Newton's second law states that the force acting on an object is equal to the mass of that object times its acceleration: $F = ma$.
+Please define Momentum.,The linear momentum of an object is the product of its mass and velocity: $p = mv$.
+Do you know the equation for Binomial theorem?,The binomial theorem states that $(x+y)^n = \sum_{k=0}^n \binom{n}{k} x^{n-k} y^k$.
+Refresh my memory on Hooke's law.,Hooke's law states that the force needed to extend or compress a spring by some distance scales linearly with respect to that distance: $F = -kx$.
+What is the formula for kinetic energy?,The kinetic energy of an object of mass $m$ and velocity $v$ is $K = \frac{1}{2}mv^2$.
+Can you explain definition of a limit?,"The limit of $f(x)$ as $x$ approaches $c$ is $L$ if for every $\epsilon > 0$ there is a $\delta > 0$ such that if $0 < |x - c| < \delta$, then $|f(x) - L| < \epsilon$."
+What does Ideal gas law mean in this context?,The ideal gas law is the equation of state of a hypothetical ideal gas: $PV = nRT$.
+Please define Binomial theorem.,The binomial theorem states that $(x+y)^n = \sum_{k=0}^n \binom{n}{k} x^{n-k} y^k$.
+Tell me about Fibonacci sequence.,"The Fibonacci sequence is defined by the recurrence relation $F_n = F_{n-1} + F_{n-2}$, with $F_0 = 0$ and $F_1 = 1$."
+Refresh my memory on Ideal gas law.,The ideal gas law is the equation of state of a hypothetical ideal gas: $PV = nRT$.
+how do i stay focused while studying?,"To stay focused, try the Pomodoro technique: study for 25 minutes, then take a 5-minute break. Eliminate distractions by placing your phone in another room."
+Do you know the equation for integral of 1/x?,The indefinite integral of $1/x$ is $\ln|x| + C$.
+Please define definition of a limit.,"The limit of $f(x)$ as $x$ approaches $c$ is $L$ if for every $\epsilon > 0$ there is a $\delta > 0$ such that if $0 < |x - c| < \delta$, then $|f(x) - L| < \epsilon$."
+Can you explain Law of Cosines?,The Law of Cosines relates the lengths of the sides of a triangle to the cosine of one of its angles: $c^2 = a^2 + b^2 - 2ab\cos(C)$.
+Can you explain Quadratic vertex form?,"The vertex form of a quadratic function is $f(x) = a(x-h)^2 + k$, where $(h,k)$ is the vertex."
+What does time complexity of quicksort mean in this context?,"The average-case time complexity of quicksort is $O(n \log n)$, but its worst-case is $O(n^2)$."
+How do I stay focused while studying? Please.,"To stay focused, try the Pomodoro technique: study for 25 minutes, then take a 5-minute break. Eliminate distractions by placing your phone in another room."
+I'm struggling to understand Euler's identity. What is it?,Euler's identity connects five fundamental mathematical constants: $e^{i\pi} + 1 = 0$.
+who are you?,I am a helpful study assistant trained to help you with your educational materials and answer questions concisely.
+Are you an AI?,"Yes, I am a helpful study assistant powered by artificial intelligence, designed to help you learn effectively."
+Please define slope-intercept form.,"The slope-intercept form of a linear equation is $y = mx + b$, where $m$ is the slope and $b$ is the y-intercept."
+Please define Hooke's law.,Hooke's law states that the force needed to extend or compress a spring by some distance scales linearly with respect to that distance: $F = -kx$.
+Do you know the equation for Geometric progression sum?,The sum of the first $n$ terms of a geometric progression is $S_n = a\frac{1-r^n}{1-r}$ for $r \neq 1$.
+Tell me about Work-Energy Theorem.,The work-energy theorem states that the net work done on an object is equal to its change in kinetic energy: $W = \Delta K$.
+Refresh my memory on photosynthesis equation.,The overall equation for photosynthesis is $6CO_2 + 6H_2O \rightarrow C_6H_{12}O_6 + 6O_2$.
+I'm struggling to understand slope-intercept form. What is it?,"The slope-intercept form of a linear equation is $y = mx + b$, where $m$ is the slope and $b$ is the y-intercept."
+Please define Newton's second law.,Newton's second law states that the force acting on an object is equal to the mass of that object times its acceleration: $F = ma$.
+Can you explain area of a circle?,The area of a circle with radius $r$ is given by the formula: $A = \pi r^2$.
+Refresh my memory on Law of Cosines.,The Law of Cosines relates the lengths of the sides of a triangle to the cosine of one of its angles: $c^2 = a^2 + b^2 - 2ab\cos(C)$.
+Can you write a 10 page essay for me? Please.,"I can help you outline and brainstorm ideas for your essay, but I cannot write the entire 10-page paper for you. Let's start with a thesis statement!"
+What is the formula for derivative of x^2?,The derivative of $f(x) = x^2$ with respect to $x$ is $f'(x) = 2x$.
+Do you know the equation for photosynthesis equation?,The overall equation for photosynthesis is $6CO_2 + 6H_2O \rightarrow C_6H_{12}O_6 + 6O_2$.
+What does Momentum mean in this context?,The linear momentum of an object is the product of its mass and velocity: $p = mv$.
+I'm struggling to understand time complexity of quicksort. What is it?,"The average-case time complexity of quicksort is $O(n \log n)$, but its worst-case is $O(n^2)$."
+Please define Pythagorean theorem.,The Pythagorean theorem relates the sides of a right triangle. It is written as: $a^2 + b^2 = c^2$.
+Please define Gravitational potential energy.,The gravitational potential energy near Earth's surface is $U = mgh$.
+Hey! Are you an AI?,"Yes, I am a helpful study assistant powered by artificial intelligence, designed to help you learn effectively."
+Can you explain integral of 1/x?,The indefinite integral of $1/x$ is $\ln|x| + C$.
+I'm struggling to understand Fibonacci sequence. What is it?,"The Fibonacci sequence is defined by the recurrence relation $F_n = F_{n-1} + F_{n-2}$, with $F_0 = 0$ and $F_1 = 1$."
+I'm struggling to understand definition of a limit. What is it?,"The limit of $f(x)$ as $x$ approaches $c$ is $L$ if for every $\epsilon > 0$ there is a $\delta > 0$ such that if $0 < |x - c| < \delta$, then $|f(x) - L| < \epsilon$."
+I'm struggling to understand Molarity. What is it?,"Molarity is a measure of the concentration of a chemical species, in particular of a solute in a solution, expressed as moles of solute per liter of solution: $M = \frac{n}{V}$."
+what's a good way to memorize vocabulary?,Spaced repetition and active recall are the best ways to memorize vocabulary. Flashcards are a great tool for this!
+Refresh my memory on Binomial theorem.,The binomial theorem states that $(x+y)^n = \sum_{k=0}^n \binom{n}{k} x^{n-k} y^k$.
+Tell me about photosynthesis equation.,The overall equation for photosynthesis is $6CO_2 + 6H_2O \rightarrow C_6H_{12}O_6 + 6O_2$.
+Hey! Who are you?,I am a helpful study assistant trained to help you with your educational materials and answer questions concisely.
+Tell me about Pythagorean theorem.,The Pythagorean theorem relates the sides of a right triangle. It is written as: $a^2 + b^2 = c^2$.
+What is the formula for Binomial theorem?,The binomial theorem states that $(x+y)^n = \sum_{k=0}^n \binom{n}{k} x^{n-k} y^k$.
+Tell me about Einstein's mass-energy equivalence.,The mass-energy equivalence principle is expressed by the famous equation $E = mc^2$.
+Do you know the equation for Quadratic vertex form?,"The vertex form of a quadratic function is $f(x) = a(x-h)^2 + k$, where $(h,k)$ is the vertex."
+Tell me about Ohm's law.,Ohm's law states that the current through a conductor between two points is directly proportional to the voltage across the two points: $V = IR$.
+are you an ai?,"Yes, I am a helpful study assistant powered by artificial intelligence, designed to help you learn effectively."
+Refresh my memory on derivative of x^2.,The derivative of $f(x) = x^2$ with respect to $x$ is $f'(x) = 2x$.
+Can you explain Fibonacci sequence?,"The Fibonacci sequence is defined by the recurrence relation $F_n = F_{n-1} + F_{n-2}$, with $F_0 = 0$ and $F_1 = 1$."
+Refresh my memory on Ohm's law.,Ohm's law states that the current through a conductor between two points is directly proportional to the voltage across the two points: $V = IR$.
+Tell me about time complexity of mergesort.,The worst-case time complexity of merge sort is $O(n \log n)$.
+Refresh my memory on area of a circle.,The area of a circle with radius $r$ is given by the formula: $A = \pi r^2$.
+Tell me about Ideal gas law.,The ideal gas law is the equation of state of a hypothetical ideal gas: $PV = nRT$.
+Tell me about integral of 1/x.,The indefinite integral of $1/x$ is $\ln|x| + C$.
+Refresh my memory on Coulomb's Law.,"Coulomb's Law quantifies the amount of force between two stationary, electrically charged particles: $F = k_e \frac{q_1 q_2}{r^2}$."
+Please define Work-Energy Theorem.,The work-energy theorem states that the net work done on an object is equal to its change in kinetic energy: $W = \Delta K$.
+Refresh my memory on time complexity of mergesort.,The worst-case time complexity of merge sort is $O(n \log n)$.
+Tell me about Quadratic vertex form.,"The vertex form of a quadratic function is $f(x) = a(x-h)^2 + k$, where $(h,k)$ is the vertex."
+Do you know the equation for Hooke's law?,Hooke's law states that the force needed to extend or compress a spring by some distance scales linearly with respect to that distance: $F = -kx$.
+Please define Geometric progression sum.,The sum of the first $n$ terms of a geometric progression is $S_n = a\frac{1-r^n}{1-r}$ for $r \neq 1$.
+Refresh my memory on Work-Energy Theorem.,The work-energy theorem states that the net work done on an object is equal to its change in kinetic energy: $W = \Delta K$.
+What does time complexity of binary search mean in this context?,The worst-case time complexity of binary search is $O(\log n)$.
+What does definition of a limit mean in this context?,"The limit of $f(x)$ as $x$ approaches $c$ is $L$ if for every $\epsilon > 0$ there is a $\delta > 0$ such that if $0 < |x - c| < \delta$, then $|f(x) - L| < \epsilon$."
+I'm struggling to understand area of a circle. What is it?,The area of a circle with radius $r$ is given by the formula: $A = \pi r^2$.
+Tell me about quadratic equation.,The quadratic formula is used to find the roots of a quadratic equation. It is expressed as: $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.
+Please define Law of Cosines.,The Law of Cosines relates the lengths of the sides of a triangle to the cosine of one of its angles: $c^2 = a^2 + b^2 - 2ab\cos(C)$.
+I'm struggling to understand Quadratic vertex form. What is it?,"The vertex form of a quadratic function is $f(x) = a(x-h)^2 + k$, where $(h,k)$ is the vertex."
+Tell me about Arithmetic progression sum.,The sum of the first $n$ terms of an arithmetic progression is $S_n = \frac{n}{2}(2a + (n-1)d)$.
+What does Arithmetic progression sum mean in this context?,The sum of the first $n$ terms of an arithmetic progression is $S_n = \frac{n}{2}(2a + (n-1)d)$.
+Tell me about Law of Cosines.,The Law of Cosines relates the lengths of the sides of a triangle to the cosine of one of its angles: $c^2 = a^2 + b^2 - 2ab\cos(C)$.
+I'm struggling to understand cellular respiration equation. What is it?,The overall equation for cellular respiration is $C_6H_{12}O_6 + 6O_2 \rightarrow 6CO_2 + 6H_2O + \text{ATP}$.
+Tell me about derivative of x^2.,The derivative of $f(x) = x^2$ with respect to $x$ is $f'(x) = 2x$.
+What is the formula for integral of 1/x?,The indefinite integral of $1/x$ is $\ln|x| + C$.
+Refresh my memory on Quadratic vertex form.,"The vertex form of a quadratic function is $f(x) = a(x-h)^2 + k$, where $(h,k)$ is the vertex."
+What is the formula for slope-intercept form?,"The slope-intercept form of a linear equation is $y = mx + b$, where $m$ is the slope and $b$ is the y-intercept."
+How do I stay focused while studying?,"To stay focused, try the Pomodoro technique: study for 25 minutes, then take a 5-minute break. Eliminate distractions by placing your phone in another room."
+Can you explain Euler's identity?,Euler's identity connects five fundamental mathematical constants: $e^{i\pi} + 1 = 0$.
+Do you know the equation for pH formula?,The pH of a solution is the negative base-10 logarithm of the hydrogen ion concentration: $\text{pH} = -\log_{10}[H^+]$.
+I'm struggling to understand Law of Sines. What is it?,The Law of Sines states that the ratio of the length of a side to the sine of its opposite angle is constant: $\frac{a}{\sin(A)} = \frac{b}{\sin(B)} = \frac{c}{\sin(C)}$.
+Refresh my memory on Arithmetic progression sum.,The sum of the first $n$ terms of an arithmetic progression is $S_n = \frac{n}{2}(2a + (n-1)d)$.
+Do you know the equation for Newton's second law?,Newton's second law states that the force acting on an object is equal to the mass of that object times its acceleration: $F = ma$.
+Refresh my memory on time complexity of binary search.,The worst-case time complexity of binary search is $O(\log n)$.
+Please define Ideal gas law.,The ideal gas law is the equation of state of a hypothetical ideal gas: $PV = nRT$.
+What is the formula for Quadratic vertex form?,"The vertex form of a quadratic function is $f(x) = a(x-h)^2 + k$, where $(h,k)$ is the vertex."
+What does Gravitational potential energy mean in this context?,The gravitational potential energy near Earth's surface is $U = mgh$.
+Please define kinetic energy.,The kinetic energy of an object of mass $m$ and velocity $v$ is $K = \frac{1}{2}mv^2$.
+Can you explain slope-intercept form?,"The slope-intercept form of a linear equation is $y = mx + b$, where $m$ is the slope and $b$ is the y-intercept."
+Refresh my memory on pH formula.,The pH of a solution is the negative base-10 logarithm of the hydrogen ion concentration: $\text{pH} = -\log_{10}[H^+]$.
+I'm struggling to understand Geometric progression sum. What is it?,The sum of the first $n$ terms of a geometric progression is $S_n = a\frac{1-r^n}{1-r}$ for $r \neq 1$.
+Can you explain Work-Energy Theorem?,The work-energy theorem states that the net work done on an object is equal to its change in kinetic energy: $W = \Delta K$.
+Please define time complexity of quicksort.,"The average-case time complexity of quicksort is $O(n \log n)$, but its worst-case is $O(n^2)$."
+Do you know the equation for derivative of x^2?,The derivative of $f(x) = x^2$ with respect to $x$ is $f'(x) = 2x$.
+What is the formula for pH formula?,The pH of a solution is the negative base-10 logarithm of the hydrogen ion concentration: $\text{pH} = -\log_{10}[H^+]$.
+Tell me about Gravitational potential energy.,The gravitational potential energy near Earth's surface is $U = mgh$.
+Can you explain time complexity of binary search?,The worst-case time complexity of binary search is $O(\log n)$.
+What is the formula for quadratic equation?,The quadratic formula is used to find the roots of a quadratic equation. It is expressed as: $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.
+Can you explain Binomial theorem?,The binomial theorem states that $(x+y)^n = \sum_{k=0}^n \binom{n}{k} x^{n-k} y^k$.
+What does pH formula mean in this context?,The pH of a solution is the negative base-10 logarithm of the hydrogen ion concentration: $\text{pH} = -\log_{10}[H^+]$.
+Refresh my memory on Newton's second law.,Newton's second law states that the force acting on an object is equal to the mass of that object times its acceleration: $F = ma$.
+What does derivative of x^2 mean in this context?,The derivative of $f(x) = x^2$ with respect to $x$ is $f'(x) = 2x$.
+Can you explain photosynthesis equation?,The overall equation for photosynthesis is $6CO_2 + 6H_2O \rightarrow C_6H_{12}O_6 + 6O_2$.
+Do you know the equation for time complexity of binary search?,The worst-case time complexity of binary search is $O(\log n)$.
+I'm struggling to understand quadratic equation. What is it?,The quadratic formula is used to find the roots of a quadratic equation. It is expressed as: $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.
+Please define time complexity of mergesort.,The worst-case time complexity of merge sort is $O(n \log n)$.
+Please define photosynthesis equation.,The overall equation for photosynthesis is $6CO_2 + 6H_2O \rightarrow C_6H_{12}O_6 + 6O_2$.
+Refresh my memory on slope-intercept form.,"The slope-intercept form of a linear equation is $y = mx + b$, where $m$ is the slope and $b$ is the y-intercept."
+Please define pH formula.,The pH of a solution is the negative base-10 logarithm of the hydrogen ion concentration: $\text{pH} = -\log_{10}[H^+]$.
+What is the formula for Law of Sines?,The Law of Sines states that the ratio of the length of a side to the sine of its opposite angle is constant: $\frac{a}{\sin(A)} = \frac{b}{\sin(B)} = \frac{c}{\sin(C)}$.
+Hey! What's a good way to memorize vocabulary?,Spaced repetition and active recall are the best ways to memorize vocabulary. Flashcards are a great tool for this!
+Can you explain kinetic energy?,The kinetic energy of an object of mass $m$ and velocity $v$ is $K = \frac{1}{2}mv^2$.
+Do you know the equation for time complexity of mergesort?,The worst-case time complexity of merge sort is $O(n \log n)$.
+Refresh my memory on quadratic equation.,The quadratic formula is used to find the roots of a quadratic equation. It is expressed as: $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.
+What does Law of Cosines mean in this context?,The Law of Cosines relates the lengths of the sides of a triangle to the cosine of one of its angles: $c^2 = a^2 + b^2 - 2ab\cos(C)$.
+Refresh my memory on Law of Sines.,The Law of Sines states that the ratio of the length of a side to the sine of its opposite angle is constant: $\frac{a}{\sin(A)} = \frac{b}{\sin(B)} = \frac{c}{\sin(C)}$.
+What is the formula for Law of Cosines?,The Law of Cosines relates the lengths of the sides of a triangle to the cosine of one of its angles: $c^2 = a^2 + b^2 - 2ab\cos(C)$.
+Do you know the equation for Gravitational potential energy?,The gravitational potential energy near Earth's surface is $U = mgh$.
+Do you know the equation for Ideal gas law?,The ideal gas law is the equation of state of a hypothetical ideal gas: $PV = nRT$.
+Please define Molarity.,"Molarity is a measure of the concentration of a chemical species, in particular of a solute in a solution, expressed as moles of solute per liter of solution: $M = \frac{n}{V}$."
+What's a good way to memorize vocabulary? Please.,Spaced repetition and active recall are the best ways to memorize vocabulary. Flashcards are a great tool for this!
+What is the formula for Euler's identity?,Euler's identity connects five fundamental mathematical constants: $e^{i\pi} + 1 = 0$.
+Do you know the equation for Euler's identity?,Euler's identity connects five fundamental mathematical constants: $e^{i\pi} + 1 = 0$.
+Please define Quadratic vertex form.,"The vertex form of a quadratic function is $f(x) = a(x-h)^2 + k$, where $(h,k)$ is the vertex."
+What is the formula for time complexity of quicksort?,"The average-case time complexity of quicksort is $O(n \log n)$, but its worst-case is $O(n^2)$."
+Can you explain Hooke's law?,Hooke's law states that the force needed to extend or compress a spring by some distance scales linearly with respect to that distance: $F = -kx$.
+Do you know the equation for Molarity?,"Molarity is a measure of the concentration of a chemical species, in particular of a solute in a solution, expressed as moles of solute per liter of solution: $M = \frac{n}{V}$."
+Please define Arithmetic progression sum.,The sum of the first $n$ terms of an arithmetic progression is $S_n = \frac{n}{2}(2a + (n-1)d)$.
+Do you know the equation for Einstein's mass-energy equivalence?,The mass-energy equivalence principle is expressed by the famous equation $E = mc^2$.
+What is the formula for time complexity of binary search?,The worst-case time complexity of binary search is $O(\log n)$.
+What does Fibonacci sequence mean in this context?,"The Fibonacci sequence is defined by the recurrence relation $F_n = F_{n-1} + F_{n-2}$, with $F_0 = 0$ and $F_1 = 1$."
+Can you explain quadratic equation?,The quadratic formula is used to find the roots of a quadratic equation. It is expressed as: $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.
+I'm struggling to understand Arithmetic progression sum. What is it?,The sum of the first $n$ terms of an arithmetic progression is $S_n = \frac{n}{2}(2a + (n-1)d)$.
+Can you write a 10 page essay for me?,"I can help you outline and brainstorm ideas for your essay, but I cannot write the entire 10-page paper for you. Let's start with a thesis statement!"
+Refresh my memory on kinetic energy.,The kinetic energy of an object of mass $m$ and velocity $v$ is $K = \frac{1}{2}mv^2$.
+Do you know the equation for area of a circle?,The area of a circle with radius $r$ is given by the formula: $A = \pi r^2$.
+Do you know the equation for cellular respiration equation?,The overall equation for cellular respiration is $C_6H_{12}O_6 + 6O_2 \rightarrow 6CO_2 + 6H_2O + \text{ATP}$.
+can you write a 10 page essay for me?,"I can help you outline and brainstorm ideas for your essay, but I cannot write the entire 10-page paper for you. Let's start with a thesis statement!"
+Do you know the equation for Arithmetic progression sum?,The sum of the first $n$ terms of an arithmetic progression is $S_n = \frac{n}{2}(2a + (n-1)d)$.
+Can you explain Ohm's law?,Ohm's law states that the current through a conductor between two points is directly proportional to the voltage across the two points: $V = IR$.
+Who are you? Please.,I am a helpful study assistant trained to help you with your educational materials and answer questions concisely.
+Are you an AI? Please.,"Yes, I am a helpful study assistant powered by artificial intelligence, designed to help you learn effectively."
+Can you explain Molarity?,"Molarity is a measure of the concentration of a chemical species, in particular of a solute in a solution, expressed as moles of solute per liter of solution: $M = \frac{n}{V}$."
+Do you know the equation for Fibonacci sequence?,"The Fibonacci sequence is defined by the recurrence relation $F_n = F_{n-1} + F_{n-2}$, with $F_0 = 0$ and $F_1 = 1$."
+I'm struggling to understand kinetic energy. What is it?,The kinetic energy of an object of mass $m$ and velocity $v$ is $K = \frac{1}{2}mv^2$.
+Do you know the equation for Momentum?,The linear momentum of an object is the product of its mass and velocity: $p = mv$.
+I'm struggling to understand Coulomb's Law. What is it?,"Coulomb's Law quantifies the amount of force between two stationary, electrically charged particles: $F = k_e \frac{q_1 q_2}{r^2}$."
+Please define quadratic equation.,The quadratic formula is used to find the roots of a quadratic equation. It is expressed as: $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.
+Please define Coulomb's Law.,"Coulomb's Law quantifies the amount of force between two stationary, electrically charged particles: $F = k_e \frac{q_1 q_2}{r^2}$."
+Refresh my memory on Gravitational potential energy.,The gravitational potential energy near Earth's surface is $U = mgh$.
+What is the formula for photosynthesis equation?,The overall equation for photosynthesis is $6CO_2 + 6H_2O \rightarrow C_6H_{12}O_6 + 6O_2$.
+I'm struggling to understand time complexity of mergesort. What is it?,The worst-case time complexity of merge sort is $O(n \log n)$.
+I'm struggling to understand time complexity of binary search. What is it?,The worst-case time complexity of binary search is $O(\log n)$.
+What is the formula for Work-Energy Theorem?,The work-energy theorem states that the net work done on an object is equal to its change in kinetic energy: $W = \Delta K$.
+What is the formula for Hooke's law?,Hooke's law states that the force needed to extend or compress a spring by some distance scales linearly with respect to that distance: $F = -kx$.
+What does Quadratic vertex form mean in this context?,"The vertex form of a quadratic function is $f(x) = a(x-h)^2 + k$, where $(h,k)$ is the vertex."
+What does slope-intercept form mean in this context?,"The slope-intercept form of a linear equation is $y = mx + b$, where $m$ is the slope and $b$ is the y-intercept."
+I'm struggling to understand pH formula. What is it?,The pH of a solution is the negative base-10 logarithm of the hydrogen ion concentration: $\text{pH} = -\log_{10}[H^+]$.
+Please define Law of Sines.,The Law of Sines states that the ratio of the length of a side to the sine of its opposite angle is constant: $\frac{a}{\sin(A)} = \frac{b}{\sin(B)} = \frac{c}{\sin(C)}$.
+What does Law of Sines mean in this context?,The Law of Sines states that the ratio of the length of a side to the sine of its opposite angle is constant: $\frac{a}{\sin(A)} = \frac{b}{\sin(B)} = \frac{c}{\sin(C)}$.
+I'm struggling to understand Einstein's mass-energy equivalence. What is it?,The mass-energy equivalence principle is expressed by the famous equation $E = mc^2$.
+Do you know the equation for quadratic equation?,The quadratic formula is used to find the roots of a quadratic equation. It is expressed as: $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.
+What does Geometric progression sum mean in this context?,The sum of the first $n$ terms of a geometric progression is $S_n = a\frac{1-r^n}{1-r}$ for $r \neq 1$.
+What does photosynthesis equation mean in this context?,The overall equation for photosynthesis is $6CO_2 + 6H_2O \rightarrow C_6H_{12}O_6 + 6O_2$.
+Can you explain time complexity of quicksort?,"The average-case time complexity of quicksort is $O(n \log n)$, but its worst-case is $O(n^2)$."
+What is the formula for time complexity of mergesort?,The worst-case time complexity of merge sort is $O(n \log n)$.
+Can you explain pH formula?,The pH of a solution is the negative base-10 logarithm of the hydrogen ion concentration: $\text{pH} = -\log_{10}[H^+]$.
+Do you know the equation for Pythagorean theorem?,The Pythagorean theorem relates the sides of a right triangle. It is written as: $a^2 + b^2 = c^2$.
+Do you know the equation for Law of Sines?,The Law of Sines states that the ratio of the length of a side to the sine of its opposite angle is constant: $\frac{a}{\sin(A)} = \frac{b}{\sin(B)} = \frac{c}{\sin(C)}$.
+Refresh my memory on Momentum.,The linear momentum of an object is the product of its mass and velocity: $p = mv$.
+Please define Ohm's law.,Ohm's law states that the current through a conductor between two points is directly proportional to the voltage across the two points: $V = IR$.
+What is the formula for Coulomb's Law?,"Coulomb's Law quantifies the amount of force between two stationary, electrically charged particles: $F = k_e \frac{q_1 q_2}{r^2}$."
+What does Binomial theorem mean in this context?,The binomial theorem states that $(x+y)^n = \sum_{k=0}^n \binom{n}{k} x^{n-k} y^k$.
+Tell me about definition of a limit.,"The limit of $f(x)$ as $x$ approaches $c$ is $L$ if for every $\epsilon > 0$ there is a $\delta > 0$ such that if $0 < |x - c| < \delta$, then $|f(x) - L| < \epsilon$."
+What is the formula for Newton's second law?,Newton's second law states that the force acting on an object is equal to the mass of that object times its acceleration: $F = ma$.
+Do you know the equation for Coulomb's Law?,"Coulomb's Law quantifies the amount of force between two stationary, electrically charged particles: $F = k_e \frac{q_1 q_2}{r^2}$."
+Please define cellular respiration equation.,The overall equation for cellular respiration is $C_6H_{12}O_6 + 6O_2 \rightarrow 6CO_2 + 6H_2O + \text{ATP}$.
+Tell me about Binomial theorem.,The binomial theorem states that $(x+y)^n = \sum_{k=0}^n \binom{n}{k} x^{n-k} y^k$.
+Do you know the equation for time complexity of quicksort?,"The average-case time complexity of quicksort is $O(n \log n)$, but its worst-case is $O(n^2)$."
+Please define Euler's identity.,Euler's identity connects five fundamental mathematical constants: $e^{i\pi} + 1 = 0$.
+Do you know the equation for Law of Cosines?,The Law of Cosines relates the lengths of the sides of a triangle to the cosine of one of its angles: $c^2 = a^2 + b^2 - 2ab\cos(C)$.
+Please define Einstein's mass-energy equivalence.,The mass-energy equivalence principle is expressed by the famous equation $E = mc^2$.
+Can you explain Pythagorean theorem?,The Pythagorean theorem relates the sides of a right triangle. It is written as: $a^2 + b^2 = c^2$.
+Tell me about Molarity.,"Molarity is a measure of the concentration of a chemical species, in particular of a solute in a solution, expressed as moles of solute per liter of solution: $M = \frac{n}{V}$."
+Please define area of a circle.,The area of a circle with radius $r$ is given by the formula: $A = \pi r^2$.
+What is the formula for Gravitational potential energy?,The gravitational potential energy near Earth's surface is $U = mgh$.
+What does Einstein's mass-energy equivalence mean in this context?,The mass-energy equivalence principle is expressed by the famous equation $E = mc^2$.
+Refresh my memory on time complexity of quicksort.,"The average-case time complexity of quicksort is $O(n \log n)$, but its worst-case is $O(n^2)$."
+Can you explain time complexity of mergesort?,The worst-case time complexity of merge sort is $O(n \log n)$.
+Can you explain Einstein's mass-energy equivalence?,The mass-energy equivalence principle is expressed by the famous equation $E = mc^2$.
+I'm struggling to understand integral of 1/x. What is it?,The indefinite integral of $1/x$ is $\ln|x| + C$.
+Refresh my memory on Geometric progression sum.,The sum of the first $n$ terms of a geometric progression is $S_n = a\frac{1-r^n}{1-r}$ for $r \neq 1$.
+Tell me about slope-intercept form.,"The slope-intercept form of a linear equation is $y = mx + b$, where $m$ is the slope and $b$ is the y-intercept."
+Hey! Can you write a 10 page essay for me?,"I can help you outline and brainstorm ideas for your essay, but I cannot write the entire 10-page paper for you. Let's start with a thesis statement!"
+What is the formula for Einstein's mass-energy equivalence?,The mass-energy equivalence principle is expressed by the famous equation $E = mc^2$.
+I'm struggling to understand derivative of x^2. What is it?,The derivative of $f(x) = x^2$ with respect to $x$ is $f'(x) = 2x$.
+Tell me about Momentum.,The linear momentum of an object is the product of its mass and velocity: $p = mv$.
+What does Pythagorean theorem mean in this context?,The Pythagorean theorem relates the sides of a right triangle. It is written as: $a^2 + b^2 = c^2$.
+Please define integral of 1/x.,The indefinite integral of $1/x$ is $\ln|x| + C$.
+Can you explain derivative of x^2?,The derivative of $f(x) = x^2$ with respect to $x$ is $f'(x) = 2x$.
+What does cellular respiration equation mean in this context?,The overall equation for cellular respiration is $C_6H_{12}O_6 + 6O_2 \rightarrow 6CO_2 + 6H_2O + \text{ATP}$.
+Tell me about Newton's second law.,Newton's second law states that the force acting on an object is equal to the mass of that object times its acceleration: $F = ma$.
+Can you explain Gravitational potential energy?,The gravitational potential energy near Earth's surface is $U = mgh$.
+Can you explain Momentum?,The linear momentum of an object is the product of its mass and velocity: $p = mv$.
+What's a good way to memorize vocabulary?,Spaced repetition and active recall are the best ways to memorize vocabulary. Flashcards are a great tool for this!
+I'm struggling to understand Law of Cosines. What is it?,The Law of Cosines relates the lengths of the sides of a triangle to the cosine of one of its angles: $c^2 = a^2 + b^2 - 2ab\cos(C)$.
+Can you explain Arithmetic progression sum?,The sum of the first $n$ terms of an arithmetic progression is $S_n = \frac{n}{2}(2a + (n-1)d)$.
+What does quadratic equation mean in this context?,The quadratic formula is used to find the roots of a quadratic equation. It is expressed as: $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.
+Who are you?,I am a helpful study assistant trained to help you with your educational materials and answer questions concisely.

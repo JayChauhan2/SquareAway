@@ -82,22 +82,11 @@ def chatbot():
         return jsonify({"error": "No message provided"}), 400
 
     # Build conversation
-    training_instructions = ""
-    try:
-        with open("chatbot_training_data.json", "r") as f:
-            training_data = json.load(f)
-            training_instructions = "Below are examples you are trained on. Adhere to this knowledge and format:\n"
-            for example in training_data:
-                training_instructions += f"User: {example['input']}\nYou: {example['output']}\n\n"
-    except Exception as e:
-        print(f"Skipping training data load: {e}")
-
     conversation = [{"role": "system", "content": (
         "You are a helpful study assistant. "
         "Keep your answers concise for chat display, "
         "wrap all formulas in LaTeX (use $...$ for inline math), "
-        "and do not write huge paragraphs.\n\n"
-        + training_instructions
+        "and do not write huge paragraphs."
     )}]
     
     # Add previous chat messages if any
@@ -106,15 +95,16 @@ def chatbot():
     # Add current user message
     conversation.append({"role": "user", "content": f"{user_message}\n\nNotes:\n{notes}"})
 
-    model_api_key = os.getenv("GROQ_API_KEY")
+    # Call OpenAI Fine-Tuned Model
+    model_api_key = os.getenv("OPENAI_API_KEY")
     response = requests.post(
-        url="https://api.groq.com/openai/v1/chat/completions",
+        url="https://api.openai.com/v1/chat/completions",
         headers={
             "Authorization": f"Bearer {model_api_key}",
             "Content-Type": "application/json",
         },
         data=json.dumps({
-            "model": "llama-3.3-70b-versatile",
+            "model": "ft:gpt-4o-mini-2024-07-18:personal:jay-capstone-chat:DTvEmOBh",
             "messages": conversation
         })
     )
@@ -391,8 +381,9 @@ def extractText():
                         (
                             "Extract all the text from this image and "
                             "After extracting, carefully review the text and correct any mistakes "
-                            "or misread characters. THEN, CONVERT the text into a neatly formatted notes with logical understanding."
-                            " Do not include any other extra text like 'okay here's your message' or something similar. ONLY include the neatly formatted output."
+                            "or misread characters. THEN, CONVERT the text into a neatly formatted notes with logical understanding. "
+                            "Based strictly on the legibility of the handwriting in the image, you must include a confidence score exactly at the very end of your response, formatted as '[Confidence: XX%]'. "
+                            "Do not include any other extra text like 'okay here's your message' or something similar. ONLY include the neatly formatted output and the final confidence score."
                         )
                     ]
                 )

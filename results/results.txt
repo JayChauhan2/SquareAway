@@ -1,40 +1,42 @@
-Here are the notes extracted from the image:
-
----
-
-**Integral Calculation and Area Interpretation**
+**Notes on Integrals and Area**
 
 **1. Definite Integral Calculation:**
-$$ \int_{-3}^{3} (x+1) dx = \left[ \frac{x^2}{2} + x + C \right]_{-3}^{3} $$
-$$ = \left( \frac{3^2}{2} + 3 \right) - \left( \frac{(-3)^2}{2} + (-3) \right) $$
-$$ = \left( \frac{9}{2} + 3 \right) - \left( \frac{9}{2} - 3 \right) $$
-$$ = \left( \frac{9}{2} + \frac{6}{2} \right) - \left( \frac{9}{2} - \frac{6}{2} \right) $$
-$$ = \frac{15}{2} - \frac{3}{2} = \frac{12}{2} = 6 $$
 
-**2. Geometric Interpretation (Area under the curve $f(x)=x+1$):**
-The graph shows two areas:
-*   **Area 1 (A1):** Above the x-axis, from x=-1 to x=3. This is a triangle with base 4 and height 4.
-    *   Area_1 = $\frac{1}{2} \times 4 \times 4 = 8$
-*   **Area 2 (A2):** Below the x-axis, from x=-3 to x=-1. This is a triangle with base 2 and height 2.
-    *   Area_2 = $-\frac{1}{2} \times 2 \times 2 = -2$ (negative because it's below the x-axis)
+*   **Problem:** $\int_{-3}^{3} (x+1) dx$
+*   **Antiderivative:** $= [\frac{x^2}{2} + x + C]_{-3}^{3}$
+*   **Evaluation:** $= (\frac{3^2}{2} + 3) - (\frac{(-3)^2}{2} + (-3))$
+    $= (\frac{9}{2} + 3) - (\frac{9}{2} - 3)$
+    $= (4.5 + 3) - (4.5 - 3)$
+    $= 7.5 - 1.5$
+    $= 6$
 
-The area of the 3rd quartile will be negative.
-Therefore, my integral $A_1 + A_2 = 8 - 2 = 6$.
+**2. Geometric Interpretation (Net Signed Area):**
 
-**3. Understanding "Area" vs. "Integral":**
-However, I could be asked to calculate "the area" (not the integral).
-*   Negative areas must be turned to positive.
-*   $|A_1| + |A_2| = |8| + |-2| = 10$
+*   The function is $f(x)=x+1$.
+*   **Area 1 (A₁):** Region above the x-axis, from $x=-1$ to $x=3$.
+    *   $A_1 = 8$
+*   **Area 2 (A₂):** Region below the x-axis, from $x=-3$ to $x=-1$.
+    *   $A_2 = -2$
+*   **Integral Value (Net Signed Area):** "The area of the 3rd quartile will be negative, therefore my Integral will be $A_1 + A_2 = 8 - 2 = 6$."
 
-**4. Integral Properties for Calculating Area:**
-Remember integrals are sums, hence:
-$$ \int_{-3}^{3} (x+1) dx = \int_{-3}^{-1} (x+1) dx + \int_{-1}^{3} (x+1) dx $$
+**3. Total Area Calculation:**
 
-If I were to calculate the area, I could divide the integral into a sum, and divide it exactly where it becomes negative, where $f(x)=0$.
+*   "However, I could be asked to calculate the area (not the integral). Negative areas must be turned to positive."
+*   **Total Area:** $|A_1| + |A_2| = |8| + |-2| = 8 + 2 = 10$
 
-**5. Calculating Absolute Area:**
-Now, the negative area is turned to positive to find the area with absolute value.
-$$ \int_{-3}^{3} (x+1) dx = \left| \int_{-3}^{-1} (x+1) dx \right| + \int_{-1}^{3} (x+1) dx $$
+**4. Integral Properties for Area Calculation:**
 
-The negative Area can also be made positive by using the last integral property:
-$$ \int_{-4}^{-2} f(x) dx = - \int_{-2}^{-4} f(x) dx $$
+*   "Remember integrals are sums, hence:"
+    $\int_{-3}^{3} (x+1) dx = \int_{-3}^{-1} (x+1) dx + \int_{-1}^{3} (x+1) dx$
+
+*   "If I were to calculate the area, I could divide the integral into a sum, and divide it exactly where it becomes negative, where $f(x)=0$."
+*   "Now, the negative area is turned to positive to find the area with absolute value."
+    $\int_{-3}^{3} (x+1) dx = |\int_{-3}^{-1} (x+1) dx| + \int_{-1}^{3} (x+1) dx$
+
+**5. Property for Reversing Integration Limits:**
+
+*   "The negative Area can also be turned Positive by using the last integral property:"
+    $\int_{a}^{b} f(x) dx = - \int_{b}^{a} f(x) dx$
+*   **Example:** $\int_{-4}^{-2} f(x) dx = - \int_{-2}^{-4} f(x) dx$
+
+[Confidence: 99%]
