@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { MoreHorizontal, LogOut, User, UserPlus, Check, ChevronDown, X } from "lucide-react";
+import { MoreHorizontal, LogOut, User, UserPlus, Check, ChevronDown, X, UploadCloud, Film, Layers, SquarePen } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { supabase } from "../supabaseClient";
 
@@ -253,23 +253,38 @@ export default function FloatingNavbar() {
             <>
               <NavLink
                 to="/"
-                className={({ isActive }) => `${linkBase} ${isActive ? active : inactive}`}
+                className={({ isActive }) => `${linkBase} ${isActive ? active : inactive} flex items-center justify-center`}
+                title="Upload"
               >
-                Upload
+                <UploadCloud className="w-5 h-5 md:hidden" />
+                <span className="hidden md:inline">Upload</span>
               </NavLink>
 
               <NavLink
                 to="/library"
-                className={({ isActive }) => `${linkBase} ${isActive ? active : inactive}`}
+                className={({ isActive }) => `${linkBase} ${isActive ? active : inactive} flex items-center justify-center`}
+                title="Videos"
               >
-                Videos
+                <Film className="w-5 h-5 md:hidden" />
+                <span className="hidden md:inline">Videos</span>
+              </NavLink>
+
+              <NavLink
+                to="/flashcards"
+                className={({ isActive }) => `${linkBase} ${isActive ? active : inactive} flex items-center justify-center`}
+                title="Flashcards"
+              >
+                <Layers className="w-5 h-5 md:hidden" />
+                <span className="hidden md:inline">Flashcards</span>
               </NavLink>
 
               <NavLink
                 to="/practice"
-                className={({ isActive }) => `${linkBase} ${isActive ? active : inactive} relative`}
+                className={({ isActive }) => `${linkBase} ${isActive ? active : inactive} relative flex items-center justify-center`}
+                title="Practice"
               >
-                Practice
+                <SquarePen className="w-5 h-5 md:hidden" />
+                <span className="hidden md:inline">Practice</span>
                 {assignmentCount > 0 && (
                   <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white shadow-sm ring-2 ring-white animate-in zoom-in duration-300">
                     {assignmentCount}

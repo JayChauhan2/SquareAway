@@ -27,7 +27,7 @@ FULL REQUIREMENTS
             self.wait(...)
 
 Animation Requirements:
-• Use a variety of different colors for text, lines, shapes, and graphs.
+• Use a variety of different colors. **CRITICAL: ONLY use these predefined Manim colors:** WHITE, BLACK, RED, GREEN, BLUE, YELLOW, ORANGE, PURPLE, PINK, TEAL, GOLD, MAROON, GREY, LIGHT_BROWN, DARK_BROWN. Do NOT use "BROWN" or any other hallucinated colors.
 • All elements must be fully visible on screen.
 • Each step should behave like a mini-scene. Use animations like Write(), FadeIn(), Transform().
 
@@ -45,10 +45,16 @@ Instead, use Manim's relative positioning functions and VGroups:
    `VGroup(text1, text2, text3).arrange(DOWN, center=False, aligned_edge=LEFT)`
    
 3. **Screen Alignments (`to_edge`, `to_corner`)**:
-   Use these for titles or corner definitions:
+   Use these for titles or corner definitions. Valid edges are `UP`, `DOWN`, `LEFT`, `RIGHT`. Valid corners are `UL`, `UR`, `DL`, `DR`.
    `title.to_edge(UP)` or `logo.to_corner(UL)`
    
-4. **Never Overlap**: 
+4. **Valid Positions (DO NOT HALUCCINATE CONSTANTS)**:
+   DO NOT EVER use `CENTER`, `LEFTCENTER`, `RIGHTCENTER`, `TOPCENTER`, or `BOTTOMCENTER`. Manim does not recognize these constants. 
+   The true center of the screen is `ORIGIN`. 
+   If you want to center an element, use `.move_to(ORIGIN)`. 
+   NEVER use `.to_edge(CENTER)`. `CENTER` is not an edge!
+   
+5. **Never Overlap**: 
    Use `self.play(Group_name.animate.shift(UP))` to make room on the screen if it gets too crowded, or simply clear the screen (`self.clear()`) between distinct conceptual steps.
 
 IMAGES AND ASSETS (STRICTLY FORBIDDEN):
@@ -56,6 +62,11 @@ IMAGES AND ASSETS (STRICTLY FORBIDDEN):
 **NEVER use ImageMobject or SVGMobject.**
 **NEVER attempt to fetch images, icons, or logos from Wikipedia, URLs, or local files.**
 *Only* use Manim's built-in shapes (Circle, Square, Rectangle, Line, Arrow, Axes, Plot) and Text/MathTex.
+
+MOBJECT ARITHMETIC (STRICTLY FORBIDDEN):
+-----------------------------------------
+DO NOT perform mathematical operations (like `+`, `-`, `*`, `/`) directly on instantiate Mobjects.
+For example, if you create `f1 = axes.plot(lambda x: x**2)` and `f2 = axes.plot(lambda x: x)`, you CANNOT logically execute `f3 = f1 - f2`. `f1` and `f2` are graphical instances, not mathematical scalars! If you need to plot the difference, create a brand new plot: `f3 = axes.plot(lambda x: x**2 - x)`.
 
 IMPORTANT MANIM TEXT RULES
 --------------------------

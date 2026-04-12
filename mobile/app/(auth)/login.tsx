@@ -3,22 +3,22 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingVi
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { supabase } from '../../services/supabase';
+import { useRouter } from 'expo-router';
 
 export default function LoginScreen() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleAuth = async (isSignUp: boolean) => {
+  const handleAuth = async () => {
     if (!email || !password) {
       Alert.alert('Error', 'Please enter email and password');
       return;
     }
 
     setLoading(true);
-    const { error } = isSignUp 
-      ? await supabase.auth.signUp({ email, password })
-      : await supabase.auth.signInWithPassword({ email, password });
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
 
     setLoading(false);
     if (error) Alert.alert('Auth Error', error.message);
@@ -56,10 +56,10 @@ export default function LoginScreen() {
               <ActivityIndicator size="large" color="#fff" style={{ marginVertical: 20 }} />
             ) : (
               <View style={styles.buttonContainer}>
-                <TouchableOpacity style={[styles.button, styles.primaryButton]} onPress={() => handleAuth(false)}>
+                <TouchableOpacity style={[styles.button, styles.primaryButton]} onPress={() => handleAuth()}>
                   <Text style={styles.primaryButtonText}>Sign In</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.button, styles.secondaryButton]} onPress={() => handleAuth(true)}>
+                <TouchableOpacity style={[styles.button, styles.secondaryButton]} onPress={() => router.push('/signup')}>
                   <Text style={styles.secondaryButtonText}>Create Account</Text>
                 </TouchableOpacity>
               </View>

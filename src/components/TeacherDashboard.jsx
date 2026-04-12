@@ -282,18 +282,18 @@ export default function TeacherDashboard() {
                         <div className="bg-white/90 backdrop-blur rounded-3xl p-8 shadow-lg border border-slate-200/50">
                             <h2 className="text-2xl font-semibold text-slate-800 mb-6">Create New Class</h2>
 
-                            <form onSubmit={handleCreateClass} className="flex gap-4">
+                            <form onSubmit={handleCreateClass} className="flex flex-col sm:flex-row gap-4">
                                 <input
                                     type="text"
                                     placeholder="Class Name (e.g., Algebra 1 - Period 3)"
                                     value={className}
                                     onChange={(e) => setClassName(e.target.value)}
-                                    className="flex-1 px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-slate-400"
+                                    className="flex-1 w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-slate-400"
                                 />
                                 <button
                                     type="submit"
                                     disabled={creating || !className.trim()}
-                                    className="px-6 py-3 bg-blue-500 text-white rounded-xl font-medium hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                                    className="w-full sm:w-auto px-6 py-3 bg-blue-500 text-white rounded-xl font-medium hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                                 >
                                     <Plus className="w-5 h-5" />
                                     {creating ? 'Creating...' : 'Create Class'}

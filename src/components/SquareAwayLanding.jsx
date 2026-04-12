@@ -234,13 +234,18 @@ export default function SquareAwayLanding() {
 
   // 1. HEIGHT SYNCHRONIZATION
   // This effect runs whenever the notes content changes.
-  // It grabs the height of the notes column and forces the chat column to match it.
+  // It grabs the height of the notes column and forces the chat column to match it (desktop only).
   useEffect(() => {
     if (notesRef.current && chatContainerRef.current) {
-      // Get height of the notes wrapper
-      const height = notesRef.current.clientHeight;
-      // Apply it to the chat wrapper
-      chatContainerRef.current.style.height = `${height}px`;
+      if (window.innerWidth >= 1024) {
+        // Get height of the notes wrapper
+        const height = notesRef.current.clientHeight;
+        // Apply it to the chat wrapper
+        chatContainerRef.current.style.height = `${height}px`;
+      } else {
+        // Clear forced height on mobile so it can shrink/grow naturally
+        chatContainerRef.current.style.height = 'auto';
+      }
     }
   }, [notesContent]);
 
@@ -768,11 +773,11 @@ export default function SquareAwayLanding() {
           </div>
 
           {/* NOTES + CHAT ROW */}
-          <div className="flex gap-6 items-stretch">
+          <div className="flex flex-col lg:flex-row gap-6 lg:items-stretch">
 
             {/* LEFT: MATH NOTES */}
             {/* Added ref={notesRef} to measure this side */}
-            <div className="flex-1" ref={notesRef}>
+            <div className="flex-1 w-full min-w-0" ref={notesRef}>
               <MathJaxWrapper>
                 <NotesDisplay
                   content={notesContent}
@@ -784,7 +789,7 @@ export default function SquareAwayLanding() {
             {/* RIGHT: CHATBOT UI - Extracted to prevent re-renders */}
             <div
               ref={chatContainerRef}
-              className="w-[400px]"
+              className="w-full lg:w-[400px] flex-shrink-0 min-h-[500px] lg:min-h-0"
               style={{ height: 'auto' }} // Initial style, sync handled by effect
             >
               <ChatInterface

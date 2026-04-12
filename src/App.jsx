@@ -14,6 +14,7 @@ import { useAuth } from './context/AuthContext';
 import VideosPage from './components/VideosPage';
 import ForgotPasswordPage from './components/ForgotPasswordPage';
 import ResetPasswordPage from './components/ResetPasswordPage';
+import FlashcardsPage from './components/FlashcardsPage';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -81,6 +82,12 @@ function App() {
           <Route path="/library" element={
             <ProtectedRoute>
               <VideosPage />
+            </ProtectedRoute>
+          } />
+          {/* Flashcards Route */}
+          <Route path="/flashcards" element={
+            <ProtectedRoute>
+              <FlashcardsPage />
             </ProtectedRoute>
           } />
         </Routes>
