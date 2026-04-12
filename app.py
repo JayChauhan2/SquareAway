@@ -82,11 +82,22 @@ def chatbot():
         return jsonify({"error": "No message provided"}), 400
 
     # Build conversation
+    training_instructions = ""
+    try:
+        with open("chatbot_training_data.json", "r") as f:
+            training_data = json.load(f)
+            training_instructions = "Below are examples you are trained on. Adhere to this knowledge and format:\n"
+            for example in training_data:
+                training_instructions += f"User: {example['input']}\nYou: {example['output']}\n\n"
+    except Exception as e:
+        print(f"Skipping training data load: {e}")
+
     conversation = [{"role": "system", "content": (
         "You are a helpful study assistant. "
         "Keep your answers concise for chat display, "
         "wrap all formulas in LaTeX (use $...$ for inline math), "
-        "and do not write huge paragraphs."
+        "and do not write huge paragraphs.\n\n"
+        + training_instructions
     )}]
     
     # Add previous chat messages if any

@@ -1,0 +1,1106 @@
+[
+  {
+    "input": "I'm struggling to understand Work-Energy Theorem. What is it?",
+    "output": "The work-energy theorem states that the net work done on an object is equal to its change in kinetic energy: $W = \\Delta K$."
+  },
+  {
+    "input": "What is the formula for Pythagorean theorem?",
+    "output": "The Pythagorean theorem relates the sides of a right triangle. It is written as: $a^2 + b^2 = c^2$."
+  },
+  {
+    "input": "I'm struggling to understand Binomial theorem. What is it?",
+    "output": "The binomial theorem states that $(x+y)^n = \\sum_{k=0}^n \\binom{n}{k} x^{n-k} y^k$."
+  },
+  {
+    "input": "Refresh my memory on cellular respiration equation.",
+    "output": "The overall equation for cellular respiration is $C_6H_{12}O_6 + 6O_2 \\rightarrow 6CO_2 + 6H_2O + \\text{ATP}$."
+  },
+  {
+    "input": "What does Ohm's law mean in this context?",
+    "output": "Ohm's law states that the current through a conductor between two points is directly proportional to the voltage across the two points: $V = IR$."
+  },
+  {
+    "input": "Tell me about area of a circle.",
+    "output": "The area of a circle with radius $r$ is given by the formula: $A = \\pi r^2$."
+  },
+  {
+    "input": "Tell me about Geometric progression sum.",
+    "output": "The sum of the first $n$ terms of a geometric progression is $S_n = a\\frac{1-r^n}{1-r}$ for $r \\neq 1$."
+  },
+  {
+    "input": "I'm struggling to understand photosynthesis equation. What is it?",
+    "output": "The overall equation for photosynthesis is $6CO_2 + 6H_2O \\rightarrow C_6H_{12}O_6 + 6O_2$."
+  },
+  {
+    "input": "Tell me about time complexity of quicksort.",
+    "output": "The average-case time complexity of quicksort is $O(n \\log n)$, but its worst-case is $O(n^2)$."
+  },
+  {
+    "input": "What is the formula for cellular respiration equation?",
+    "output": "The overall equation for cellular respiration is $C_6H_{12}O_6 + 6O_2 \\rightarrow 6CO_2 + 6H_2O + \\text{ATP}$."
+  },
+  {
+    "input": "Please define derivative of x^2.",
+    "output": "The derivative of $f(x) = x^2$ with respect to $x$ is $f'(x) = 2x$."
+  },
+  {
+    "input": "Refresh my memory on definition of a limit.",
+    "output": "The limit of $f(x)$ as $x$ approaches $c$ is $L$ if for every $\\epsilon > 0$ there is a $\\delta > 0$ such that if $0 < |x - c| < \\delta$, then $|f(x) - L| < \\epsilon$."
+  },
+  {
+    "input": "Refresh my memory on Einstein's mass-energy equivalence.",
+    "output": "The mass-energy equivalence principle is expressed by the famous equation $E = mc^2$."
+  },
+  {
+    "input": "Refresh my memory on Euler's identity.",
+    "output": "Euler's identity connects five fundamental mathematical constants: $e^{i\\pi} + 1 = 0$."
+  },
+  {
+    "input": "I'm struggling to understand Ohm's law. What is it?",
+    "output": "Ohm's law states that the current through a conductor between two points is directly proportional to the voltage across the two points: $V = IR$."
+  },
+  {
+    "input": "Do you know the equation for Ohm's law?",
+    "output": "Ohm's law states that the current through a conductor between two points is directly proportional to the voltage across the two points: $V = IR$."
+  },
+  {
+    "input": "What is the formula for Momentum?",
+    "output": "The linear momentum of an object is the product of its mass and velocity: $p = mv$."
+  },
+  {
+    "input": "Refresh my memory on Fibonacci sequence.",
+    "output": "The Fibonacci sequence is defined by the recurrence relation $F_n = F_{n-1} + F_{n-2}$, with $F_0 = 0$ and $F_1 = 1$."
+  },
+  {
+    "input": "What does kinetic energy mean in this context?",
+    "output": "The kinetic energy of an object of mass $m$ and velocity $v$ is $K = \\frac{1}{2}mv^2$."
+  },
+  {
+    "input": "Tell me about time complexity of binary search.",
+    "output": "The worst-case time complexity of binary search is $O(\\log n)$."
+  },
+  {
+    "input": "Tell me about Law of Sines.",
+    "output": "The Law of Sines states that the ratio of the length of a side to the sine of its opposite angle is constant: $\\frac{a}{\\sin(A)} = \\frac{b}{\\sin(B)} = \\frac{c}{\\sin(C)}$."
+  },
+  {
+    "input": "Please define time complexity of binary search.",
+    "output": "The worst-case time complexity of binary search is $O(\\log n)$."
+  },
+  {
+    "input": "What does integral of 1/x mean in this context?",
+    "output": "The indefinite integral of $1/x$ is $\\ln|x| + C$."
+  },
+  {
+    "input": "Refresh my memory on integral of 1/x.",
+    "output": "The indefinite integral of $1/x$ is $\\ln|x| + C$."
+  },
+  {
+    "input": "What is the formula for definition of a limit?",
+    "output": "The limit of $f(x)$ as $x$ approaches $c$ is $L$ if for every $\\epsilon > 0$ there is a $\\delta > 0$ such that if $0 < |x - c| < \\delta$, then $|f(x) - L| < \\epsilon$."
+  },
+  {
+    "input": "Tell me about pH formula.",
+    "output": "The pH of a solution is the negative base-10 logarithm of the hydrogen ion concentration: $\\text{pH} = -\\log_{10}[H^+]$."
+  },
+  {
+    "input": "Can you explain Coulomb's Law?",
+    "output": "Coulomb's Law quantifies the amount of force between two stationary, electrically charged particles: $F = k_e \\frac{q_1 q_2}{r^2}$."
+  },
+  {
+    "input": "What does Work-Energy Theorem mean in this context?",
+    "output": "The work-energy theorem states that the net work done on an object is equal to its change in kinetic energy: $W = \\Delta K$."
+  },
+  {
+    "input": "Refresh my memory on Molarity.",
+    "output": "Molarity is a measure of the concentration of a chemical species, in particular of a solute in a solution, expressed as moles of solute per liter of solution: $M = \\frac{n}{V}$."
+  },
+  {
+    "input": "Can you explain Newton's second law?",
+    "output": "Newton's second law states that the force acting on an object is equal to the mass of that object times its acceleration: $F = ma$."
+  },
+  {
+    "input": "Do you know the equation for kinetic energy?",
+    "output": "The kinetic energy of an object of mass $m$ and velocity $v$ is $K = \\frac{1}{2}mv^2$."
+  },
+  {
+    "input": "Do you know the equation for Work-Energy Theorem?",
+    "output": "The work-energy theorem states that the net work done on an object is equal to its change in kinetic energy: $W = \\Delta K$."
+  },
+  {
+    "input": "What does Euler's identity mean in this context?",
+    "output": "Euler's identity connects five fundamental mathematical constants: $e^{i\\pi} + 1 = 0$."
+  },
+  {
+    "input": "Tell me about Hooke's law.",
+    "output": "Hooke's law states that the force needed to extend or compress a spring by some distance scales linearly with respect to that distance: $F = -kx$."
+  },
+  {
+    "input": "What does Coulomb's Law mean in this context?",
+    "output": "Coulomb's Law quantifies the amount of force between two stationary, electrically charged particles: $F = k_e \\frac{q_1 q_2}{r^2}$."
+  },
+  {
+    "input": "What does time complexity of mergesort mean in this context?",
+    "output": "The worst-case time complexity of merge sort is $O(n \\log n)$."
+  },
+  {
+    "input": "Do you know the equation for slope-intercept form?",
+    "output": "The slope-intercept form of a linear equation is $y = mx + b$, where $m$ is the slope and $b$ is the y-intercept."
+  },
+  {
+    "input": "Can you explain Geometric progression sum?",
+    "output": "The sum of the first $n$ terms of a geometric progression is $S_n = a\\frac{1-r^n}{1-r}$ for $r \\neq 1$."
+  },
+  {
+    "input": "I'm struggling to understand Gravitational potential energy. What is it?",
+    "output": "The gravitational potential energy near Earth's surface is $U = mgh$."
+  },
+  {
+    "input": "What is the formula for area of a circle?",
+    "output": "The area of a circle with radius $r$ is given by the formula: $A = \\pi r^2$."
+  },
+  {
+    "input": "What is the formula for Arithmetic progression sum?",
+    "output": "The sum of the first $n$ terms of an arithmetic progression is $S_n = \\frac{n}{2}(2a + (n-1)d)$."
+  },
+  {
+    "input": "Do you know the equation for definition of a limit?",
+    "output": "The limit of $f(x)$ as $x$ approaches $c$ is $L$ if for every $\\epsilon > 0$ there is a $\\delta > 0$ such that if $0 < |x - c| < \\delta$, then $|f(x) - L| < \\epsilon$."
+  },
+  {
+    "input": "What is the formula for Geometric progression sum?",
+    "output": "The sum of the first $n$ terms of a geometric progression is $S_n = a\\frac{1-r^n}{1-r}$ for $r \\neq 1$."
+  },
+  {
+    "input": "What does Molarity mean in this context?",
+    "output": "Molarity is a measure of the concentration of a chemical species, in particular of a solute in a solution, expressed as moles of solute per liter of solution: $M = \\frac{n}{V}$."
+  },
+  {
+    "input": "What does Hooke's law mean in this context?",
+    "output": "Hooke's law states that the force needed to extend or compress a spring by some distance scales linearly with respect to that distance: $F = -kx$."
+  },
+  {
+    "input": "What is the formula for Molarity?",
+    "output": "Molarity is a measure of the concentration of a chemical species, in particular of a solute in a solution, expressed as moles of solute per liter of solution: $M = \\frac{n}{V}$."
+  },
+  {
+    "input": "I'm struggling to understand Momentum. What is it?",
+    "output": "The linear momentum of an object is the product of its mass and velocity: $p = mv$."
+  },
+  {
+    "input": "Refresh my memory on Pythagorean theorem.",
+    "output": "The Pythagorean theorem relates the sides of a right triangle. It is written as: $a^2 + b^2 = c^2$."
+  },
+  {
+    "input": "Tell me about Euler's identity.",
+    "output": "Euler's identity connects five fundamental mathematical constants: $e^{i\\pi} + 1 = 0$."
+  },
+  {
+    "input": "Please define Fibonacci sequence.",
+    "output": "The Fibonacci sequence is defined by the recurrence relation $F_n = F_{n-1} + F_{n-2}$, with $F_0 = 0$ and $F_1 = 1$."
+  },
+  {
+    "input": "I'm struggling to understand Newton's second law. What is it?",
+    "output": "Newton's second law states that the force acting on an object is equal to the mass of that object times its acceleration: $F = ma$."
+  },
+  {
+    "input": "Tell me about Coulomb's Law.",
+    "output": "Coulomb's Law quantifies the amount of force between two stationary, electrically charged particles: $F = k_e \\frac{q_1 q_2}{r^2}$."
+  },
+  {
+    "input": "What is the formula for Ideal gas law?",
+    "output": "The ideal gas law is the equation of state of a hypothetical ideal gas: $PV = nRT$."
+  },
+  {
+    "input": "Tell me about cellular respiration equation.",
+    "output": "The overall equation for cellular respiration is $C_6H_{12}O_6 + 6O_2 \\rightarrow 6CO_2 + 6H_2O + \\text{ATP}$."
+  },
+  {
+    "input": "What does area of a circle mean in this context?",
+    "output": "The area of a circle with radius $r$ is given by the formula: $A = \\pi r^2$."
+  },
+  {
+    "input": "Can you explain Law of Sines?",
+    "output": "The Law of Sines states that the ratio of the length of a side to the sine of its opposite angle is constant: $\\frac{a}{\\sin(A)} = \\frac{b}{\\sin(B)} = \\frac{c}{\\sin(C)}$."
+  },
+  {
+    "input": "Tell me about kinetic energy.",
+    "output": "The kinetic energy of an object of mass $m$ and velocity $v$ is $K = \\frac{1}{2}mv^2$."
+  },
+  {
+    "input": "What is the formula for Ohm's law?",
+    "output": "Ohm's law states that the current through a conductor between two points is directly proportional to the voltage across the two points: $V = IR$."
+  },
+  {
+    "input": "I'm struggling to understand Hooke's law. What is it?",
+    "output": "Hooke's law states that the force needed to extend or compress a spring by some distance scales linearly with respect to that distance: $F = -kx$."
+  },
+  {
+    "input": "Can you explain Ideal gas law?",
+    "output": "The ideal gas law is the equation of state of a hypothetical ideal gas: $PV = nRT$."
+  },
+  {
+    "input": "I'm struggling to understand Ideal gas law. What is it?",
+    "output": "The ideal gas law is the equation of state of a hypothetical ideal gas: $PV = nRT$."
+  },
+  {
+    "input": "Can you explain cellular respiration equation?",
+    "output": "The overall equation for cellular respiration is $C_6H_{12}O_6 + 6O_2 \\rightarrow 6CO_2 + 6H_2O + \\text{ATP}$."
+  },
+  {
+    "input": "Hey! How do I stay focused while studying?",
+    "output": "To stay focused, try the Pomodoro technique: study for 25 minutes, then take a 5-minute break. Eliminate distractions by placing your phone in another room."
+  },
+  {
+    "input": "I'm struggling to understand Pythagorean theorem. What is it?",
+    "output": "The Pythagorean theorem relates the sides of a right triangle. It is written as: $a^2 + b^2 = c^2$."
+  },
+  {
+    "input": "What is the formula for Fibonacci sequence?",
+    "output": "The Fibonacci sequence is defined by the recurrence relation $F_n = F_{n-1} + F_{n-2}$, with $F_0 = 0$ and $F_1 = 1$."
+  },
+  {
+    "input": "What does Newton's second law mean in this context?",
+    "output": "Newton's second law states that the force acting on an object is equal to the mass of that object times its acceleration: $F = ma$."
+  },
+  {
+    "input": "Please define Momentum.",
+    "output": "The linear momentum of an object is the product of its mass and velocity: $p = mv$."
+  },
+  {
+    "input": "Do you know the equation for Binomial theorem?",
+    "output": "The binomial theorem states that $(x+y)^n = \\sum_{k=0}^n \\binom{n}{k} x^{n-k} y^k$."
+  },
+  {
+    "input": "Refresh my memory on Hooke's law.",
+    "output": "Hooke's law states that the force needed to extend or compress a spring by some distance scales linearly with respect to that distance: $F = -kx$."
+  },
+  {
+    "input": "What is the formula for kinetic energy?",
+    "output": "The kinetic energy of an object of mass $m$ and velocity $v$ is $K = \\frac{1}{2}mv^2$."
+  },
+  {
+    "input": "Can you explain definition of a limit?",
+    "output": "The limit of $f(x)$ as $x$ approaches $c$ is $L$ if for every $\\epsilon > 0$ there is a $\\delta > 0$ such that if $0 < |x - c| < \\delta$, then $|f(x) - L| < \\epsilon$."
+  },
+  {
+    "input": "What does Ideal gas law mean in this context?",
+    "output": "The ideal gas law is the equation of state of a hypothetical ideal gas: $PV = nRT$."
+  },
+  {
+    "input": "Please define Binomial theorem.",
+    "output": "The binomial theorem states that $(x+y)^n = \\sum_{k=0}^n \\binom{n}{k} x^{n-k} y^k$."
+  },
+  {
+    "input": "Tell me about Fibonacci sequence.",
+    "output": "The Fibonacci sequence is defined by the recurrence relation $F_n = F_{n-1} + F_{n-2}$, with $F_0 = 0$ and $F_1 = 1$."
+  },
+  {
+    "input": "Refresh my memory on Ideal gas law.",
+    "output": "The ideal gas law is the equation of state of a hypothetical ideal gas: $PV = nRT$."
+  },
+  {
+    "input": "how do i stay focused while studying?",
+    "output": "To stay focused, try the Pomodoro technique: study for 25 minutes, then take a 5-minute break. Eliminate distractions by placing your phone in another room."
+  },
+  {
+    "input": "Do you know the equation for integral of 1/x?",
+    "output": "The indefinite integral of $1/x$ is $\\ln|x| + C$."
+  },
+  {
+    "input": "Please define definition of a limit.",
+    "output": "The limit of $f(x)$ as $x$ approaches $c$ is $L$ if for every $\\epsilon > 0$ there is a $\\delta > 0$ such that if $0 < |x - c| < \\delta$, then $|f(x) - L| < \\epsilon$."
+  },
+  {
+    "input": "Can you explain Law of Cosines?",
+    "output": "The Law of Cosines relates the lengths of the sides of a triangle to the cosine of one of its angles: $c^2 = a^2 + b^2 - 2ab\\cos(C)$."
+  },
+  {
+    "input": "Can you explain Quadratic vertex form?",
+    "output": "The vertex form of a quadratic function is $f(x) = a(x-h)^2 + k$, where $(h,k)$ is the vertex."
+  },
+  {
+    "input": "What does time complexity of quicksort mean in this context?",
+    "output": "The average-case time complexity of quicksort is $O(n \\log n)$, but its worst-case is $O(n^2)$."
+  },
+  {
+    "input": "How do I stay focused while studying? Please.",
+    "output": "To stay focused, try the Pomodoro technique: study for 25 minutes, then take a 5-minute break. Eliminate distractions by placing your phone in another room."
+  },
+  {
+    "input": "I'm struggling to understand Euler's identity. What is it?",
+    "output": "Euler's identity connects five fundamental mathematical constants: $e^{i\\pi} + 1 = 0$."
+  },
+  {
+    "input": "who are you?",
+    "output": "I am a helpful study assistant trained to help you with your educational materials and answer questions concisely."
+  },
+  {
+    "input": "Are you an AI?",
+    "output": "Yes, I am a helpful study assistant powered by artificial intelligence, designed to help you learn effectively."
+  },
+  {
+    "input": "Please define slope-intercept form.",
+    "output": "The slope-intercept form of a linear equation is $y = mx + b$, where $m$ is the slope and $b$ is the y-intercept."
+  },
+  {
+    "input": "Please define Hooke's law.",
+    "output": "Hooke's law states that the force needed to extend or compress a spring by some distance scales linearly with respect to that distance: $F = -kx$."
+  },
+  {
+    "input": "Do you know the equation for Geometric progression sum?",
+    "output": "The sum of the first $n$ terms of a geometric progression is $S_n = a\\frac{1-r^n}{1-r}$ for $r \\neq 1$."
+  },
+  {
+    "input": "Tell me about Work-Energy Theorem.",
+    "output": "The work-energy theorem states that the net work done on an object is equal to its change in kinetic energy: $W = \\Delta K$."
+  },
+  {
+    "input": "Refresh my memory on photosynthesis equation.",
+    "output": "The overall equation for photosynthesis is $6CO_2 + 6H_2O \\rightarrow C_6H_{12}O_6 + 6O_2$."
+  },
+  {
+    "input": "I'm struggling to understand slope-intercept form. What is it?",
+    "output": "The slope-intercept form of a linear equation is $y = mx + b$, where $m$ is the slope and $b$ is the y-intercept."
+  },
+  {
+    "input": "Please define Newton's second law.",
+    "output": "Newton's second law states that the force acting on an object is equal to the mass of that object times its acceleration: $F = ma$."
+  },
+  {
+    "input": "Can you explain area of a circle?",
+    "output": "The area of a circle with radius $r$ is given by the formula: $A = \\pi r^2$."
+  },
+  {
+    "input": "Refresh my memory on Law of Cosines.",
+    "output": "The Law of Cosines relates the lengths of the sides of a triangle to the cosine of one of its angles: $c^2 = a^2 + b^2 - 2ab\\cos(C)$."
+  },
+  {
+    "input": "Can you write a 10 page essay for me? Please.",
+    "output": "I can help you outline and brainstorm ideas for your essay, but I cannot write the entire 10-page paper for you. Let's start with a thesis statement!"
+  },
+  {
+    "input": "What is the formula for derivative of x^2?",
+    "output": "The derivative of $f(x) = x^2$ with respect to $x$ is $f'(x) = 2x$."
+  },
+  {
+    "input": "Do you know the equation for photosynthesis equation?",
+    "output": "The overall equation for photosynthesis is $6CO_2 + 6H_2O \\rightarrow C_6H_{12}O_6 + 6O_2$."
+  },
+  {
+    "input": "What does Momentum mean in this context?",
+    "output": "The linear momentum of an object is the product of its mass and velocity: $p = mv$."
+  },
+  {
+    "input": "I'm struggling to understand time complexity of quicksort. What is it?",
+    "output": "The average-case time complexity of quicksort is $O(n \\log n)$, but its worst-case is $O(n^2)$."
+  },
+  {
+    "input": "Please define Pythagorean theorem.",
+    "output": "The Pythagorean theorem relates the sides of a right triangle. It is written as: $a^2 + b^2 = c^2$."
+  },
+  {
+    "input": "Please define Gravitational potential energy.",
+    "output": "The gravitational potential energy near Earth's surface is $U = mgh$."
+  },
+  {
+    "input": "Hey! Are you an AI?",
+    "output": "Yes, I am a helpful study assistant powered by artificial intelligence, designed to help you learn effectively."
+  },
+  {
+    "input": "Can you explain integral of 1/x?",
+    "output": "The indefinite integral of $1/x$ is $\\ln|x| + C$."
+  },
+  {
+    "input": "I'm struggling to understand Fibonacci sequence. What is it?",
+    "output": "The Fibonacci sequence is defined by the recurrence relation $F_n = F_{n-1} + F_{n-2}$, with $F_0 = 0$ and $F_1 = 1$."
+  },
+  {
+    "input": "I'm struggling to understand definition of a limit. What is it?",
+    "output": "The limit of $f(x)$ as $x$ approaches $c$ is $L$ if for every $\\epsilon > 0$ there is a $\\delta > 0$ such that if $0 < |x - c| < \\delta$, then $|f(x) - L| < \\epsilon$."
+  },
+  {
+    "input": "I'm struggling to understand Molarity. What is it?",
+    "output": "Molarity is a measure of the concentration of a chemical species, in particular of a solute in a solution, expressed as moles of solute per liter of solution: $M = \\frac{n}{V}$."
+  },
+  {
+    "input": "what's a good way to memorize vocabulary?",
+    "output": "Spaced repetition and active recall are the best ways to memorize vocabulary. Flashcards are a great tool for this!"
+  },
+  {
+    "input": "Refresh my memory on Binomial theorem.",
+    "output": "The binomial theorem states that $(x+y)^n = \\sum_{k=0}^n \\binom{n}{k} x^{n-k} y^k$."
+  },
+  {
+    "input": "Tell me about photosynthesis equation.",
+    "output": "The overall equation for photosynthesis is $6CO_2 + 6H_2O \\rightarrow C_6H_{12}O_6 + 6O_2$."
+  },
+  {
+    "input": "Hey! Who are you?",
+    "output": "I am a helpful study assistant trained to help you with your educational materials and answer questions concisely."
+  },
+  {
+    "input": "Tell me about Pythagorean theorem.",
+    "output": "The Pythagorean theorem relates the sides of a right triangle. It is written as: $a^2 + b^2 = c^2$."
+  },
+  {
+    "input": "What is the formula for Binomial theorem?",
+    "output": "The binomial theorem states that $(x+y)^n = \\sum_{k=0}^n \\binom{n}{k} x^{n-k} y^k$."
+  },
+  {
+    "input": "Tell me about Einstein's mass-energy equivalence.",
+    "output": "The mass-energy equivalence principle is expressed by the famous equation $E = mc^2$."
+  },
+  {
+    "input": "Do you know the equation for Quadratic vertex form?",
+    "output": "The vertex form of a quadratic function is $f(x) = a(x-h)^2 + k$, where $(h,k)$ is the vertex."
+  },
+  {
+    "input": "Tell me about Ohm's law.",
+    "output": "Ohm's law states that the current through a conductor between two points is directly proportional to the voltage across the two points: $V = IR$."
+  },
+  {
+    "input": "are you an ai?",
+    "output": "Yes, I am a helpful study assistant powered by artificial intelligence, designed to help you learn effectively."
+  },
+  {
+    "input": "Refresh my memory on derivative of x^2.",
+    "output": "The derivative of $f(x) = x^2$ with respect to $x$ is $f'(x) = 2x$."
+  },
+  {
+    "input": "Can you explain Fibonacci sequence?",
+    "output": "The Fibonacci sequence is defined by the recurrence relation $F_n = F_{n-1} + F_{n-2}$, with $F_0 = 0$ and $F_1 = 1$."
+  },
+  {
+    "input": "Refresh my memory on Ohm's law.",
+    "output": "Ohm's law states that the current through a conductor between two points is directly proportional to the voltage across the two points: $V = IR$."
+  },
+  {
+    "input": "Tell me about time complexity of mergesort.",
+    "output": "The worst-case time complexity of merge sort is $O(n \\log n)$."
+  },
+  {
+    "input": "Refresh my memory on area of a circle.",
+    "output": "The area of a circle with radius $r$ is given by the formula: $A = \\pi r^2$."
+  },
+  {
+    "input": "Tell me about Ideal gas law.",
+    "output": "The ideal gas law is the equation of state of a hypothetical ideal gas: $PV = nRT$."
+  },
+  {
+    "input": "Tell me about integral of 1/x.",
+    "output": "The indefinite integral of $1/x$ is $\\ln|x| + C$."
+  },
+  {
+    "input": "Refresh my memory on Coulomb's Law.",
+    "output": "Coulomb's Law quantifies the amount of force between two stationary, electrically charged particles: $F = k_e \\frac{q_1 q_2}{r^2}$."
+  },
+  {
+    "input": "Please define Work-Energy Theorem.",
+    "output": "The work-energy theorem states that the net work done on an object is equal to its change in kinetic energy: $W = \\Delta K$."
+  },
+  {
+    "input": "Refresh my memory on time complexity of mergesort.",
+    "output": "The worst-case time complexity of merge sort is $O(n \\log n)$."
+  },
+  {
+    "input": "Tell me about Quadratic vertex form.",
+    "output": "The vertex form of a quadratic function is $f(x) = a(x-h)^2 + k$, where $(h,k)$ is the vertex."
+  },
+  {
+    "input": "Do you know the equation for Hooke's law?",
+    "output": "Hooke's law states that the force needed to extend or compress a spring by some distance scales linearly with respect to that distance: $F = -kx$."
+  },
+  {
+    "input": "Please define Geometric progression sum.",
+    "output": "The sum of the first $n$ terms of a geometric progression is $S_n = a\\frac{1-r^n}{1-r}$ for $r \\neq 1$."
+  },
+  {
+    "input": "Refresh my memory on Work-Energy Theorem.",
+    "output": "The work-energy theorem states that the net work done on an object is equal to its change in kinetic energy: $W = \\Delta K$."
+  },
+  {
+    "input": "What does time complexity of binary search mean in this context?",
+    "output": "The worst-case time complexity of binary search is $O(\\log n)$."
+  },
+  {
+    "input": "What does definition of a limit mean in this context?",
+    "output": "The limit of $f(x)$ as $x$ approaches $c$ is $L$ if for every $\\epsilon > 0$ there is a $\\delta > 0$ such that if $0 < |x - c| < \\delta$, then $|f(x) - L| < \\epsilon$."
+  },
+  {
+    "input": "I'm struggling to understand area of a circle. What is it?",
+    "output": "The area of a circle with radius $r$ is given by the formula: $A = \\pi r^2$."
+  },
+  {
+    "input": "Tell me about quadratic equation.",
+    "output": "The quadratic formula is used to find the roots of a quadratic equation. It is expressed as: $x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$."
+  },
+  {
+    "input": "Please define Law of Cosines.",
+    "output": "The Law of Cosines relates the lengths of the sides of a triangle to the cosine of one of its angles: $c^2 = a^2 + b^2 - 2ab\\cos(C)$."
+  },
+  {
+    "input": "I'm struggling to understand Quadratic vertex form. What is it?",
+    "output": "The vertex form of a quadratic function is $f(x) = a(x-h)^2 + k$, where $(h,k)$ is the vertex."
+  },
+  {
+    "input": "Tell me about Arithmetic progression sum.",
+    "output": "The sum of the first $n$ terms of an arithmetic progression is $S_n = \\frac{n}{2}(2a + (n-1)d)$."
+  },
+  {
+    "input": "What does Arithmetic progression sum mean in this context?",
+    "output": "The sum of the first $n$ terms of an arithmetic progression is $S_n = \\frac{n}{2}(2a + (n-1)d)$."
+  },
+  {
+    "input": "Tell me about Law of Cosines.",
+    "output": "The Law of Cosines relates the lengths of the sides of a triangle to the cosine of one of its angles: $c^2 = a^2 + b^2 - 2ab\\cos(C)$."
+  },
+  {
+    "input": "I'm struggling to understand cellular respiration equation. What is it?",
+    "output": "The overall equation for cellular respiration is $C_6H_{12}O_6 + 6O_2 \\rightarrow 6CO_2 + 6H_2O + \\text{ATP}$."
+  },
+  {
+    "input": "Tell me about derivative of x^2.",
+    "output": "The derivative of $f(x) = x^2$ with respect to $x$ is $f'(x) = 2x$."
+  },
+  {
+    "input": "What is the formula for integral of 1/x?",
+    "output": "The indefinite integral of $1/x$ is $\\ln|x| + C$."
+  },
+  {
+    "input": "Refresh my memory on Quadratic vertex form.",
+    "output": "The vertex form of a quadratic function is $f(x) = a(x-h)^2 + k$, where $(h,k)$ is the vertex."
+  },
+  {
+    "input": "What is the formula for slope-intercept form?",
+    "output": "The slope-intercept form of a linear equation is $y = mx + b$, where $m$ is the slope and $b$ is the y-intercept."
+  },
+  {
+    "input": "How do I stay focused while studying?",
+    "output": "To stay focused, try the Pomodoro technique: study for 25 minutes, then take a 5-minute break. Eliminate distractions by placing your phone in another room."
+  },
+  {
+    "input": "Can you explain Euler's identity?",
+    "output": "Euler's identity connects five fundamental mathematical constants: $e^{i\\pi} + 1 = 0$."
+  },
+  {
+    "input": "Do you know the equation for pH formula?",
+    "output": "The pH of a solution is the negative base-10 logarithm of the hydrogen ion concentration: $\\text{pH} = -\\log_{10}[H^+]$."
+  },
+  {
+    "input": "I'm struggling to understand Law of Sines. What is it?",
+    "output": "The Law of Sines states that the ratio of the length of a side to the sine of its opposite angle is constant: $\\frac{a}{\\sin(A)} = \\frac{b}{\\sin(B)} = \\frac{c}{\\sin(C)}$."
+  },
+  {
+    "input": "Refresh my memory on Arithmetic progression sum.",
+    "output": "The sum of the first $n$ terms of an arithmetic progression is $S_n = \\frac{n}{2}(2a + (n-1)d)$."
+  },
+  {
+    "input": "Do you know the equation for Newton's second law?",
+    "output": "Newton's second law states that the force acting on an object is equal to the mass of that object times its acceleration: $F = ma$."
+  },
+  {
+    "input": "Refresh my memory on time complexity of binary search.",
+    "output": "The worst-case time complexity of binary search is $O(\\log n)$."
+  },
+  {
+    "input": "Please define Ideal gas law.",
+    "output": "The ideal gas law is the equation of state of a hypothetical ideal gas: $PV = nRT$."
+  },
+  {
+    "input": "What is the formula for Quadratic vertex form?",
+    "output": "The vertex form of a quadratic function is $f(x) = a(x-h)^2 + k$, where $(h,k)$ is the vertex."
+  },
+  {
+    "input": "What does Gravitational potential energy mean in this context?",
+    "output": "The gravitational potential energy near Earth's surface is $U = mgh$."
+  },
+  {
+    "input": "Please define kinetic energy.",
+    "output": "The kinetic energy of an object of mass $m$ and velocity $v$ is $K = \\frac{1}{2}mv^2$."
+  },
+  {
+    "input": "Can you explain slope-intercept form?",
+    "output": "The slope-intercept form of a linear equation is $y = mx + b$, where $m$ is the slope and $b$ is the y-intercept."
+  },
+  {
+    "input": "Refresh my memory on pH formula.",
+    "output": "The pH of a solution is the negative base-10 logarithm of the hydrogen ion concentration: $\\text{pH} = -\\log_{10}[H^+]$."
+  },
+  {
+    "input": "I'm struggling to understand Geometric progression sum. What is it?",
+    "output": "The sum of the first $n$ terms of a geometric progression is $S_n = a\\frac{1-r^n}{1-r}$ for $r \\neq 1$."
+  },
+  {
+    "input": "Can you explain Work-Energy Theorem?",
+    "output": "The work-energy theorem states that the net work done on an object is equal to its change in kinetic energy: $W = \\Delta K$."
+  },
+  {
+    "input": "Please define time complexity of quicksort.",
+    "output": "The average-case time complexity of quicksort is $O(n \\log n)$, but its worst-case is $O(n^2)$."
+  },
+  {
+    "input": "Do you know the equation for derivative of x^2?",
+    "output": "The derivative of $f(x) = x^2$ with respect to $x$ is $f'(x) = 2x$."
+  },
+  {
+    "input": "What is the formula for pH formula?",
+    "output": "The pH of a solution is the negative base-10 logarithm of the hydrogen ion concentration: $\\text{pH} = -\\log_{10}[H^+]$."
+  },
+  {
+    "input": "Tell me about Gravitational potential energy.",
+    "output": "The gravitational potential energy near Earth's surface is $U = mgh$."
+  },
+  {
+    "input": "Can you explain time complexity of binary search?",
+    "output": "The worst-case time complexity of binary search is $O(\\log n)$."
+  },
+  {
+    "input": "What is the formula for quadratic equation?",
+    "output": "The quadratic formula is used to find the roots of a quadratic equation. It is expressed as: $x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$."
+  },
+  {
+    "input": "Can you explain Binomial theorem?",
+    "output": "The binomial theorem states that $(x+y)^n = \\sum_{k=0}^n \\binom{n}{k} x^{n-k} y^k$."
+  },
+  {
+    "input": "What does pH formula mean in this context?",
+    "output": "The pH of a solution is the negative base-10 logarithm of the hydrogen ion concentration: $\\text{pH} = -\\log_{10}[H^+]$."
+  },
+  {
+    "input": "Refresh my memory on Newton's second law.",
+    "output": "Newton's second law states that the force acting on an object is equal to the mass of that object times its acceleration: $F = ma$."
+  },
+  {
+    "input": "What does derivative of x^2 mean in this context?",
+    "output": "The derivative of $f(x) = x^2$ with respect to $x$ is $f'(x) = 2x$."
+  },
+  {
+    "input": "Can you explain photosynthesis equation?",
+    "output": "The overall equation for photosynthesis is $6CO_2 + 6H_2O \\rightarrow C_6H_{12}O_6 + 6O_2$."
+  },
+  {
+    "input": "Do you know the equation for time complexity of binary search?",
+    "output": "The worst-case time complexity of binary search is $O(\\log n)$."
+  },
+  {
+    "input": "I'm struggling to understand quadratic equation. What is it?",
+    "output": "The quadratic formula is used to find the roots of a quadratic equation. It is expressed as: $x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$."
+  },
+  {
+    "input": "Please define time complexity of mergesort.",
+    "output": "The worst-case time complexity of merge sort is $O(n \\log n)$."
+  },
+  {
+    "input": "Please define photosynthesis equation.",
+    "output": "The overall equation for photosynthesis is $6CO_2 + 6H_2O \\rightarrow C_6H_{12}O_6 + 6O_2$."
+  },
+  {
+    "input": "Refresh my memory on slope-intercept form.",
+    "output": "The slope-intercept form of a linear equation is $y = mx + b$, where $m$ is the slope and $b$ is the y-intercept."
+  },
+  {
+    "input": "Please define pH formula.",
+    "output": "The pH of a solution is the negative base-10 logarithm of the hydrogen ion concentration: $\\text{pH} = -\\log_{10}[H^+]$."
+  },
+  {
+    "input": "What is the formula for Law of Sines?",
+    "output": "The Law of Sines states that the ratio of the length of a side to the sine of its opposite angle is constant: $\\frac{a}{\\sin(A)} = \\frac{b}{\\sin(B)} = \\frac{c}{\\sin(C)}$."
+  },
+  {
+    "input": "Hey! What's a good way to memorize vocabulary?",
+    "output": "Spaced repetition and active recall are the best ways to memorize vocabulary. Flashcards are a great tool for this!"
+  },
+  {
+    "input": "Can you explain kinetic energy?",
+    "output": "The kinetic energy of an object of mass $m$ and velocity $v$ is $K = \\frac{1}{2}mv^2$."
+  },
+  {
+    "input": "Do you know the equation for time complexity of mergesort?",
+    "output": "The worst-case time complexity of merge sort is $O(n \\log n)$."
+  },
+  {
+    "input": "Refresh my memory on quadratic equation.",
+    "output": "The quadratic formula is used to find the roots of a quadratic equation. It is expressed as: $x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$."
+  },
+  {
+    "input": "What does Law of Cosines mean in this context?",
+    "output": "The Law of Cosines relates the lengths of the sides of a triangle to the cosine of one of its angles: $c^2 = a^2 + b^2 - 2ab\\cos(C)$."
+  },
+  {
+    "input": "Refresh my memory on Law of Sines.",
+    "output": "The Law of Sines states that the ratio of the length of a side to the sine of its opposite angle is constant: $\\frac{a}{\\sin(A)} = \\frac{b}{\\sin(B)} = \\frac{c}{\\sin(C)}$."
+  },
+  {
+    "input": "What is the formula for Law of Cosines?",
+    "output": "The Law of Cosines relates the lengths of the sides of a triangle to the cosine of one of its angles: $c^2 = a^2 + b^2 - 2ab\\cos(C)$."
+  },
+  {
+    "input": "Do you know the equation for Gravitational potential energy?",
+    "output": "The gravitational potential energy near Earth's surface is $U = mgh$."
+  },
+  {
+    "input": "Do you know the equation for Ideal gas law?",
+    "output": "The ideal gas law is the equation of state of a hypothetical ideal gas: $PV = nRT$."
+  },
+  {
+    "input": "Please define Molarity.",
+    "output": "Molarity is a measure of the concentration of a chemical species, in particular of a solute in a solution, expressed as moles of solute per liter of solution: $M = \\frac{n}{V}$."
+  },
+  {
+    "input": "What's a good way to memorize vocabulary? Please.",
+    "output": "Spaced repetition and active recall are the best ways to memorize vocabulary. Flashcards are a great tool for this!"
+  },
+  {
+    "input": "What is the formula for Euler's identity?",
+    "output": "Euler's identity connects five fundamental mathematical constants: $e^{i\\pi} + 1 = 0$."
+  },
+  {
+    "input": "Do you know the equation for Euler's identity?",
+    "output": "Euler's identity connects five fundamental mathematical constants: $e^{i\\pi} + 1 = 0$."
+  },
+  {
+    "input": "Please define Quadratic vertex form.",
+    "output": "The vertex form of a quadratic function is $f(x) = a(x-h)^2 + k$, where $(h,k)$ is the vertex."
+  },
+  {
+    "input": "What is the formula for time complexity of quicksort?",
+    "output": "The average-case time complexity of quicksort is $O(n \\log n)$, but its worst-case is $O(n^2)$."
+  },
+  {
+    "input": "Can you explain Hooke's law?",
+    "output": "Hooke's law states that the force needed to extend or compress a spring by some distance scales linearly with respect to that distance: $F = -kx$."
+  },
+  {
+    "input": "Do you know the equation for Molarity?",
+    "output": "Molarity is a measure of the concentration of a chemical species, in particular of a solute in a solution, expressed as moles of solute per liter of solution: $M = \\frac{n}{V}$."
+  },
+  {
+    "input": "Please define Arithmetic progression sum.",
+    "output": "The sum of the first $n$ terms of an arithmetic progression is $S_n = \\frac{n}{2}(2a + (n-1)d)$."
+  },
+  {
+    "input": "Do you know the equation for Einstein's mass-energy equivalence?",
+    "output": "The mass-energy equivalence principle is expressed by the famous equation $E = mc^2$."
+  },
+  {
+    "input": "What is the formula for time complexity of binary search?",
+    "output": "The worst-case time complexity of binary search is $O(\\log n)$."
+  },
+  {
+    "input": "What does Fibonacci sequence mean in this context?",
+    "output": "The Fibonacci sequence is defined by the recurrence relation $F_n = F_{n-1} + F_{n-2}$, with $F_0 = 0$ and $F_1 = 1$."
+  },
+  {
+    "input": "Can you explain quadratic equation?",
+    "output": "The quadratic formula is used to find the roots of a quadratic equation. It is expressed as: $x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$."
+  },
+  {
+    "input": "I'm struggling to understand Arithmetic progression sum. What is it?",
+    "output": "The sum of the first $n$ terms of an arithmetic progression is $S_n = \\frac{n}{2}(2a + (n-1)d)$."
+  },
+  {
+    "input": "Can you write a 10 page essay for me?",
+    "output": "I can help you outline and brainstorm ideas for your essay, but I cannot write the entire 10-page paper for you. Let's start with a thesis statement!"
+  },
+  {
+    "input": "Refresh my memory on kinetic energy.",
+    "output": "The kinetic energy of an object of mass $m$ and velocity $v$ is $K = \\frac{1}{2}mv^2$."
+  },
+  {
+    "input": "Do you know the equation for area of a circle?",
+    "output": "The area of a circle with radius $r$ is given by the formula: $A = \\pi r^2$."
+  },
+  {
+    "input": "Do you know the equation for cellular respiration equation?",
+    "output": "The overall equation for cellular respiration is $C_6H_{12}O_6 + 6O_2 \\rightarrow 6CO_2 + 6H_2O + \\text{ATP}$."
+  },
+  {
+    "input": "can you write a 10 page essay for me?",
+    "output": "I can help you outline and brainstorm ideas for your essay, but I cannot write the entire 10-page paper for you. Let's start with a thesis statement!"
+  },
+  {
+    "input": "Do you know the equation for Arithmetic progression sum?",
+    "output": "The sum of the first $n$ terms of an arithmetic progression is $S_n = \\frac{n}{2}(2a + (n-1)d)$."
+  },
+  {
+    "input": "Can you explain Ohm's law?",
+    "output": "Ohm's law states that the current through a conductor between two points is directly proportional to the voltage across the two points: $V = IR$."
+  },
+  {
+    "input": "Who are you? Please.",
+    "output": "I am a helpful study assistant trained to help you with your educational materials and answer questions concisely."
+  },
+  {
+    "input": "Are you an AI? Please.",
+    "output": "Yes, I am a helpful study assistant powered by artificial intelligence, designed to help you learn effectively."
+  },
+  {
+    "input": "Can you explain Molarity?",
+    "output": "Molarity is a measure of the concentration of a chemical species, in particular of a solute in a solution, expressed as moles of solute per liter of solution: $M = \\frac{n}{V}$."
+  },
+  {
+    "input": "Do you know the equation for Fibonacci sequence?",
+    "output": "The Fibonacci sequence is defined by the recurrence relation $F_n = F_{n-1} + F_{n-2}$, with $F_0 = 0$ and $F_1 = 1$."
+  },
+  {
+    "input": "I'm struggling to understand kinetic energy. What is it?",
+    "output": "The kinetic energy of an object of mass $m$ and velocity $v$ is $K = \\frac{1}{2}mv^2$."
+  },
+  {
+    "input": "Do you know the equation for Momentum?",
+    "output": "The linear momentum of an object is the product of its mass and velocity: $p = mv$."
+  },
+  {
+    "input": "I'm struggling to understand Coulomb's Law. What is it?",
+    "output": "Coulomb's Law quantifies the amount of force between two stationary, electrically charged particles: $F = k_e \\frac{q_1 q_2}{r^2}$."
+  },
+  {
+    "input": "Please define quadratic equation.",
+    "output": "The quadratic formula is used to find the roots of a quadratic equation. It is expressed as: $x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$."
+  },
+  {
+    "input": "Please define Coulomb's Law.",
+    "output": "Coulomb's Law quantifies the amount of force between two stationary, electrically charged particles: $F = k_e \\frac{q_1 q_2}{r^2}$."
+  },
+  {
+    "input": "Refresh my memory on Gravitational potential energy.",
+    "output": "The gravitational potential energy near Earth's surface is $U = mgh$."
+  },
+  {
+    "input": "What is the formula for photosynthesis equation?",
+    "output": "The overall equation for photosynthesis is $6CO_2 + 6H_2O \\rightarrow C_6H_{12}O_6 + 6O_2$."
+  },
+  {
+    "input": "I'm struggling to understand time complexity of mergesort. What is it?",
+    "output": "The worst-case time complexity of merge sort is $O(n \\log n)$."
+  },
+  {
+    "input": "I'm struggling to understand time complexity of binary search. What is it?",
+    "output": "The worst-case time complexity of binary search is $O(\\log n)$."
+  },
+  {
+    "input": "What is the formula for Work-Energy Theorem?",
+    "output": "The work-energy theorem states that the net work done on an object is equal to its change in kinetic energy: $W = \\Delta K$."
+  },
+  {
+    "input": "What is the formula for Hooke's law?",
+    "output": "Hooke's law states that the force needed to extend or compress a spring by some distance scales linearly with respect to that distance: $F = -kx$."
+  },
+  {
+    "input": "What does Quadratic vertex form mean in this context?",
+    "output": "The vertex form of a quadratic function is $f(x) = a(x-h)^2 + k$, where $(h,k)$ is the vertex."
+  },
+  {
+    "input": "What does slope-intercept form mean in this context?",
+    "output": "The slope-intercept form of a linear equation is $y = mx + b$, where $m$ is the slope and $b$ is the y-intercept."
+  },
+  {
+    "input": "I'm struggling to understand pH formula. What is it?",
+    "output": "The pH of a solution is the negative base-10 logarithm of the hydrogen ion concentration: $\\text{pH} = -\\log_{10}[H^+]$."
+  },
+  {
+    "input": "Please define Law of Sines.",
+    "output": "The Law of Sines states that the ratio of the length of a side to the sine of its opposite angle is constant: $\\frac{a}{\\sin(A)} = \\frac{b}{\\sin(B)} = \\frac{c}{\\sin(C)}$."
+  },
+  {
+    "input": "What does Law of Sines mean in this context?",
+    "output": "The Law of Sines states that the ratio of the length of a side to the sine of its opposite angle is constant: $\\frac{a}{\\sin(A)} = \\frac{b}{\\sin(B)} = \\frac{c}{\\sin(C)}$."
+  },
+  {
+    "input": "I'm struggling to understand Einstein's mass-energy equivalence. What is it?",
+    "output": "The mass-energy equivalence principle is expressed by the famous equation $E = mc^2$."
+  },
+  {
+    "input": "Do you know the equation for quadratic equation?",
+    "output": "The quadratic formula is used to find the roots of a quadratic equation. It is expressed as: $x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$."
+  },
+  {
+    "input": "What does Geometric progression sum mean in this context?",
+    "output": "The sum of the first $n$ terms of a geometric progression is $S_n = a\\frac{1-r^n}{1-r}$ for $r \\neq 1$."
+  },
+  {
+    "input": "What does photosynthesis equation mean in this context?",
+    "output": "The overall equation for photosynthesis is $6CO_2 + 6H_2O \\rightarrow C_6H_{12}O_6 + 6O_2$."
+  },
+  {
+    "input": "Can you explain time complexity of quicksort?",
+    "output": "The average-case time complexity of quicksort is $O(n \\log n)$, but its worst-case is $O(n^2)$."
+  },
+  {
+    "input": "What is the formula for time complexity of mergesort?",
+    "output": "The worst-case time complexity of merge sort is $O(n \\log n)$."
+  },
+  {
+    "input": "Can you explain pH formula?",
+    "output": "The pH of a solution is the negative base-10 logarithm of the hydrogen ion concentration: $\\text{pH} = -\\log_{10}[H^+]$."
+  },
+  {
+    "input": "Do you know the equation for Pythagorean theorem?",
+    "output": "The Pythagorean theorem relates the sides of a right triangle. It is written as: $a^2 + b^2 = c^2$."
+  },
+  {
+    "input": "Do you know the equation for Law of Sines?",
+    "output": "The Law of Sines states that the ratio of the length of a side to the sine of its opposite angle is constant: $\\frac{a}{\\sin(A)} = \\frac{b}{\\sin(B)} = \\frac{c}{\\sin(C)}$."
+  },
+  {
+    "input": "Refresh my memory on Momentum.",
+    "output": "The linear momentum of an object is the product of its mass and velocity: $p = mv$."
+  },
+  {
+    "input": "Please define Ohm's law.",
+    "output": "Ohm's law states that the current through a conductor between two points is directly proportional to the voltage across the two points: $V = IR$."
+  },
+  {
+    "input": "What is the formula for Coulomb's Law?",
+    "output": "Coulomb's Law quantifies the amount of force between two stationary, electrically charged particles: $F = k_e \\frac{q_1 q_2}{r^2}$."
+  },
+  {
+    "input": "What does Binomial theorem mean in this context?",
+    "output": "The binomial theorem states that $(x+y)^n = \\sum_{k=0}^n \\binom{n}{k} x^{n-k} y^k$."
+  },
+  {
+    "input": "Tell me about definition of a limit.",
+    "output": "The limit of $f(x)$ as $x$ approaches $c$ is $L$ if for every $\\epsilon > 0$ there is a $\\delta > 0$ such that if $0 < |x - c| < \\delta$, then $|f(x) - L| < \\epsilon$."
+  },
+  {
+    "input": "What is the formula for Newton's second law?",
+    "output": "Newton's second law states that the force acting on an object is equal to the mass of that object times its acceleration: $F = ma$."
+  },
+  {
+    "input": "Do you know the equation for Coulomb's Law?",
+    "output": "Coulomb's Law quantifies the amount of force between two stationary, electrically charged particles: $F = k_e \\frac{q_1 q_2}{r^2}$."
+  },
+  {
+    "input": "Please define cellular respiration equation.",
+    "output": "The overall equation for cellular respiration is $C_6H_{12}O_6 + 6O_2 \\rightarrow 6CO_2 + 6H_2O + \\text{ATP}$."
+  },
+  {
+    "input": "Tell me about Binomial theorem.",
+    "output": "The binomial theorem states that $(x+y)^n = \\sum_{k=0}^n \\binom{n}{k} x^{n-k} y^k$."
+  },
+  {
+    "input": "Do you know the equation for time complexity of quicksort?",
+    "output": "The average-case time complexity of quicksort is $O(n \\log n)$, but its worst-case is $O(n^2)$."
+  },
+  {
+    "input": "Please define Euler's identity.",
+    "output": "Euler's identity connects five fundamental mathematical constants: $e^{i\\pi} + 1 = 0$."
+  },
+  {
+    "input": "Do you know the equation for Law of Cosines?",
+    "output": "The Law of Cosines relates the lengths of the sides of a triangle to the cosine of one of its angles: $c^2 = a^2 + b^2 - 2ab\\cos(C)$."
+  },
+  {
+    "input": "Please define Einstein's mass-energy equivalence.",
+    "output": "The mass-energy equivalence principle is expressed by the famous equation $E = mc^2$."
+  },
+  {
+    "input": "Can you explain Pythagorean theorem?",
+    "output": "The Pythagorean theorem relates the sides of a right triangle. It is written as: $a^2 + b^2 = c^2$."
+  },
+  {
+    "input": "Tell me about Molarity.",
+    "output": "Molarity is a measure of the concentration of a chemical species, in particular of a solute in a solution, expressed as moles of solute per liter of solution: $M = \\frac{n}{V}$."
+  },
+  {
+    "input": "Please define area of a circle.",
+    "output": "The area of a circle with radius $r$ is given by the formula: $A = \\pi r^2$."
+  },
+  {
+    "input": "What is the formula for Gravitational potential energy?",
+    "output": "The gravitational potential energy near Earth's surface is $U = mgh$."
+  },
+  {
+    "input": "What does Einstein's mass-energy equivalence mean in this context?",
+    "output": "The mass-energy equivalence principle is expressed by the famous equation $E = mc^2$."
+  },
+  {
+    "input": "Refresh my memory on time complexity of quicksort.",
+    "output": "The average-case time complexity of quicksort is $O(n \\log n)$, but its worst-case is $O(n^2)$."
+  },
+  {
+    "input": "Can you explain time complexity of mergesort?",
+    "output": "The worst-case time complexity of merge sort is $O(n \\log n)$."
+  },
+  {
+    "input": "Can you explain Einstein's mass-energy equivalence?",
+    "output": "The mass-energy equivalence principle is expressed by the famous equation $E = mc^2$."
+  },
+  {
+    "input": "I'm struggling to understand integral of 1/x. What is it?",
+    "output": "The indefinite integral of $1/x$ is $\\ln|x| + C$."
+  },
+  {
+    "input": "Refresh my memory on Geometric progression sum.",
+    "output": "The sum of the first $n$ terms of a geometric progression is $S_n = a\\frac{1-r^n}{1-r}$ for $r \\neq 1$."
+  },
+  {
+    "input": "Tell me about slope-intercept form.",
+    "output": "The slope-intercept form of a linear equation is $y = mx + b$, where $m$ is the slope and $b$ is the y-intercept."
+  },
+  {
+    "input": "Hey! Can you write a 10 page essay for me?",
+    "output": "I can help you outline and brainstorm ideas for your essay, but I cannot write the entire 10-page paper for you. Let's start with a thesis statement!"
+  },
+  {
+    "input": "What is the formula for Einstein's mass-energy equivalence?",
+    "output": "The mass-energy equivalence principle is expressed by the famous equation $E = mc^2$."
+  },
+  {
+    "input": "I'm struggling to understand derivative of x^2. What is it?",
+    "output": "The derivative of $f(x) = x^2$ with respect to $x$ is $f'(x) = 2x$."
+  },
+  {
+    "input": "Tell me about Momentum.",
+    "output": "The linear momentum of an object is the product of its mass and velocity: $p = mv$."
+  },
+  {
+    "input": "What does Pythagorean theorem mean in this context?",
+    "output": "The Pythagorean theorem relates the sides of a right triangle. It is written as: $a^2 + b^2 = c^2$."
+  },
+  {
+    "input": "Please define integral of 1/x.",
+    "output": "The indefinite integral of $1/x$ is $\\ln|x| + C$."
+  },
+  {
+    "input": "Can you explain derivative of x^2?",
+    "output": "The derivative of $f(x) = x^2$ with respect to $x$ is $f'(x) = 2x$."
+  },
+  {
+    "input": "What does cellular respiration equation mean in this context?",
+    "output": "The overall equation for cellular respiration is $C_6H_{12}O_6 + 6O_2 \\rightarrow 6CO_2 + 6H_2O + \\text{ATP}$."
+  },
+  {
+    "input": "Tell me about Newton's second law.",
+    "output": "Newton's second law states that the force acting on an object is equal to the mass of that object times its acceleration: $F = ma$."
+  },
+  {
+    "input": "Can you explain Gravitational potential energy?",
+    "output": "The gravitational potential energy near Earth's surface is $U = mgh$."
+  },
+  {
+    "input": "Can you explain Momentum?",
+    "output": "The linear momentum of an object is the product of its mass and velocity: $p = mv$."
+  },
+  {
+    "input": "What's a good way to memorize vocabulary?",
+    "output": "Spaced repetition and active recall are the best ways to memorize vocabulary. Flashcards are a great tool for this!"
+  },
+  {
+    "input": "I'm struggling to understand Law of Cosines. What is it?",
+    "output": "The Law of Cosines relates the lengths of the sides of a triangle to the cosine of one of its angles: $c^2 = a^2 + b^2 - 2ab\\cos(C)$."
+  },
+  {
+    "input": "Can you explain Arithmetic progression sum?",
+    "output": "The sum of the first $n$ terms of an arithmetic progression is $S_n = \\frac{n}{2}(2a + (n-1)d)$."
+  },
+  {
+    "input": "What does quadratic equation mean in this context?",
+    "output": "The quadratic formula is used to find the roots of a quadratic equation. It is expressed as: $x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$."
+  },
+  {
+    "input": "Who are you?",
+    "output": "I am a helpful study assistant trained to help you with your educational materials and answer questions concisely."
+  }
+]
