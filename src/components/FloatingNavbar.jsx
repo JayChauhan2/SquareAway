@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import { supabase } from "../supabaseClient";
 
 export default function FloatingNavbar() {
-  const linkBase = "px-4 py-2 rounded-full text-sm font-light transition-all duration-300";
+  const linkBase = "whitespace-nowrap px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-light transition-all duration-300";
   const active = "bg-white/60 text-slate-900 shadow-sm";
   const inactive = "text-slate-600 hover:text-slate-900 hover:bg-white/40";
   const { user, signOut } = useAuth();
@@ -19,6 +19,14 @@ export default function FloatingNavbar() {
   const [joining, setJoining] = useState(false);
   const [joinError, setJoinError] = useState('');
   const [showJoinInput, setShowJoinInput] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
+
+  // Close dropdowns on outside click
+  useEffect(() => {
+    const handleClickOutside = () => setOpenDropdown(null);
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
 
   const fetchEnrollments = async () => {
     try {
@@ -226,8 +234,8 @@ export default function FloatingNavbar() {
 
   return (
     <>
-      <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
-        <nav className="flex items-center gap-2 px-3 py-2
+      <div className="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-[98vw] md:max-w-none md:w-auto flex justify-center">
+        <nav className="flex items-center gap-1 md:gap-2 px-2 py-1.5 md:px-3 md:py-2
         bg-white/50 backdrop-blur-xl
         border border-white/40
         rounded-full shadow-lg shadow-blue-500/10"
@@ -272,18 +280,25 @@ export default function FloatingNavbar() {
               {/* Multi-Class Dropdown */}
               <div className="relative group">
                 <button
-                  className={`${linkBase} ${activeClass ? 'bg-green-100/50 text-green-700 border border-green-200 font-medium' : inactive} flex items-center gap-1 min-w-[120px] justify-between`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setOpenDropdown(openDropdown === 'classes' ? null : 'classes');
+                  }}
+                  className={`${linkBase} ${activeClass ? 'bg-green-100/50 text-green-700 border border-green-200 font-medium' : inactive} flex items-center gap-1 min-w-[90px] md:min-w-[120px] justify-between`}
                 >
                   <div className="flex items-center gap-1 overflow-hidden">
-                    <UserPlus className="w-4 h-4 flex-shrink-0" />
-                    <span className="truncate max-w-[100px]">
-                      {activeClass ? activeClass.name : 'Join Class'}
+                    <UserPlus className="w-4 h-4 hidden sm:block flex-shrink-0" />
+                    <span className="truncate max-w-[60px] md:max-w-[100px]">
+                      {activeClass ? activeClass.name : 'Join'}
                     </span>
                   </div>
                   {activeClass && <ChevronDown className="w-3 h-3 opacity-50" />}
                 </button>
 
-                <div className="absolute left-0 top-full mt-2 w-72 bg-white rounded-xl shadow-xl border border-slate-200 p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform origin-top-left divide-y divide-slate-100">
+                <div 
+                  onClick={(e) => e.stopPropagation()}
+                  className={`absolute right-0 md:right-auto md:left-0 top-full mt-2 w-72 bg-white rounded-xl shadow-xl border border-slate-200 p-2 transition-all transform origin-top-right md:origin-top-left divide-y divide-slate-100 ${openDropdown === 'classes' ? 'opacity-100 visible' : 'opacity-0 invisible md:group-hover:opacity-100 md:group-hover:visible'}`}
+                >
 
                   {/* Enrolled Classes List */}
                   {enrolledClasses.length > 0 && !showJoinInput && (
@@ -374,11 +389,20 @@ export default function FloatingNavbar() {
 
           {/* More Menu (Unchanged) */}
           <div className="relative group">
-            <button className="p-2 rounded-full text-slate-500 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+            <button 
+              onClick={(e) => {
+                e.stopPropagation();
+                setOpenDropdown(openDropdown === 'more' ? null : 'more');
+              }}
+              className="p-2 rounded-full text-slate-500 hover:bg-slate-100 hover:text-slate-900 transition-colors"
+            >
               <MoreHorizontal className="w-5 h-5" />
             </button>
 
-            <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-xl border border-slate-200 p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform origin-top-right">
+            <div 
+              onClick={(e) => e.stopPropagation()}
+              className={`absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-xl border border-slate-200 p-2 transition-all transform origin-top-right ${openDropdown === 'more' ? 'opacity-100 visible' : 'opacity-0 invisible md:group-hover:opacity-100 md:group-hover:visible'}`}
+            >
               {user ? (
                 <>
                   <div className="px-3 py-2 border-b border-slate-100 mb-1">

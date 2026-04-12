@@ -1,7 +1,7 @@
 import { supabase } from './supabase';
 
 const API_BASE_URL = __DEV__
-  ? "http://192.168.0.151:5000"
+  ? "http://192.168.0.152:5000"
   : "https://your-production-api.com";
 
 export interface Note {
