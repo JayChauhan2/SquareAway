@@ -11,119 +11,64 @@ CRITICAL: You MUST include the word "Manim" on its own line before the code.
 This is a required marker. DO NOT skip it or replace it with anything else.
 
 Below the `Manim` marker, you MUST generate ONLY the Python code — a single file that contains ONLY:
-• A Manim Scene class that uses:
-        self.wait(...)  # placeholder duration
+• A Manim Scene class that uses `self.wait(...)` for pacing.
 
-IMPORTANT: In your `construct` method, do NOT add any sound or voiceover calls.
-
-
-No explanations or text outside the code block after the "Manim" signal.
+IMPORTANT: In your `construct` method, do NOT add any sound or voiceover calls. The backend handles this.
 The video should be as long as necessary to fully cover the script content.
 
 FULL REQUIREMENTS
 -----------------
-1. Generate a single Manim Scene. Ensure that the class name is called Explainer:
+1. Generate a single Manim Scene named `Explainer`:
 
     class Explainer(Scene):
         def construct(self):
             # Step 1 animation
             ...
-            # Step 2 animation
-            ...
-            # etc.
-            self.wait(...)  # total duration placeholder
+            self.wait(...)
 
 Animation Requirements:
 • Use a variety of different colors for text, lines, shapes, and graphs.
-• **CRITICAL: Ensure no two Manim elements overlap—adjust positions appropriately.**
 • All elements must be fully visible on screen.
-• Each step should behave like a mini-scene (use self.clear() if needed).
-• Use Text() for standard descriptive text without math to ensure maximum compatibility and speed.
-• Use MathTex() or Tex() ONLY when mathematical notation or specific LaTeX features are required.
-• Use Write(), FadeIn(), Transform(), MathTex(), Tex(), Axes(), Circle(),
-    Line(), Plot(), etc.
-• Sync the animations roughly with the provided voiceover script segments.
+• Each step should behave like a mini-scene. Use animations like Write(), FadeIn(), Transform().
 
-SPATIAL LAYOUT REQUIREMENTS (CRITICAL):
+SPATIAL LAYOUT REQUIREMENTS (CRITICAL FIXES):
 -----------------------------------------
-**Screen Coordinate System:**
-- Center of screen: ORIGIN or (0, 0, 0)
-- Screen dimensions: approximately -7 to +7 horizontally, -4 to +4 vertically
-- UP = [0, 1, 0], DOWN = [0, -1, 0], LEFT = [-1, 0, 0], RIGHT = [1, 0, 0]
+DO NOT use hardcoded coordinate arithmetic like `UP*2 + LEFT*3` or `DOWN*2.5`, which often causes elements to overlap or move off screen.
+Instead, use Manim's relative positioning functions and VGroups:
 
-**Screen Regions (use these for distribution):**
-1. TOP-LEFT: UP*2 + LEFT*3
-2. TOP-CENTER: UP*2.5
-3. TOP-RIGHT: UP*2 + RIGHT*3
-4. CENTER-LEFT: LEFT*3
-5. CENTER: ORIGIN (use sparingly!)
-6. CENTER-RIGHT: RIGHT*3
-7. BOTTOM-LEFT: DOWN*2 + LEFT*3
-8. BOTTOM-CENTER: DOWN*2.5
-9. BOTTOM-RIGHT: DOWN*2 + RIGHT*3
+1. **Relative Positioning (`next_to`)**: 
+   When placing a new element, position it relative to an existing element:
+   `equation.next_to(title, DOWN, buff=0.5)`
 
-**Positioning Rules:**
-1. **NEVER place more than ONE element at ORIGIN/center (0,0,0)**
-2. Maintain minimum 1.5 unit spacing between text elements
-3. Distribute elements across AT LEAST 3 different screen regions
-4. Use .move_to() for precise positioning: element.move_to(UP*2 + LEFT*3)
-5. Use .to_edge() for edge alignment: element.to_edge(UP) or element.to_edge(LEFT)
-6. Use .to_corner() for corners: element.to_corner(UL) for upper-left
+2. **Group Arrangements (`VGroup().arrange`)**: 
+   When you have multiple elements, put them in a VGroup and arrange them along an axis:
+   `VGroup(text1, text2, text3).arrange(DOWN, center=False, aligned_edge=LEFT)`
+   
+3. **Screen Alignments (`to_edge`, `to_corner`)**:
+   Use these for titles or corner definitions:
+   `title.to_edge(UP)` or `logo.to_corner(UL)`
+   
+4. **Never Overlap**: 
+   Use `self.play(Group_name.animate.shift(UP))` to make room on the screen if it gets too crowded, or simply clear the screen (`self.clear()`) between distinct conceptual steps.
 
-**Example Good Layout (3 text elements):**
-```python
-title = Text("Main Topic").move_to(UP*3)
-definition = Tex("Definition text").move_to(UP*0.5 + LEFT*2)
-example = MathTex("x^2 + y^2 = r^2").move_to(DOWN*1.5 + RIGHT*2)
-```
-
-**Example Bad Layout (AVOID THIS):**
-```python
-# BAD: All at center!
-title = Text("Main Topic")  # defaults to center
-definition = Tex("Definition")  # defaults to center
-example = MathTex("x^2")  # defaults to center
-```
-
-2. Everything below the "Manim" signal must be only code in one file.
-
-3. The script must be immediately runnable once pasted.
+IMAGES AND ASSETS (STRICTLY FORBIDDEN):
+-----------------------------------------
+**NEVER use ImageMobject or SVGMobject.**
+**NEVER attempt to fetch images, icons, or logos from Wikipedia, URLs, or local files.**
+*Only* use Manim's built-in shapes (Circle, Square, Rectangle, Line, Arrow, Axes, Plot) and Text/MathTex.
 
 IMPORTANT MANIM TEXT RULES
 --------------------------
-90a. Always use Text("...") instead of Tex("...") for standard descriptive text that doesn't contain mathematical notation. This avoids unnecessary LaTeX compilation overhead and potential failures.
-90b. All Manim text (Tex or MathTex) MUST avoid raw Unicode math symbols entirely.  
-Never use characters like ∃, ∈, ≤, ≥, →, ⇔, ℝ, etc. directly.  
-If necessary, replace them with descriptive text or LaTeX-safe alternatives.
-
-Examples of acceptable alternatives:
-- ∃  →  "exists"
-- ∈  →  "in"
-- ≤  →  "<="
-- ≥  →  ">="
-- →  →  "->"
-- ℝ  →  "R"
-
-Example of INCORRECT (will break Manim):
-    Tex("Then ∃ c ∈ (a,b) where f'(c) = 0")
-
-Correct:
-    Tex("Then 'exists c in (a,b)' where f'(c)=0")
-
-ALWAYS ensure special characters are avoided or replaced with safe alternatives.
-
-Remember the Manim signal at the start.
-
-RULES FOR MATH EQUATIONS:
-- When using MathTex(), do NOT include dollar signs ($).
+• Always use `Text("...")` for standard descriptive text. It is faster, safer, and does not require LaTeX compilation.
+• Use `MathTex()` or `Tex()` ONLY when mathematical notation or specific LaTeX features are required.
+• All Manim text MUST avoid raw Unicode math symbols entirely (like ∃, ∈, ≤, ≥, →, ⇔, ℝ). 
+   - ∃  →  "exists"
+   - ∈  →  "in"
+   - ≤  →  "<="
+• When using MathTex(), do NOT include dollar signs ($).
     Correct: MathTex("x^2 + y^2 = z^2")
-    Incorrect: MathTex("$x^2 + y^2 = z^2$")
-- When using Tex() for narrative text that includes math, YOU MUST wrap the math parts in single dollar signs ($).
+• When using Tex() for narrative text that includes math, YOU MUST wrap the math parts in single dollar signs ($).
     Correct: Tex("The equation is $E=mc^2$")
-    Incorrect: Tex("The equation is E=mc^2") -> THIS WILL CRASH
-    Incorrect: Tex("f(x) = x^3") -> THIS WILL CRASH (Missing $)
-
-GENERAL RULE: Do NOT try to access any images (svg, png, jpg, etc.) because they are not included in the repository.
 
 --------------------------------------------------------------------
 

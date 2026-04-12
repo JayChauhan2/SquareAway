@@ -146,9 +146,8 @@ export default function VideosPage() {
     };
 
     const pollVideo = async (jobId) => {
-        // ALWAYS use the generic endpoint with timestamp
         const timestamp = new Date().getTime();
-        const videoCheckUrl = `http://127.0.0.1:5000/video?t=${timestamp}`;
+        const videoCheckUrl = `http://127.0.0.1:5000/videos/video_${jobId}.mp4?t=${timestamp}`;
 
         try {
             const response = await fetch(videoCheckUrl, { method: 'HEAD' });

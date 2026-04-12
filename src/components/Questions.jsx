@@ -489,9 +489,9 @@ export default function Questions() {
   };
 
   // --- Video Generation Logic ---
-  const pollVideo = async () => {
+  const pollVideo = async (jobId) => {
     const timestamp = new Date().getTime();
-    const videoCheckUrl = `http://127.0.0.1:5000/video?t=${timestamp}`;
+    const videoCheckUrl = `http://127.0.0.1:5000/videos/video_${jobId}.mp4?t=${timestamp}`;
 
     try {
       const response = await fetch(videoCheckUrl, { method: 'HEAD' });
@@ -499,10 +499,10 @@ export default function Questions() {
         setVideoUrl(videoCheckUrl);
         setIsGeneratingVideo(false);
       } else {
-        setTimeout(pollVideo, 3000);
+        setTimeout(() => pollVideo(jobId), 3000);
       }
     } catch (err) {
-      setTimeout(pollVideo, 3000);
+      setTimeout(() => pollVideo(jobId), 3000);
     }
   };
 
@@ -520,7 +520,7 @@ export default function Questions() {
       if (response.ok) {
         const result = await response.json();
         if (result.status === 'started') {
-          pollVideo();
+          pollVideo(result.job_id);
         }
       } else {
         alert('Error starting video generation');

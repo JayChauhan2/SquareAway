@@ -504,22 +504,7 @@ def serve_specific_video(filename):
     video_dir = Path("media/videos/generated_manim_script/1080p60")
     video_path = video_dir / filename
     
-    print(f"Request for video: {filename}")
-    print(f"Looking for file at: {video_path.resolve()}")
-    
     if not video_path.exists():
-        print(f"ERROR: Video file not found: {video_path}")
-        # List available files to help debug
-        try:
-            print(f"Available files in {video_dir}:")
-            if video_dir.exists():
-                for p in video_dir.iterdir():
-                    print(f" - {p.name}")
-            else:
-                print(f"Directory {video_dir} does not exist!")
-        except Exception as e:
-            print(f"Error listing directory: {e}")
-            
         return jsonify({"error": "Video not found"}), 404
         
     return send_file(
@@ -730,13 +715,13 @@ Respond in JSON format ONLY:
 """
     
     response = requests.post(
-        url="https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
+        url="https://api.groq.com/openai/v1/chat/completions",
         headers={
             "Authorization": f"Bearer {model_api_key}",
             "Content-Type": "application/json",
         },
         data=json.dumps({
-            "model": "gemma-3-27b-it",
+            "model": "llama-3.3-70b-versatile",
             "messages": [{"role": "user", "content": layout_prompt}]
         })
     )
@@ -796,13 +781,13 @@ Respond in JSON format ONLY:
 """
     
     response = requests.post(
-        url="https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
+        url="https://api.groq.com/openai/v1/chat/completions",
         headers={
             "Authorization": f"Bearer {model_api_key}",
             "Content-Type": "application/json",
         },
         data=json.dumps({
-            "model": "gemma-3-27b-it",
+            "model": "llama-3.3-70b-versatile",
             "messages": [{"role": "user", "content": assessment_prompt}]
         })
     )
@@ -859,13 +844,13 @@ Generate the IMPROVED complete script with the same format as before. Output ONL
 """
     
     response = requests.post(
-        url="https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
+        url="https://api.groq.com/openai/v1/chat/completions",
         headers={
             "Authorization": f"Bearer {model_api_key}",
             "Content-Type": "application/json",
         },
         data=json.dumps({
-            "model": "gemma-3-27b-it",
+            "model": "llama-3.3-70b-versatile",
             "messages": [{"role": "user", "content": refinement_prompt}]
         })
     )
@@ -892,19 +877,19 @@ def createVideo(user_text_here):
     with open("./src/assets/script_only_prompt.txt", "r") as file:
         content = file.read()
     
-    model_api_key = os.getenv("GOOGLE_API_KEY")
+    model_api_key = os.getenv("GROQ_API_KEY")
     latex_content = convert_to_latex(user_text_here)
     
     # Initial script generation
     print("\n=== GENERATING INITIAL SCRIPT ===")
     response = requests.post(
-        url="https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
+        url="https://api.groq.com/openai/v1/chat/completions",
         headers={
             "Authorization": f"Bearer {model_api_key}",
             "Content-Type": "application/json",
         },
         data=json.dumps({
-            "model": "gemma-3-27b-it",
+            "model": "llama-3.3-70b-versatile",
             "messages": [
                 {
                     "role": "user",
