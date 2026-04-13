@@ -1,42 +1,41 @@
-**Notes on Integrals and Area**
+## Mathematics Notes
 
-**1. Definite Integral Calculation:**
+### Trigonometry Identities
+*   **Unfamiliar with:**
+    *   `sin x = cos(90 - x)`
+    *   `cos x = sin(90 - x)`
+    *   _x will be some angle_
 
-*   **Problem:** $\int_{-3}^{3} (x+1) dx$
-*   **Antiderivative:** $= [\frac{x^2}{2} + x + C]_{-3}^{3}$
-*   **Evaluation:** $= (\frac{3^2}{2} + 3) - (\frac{(-3)^2}{2} + (-3))$
-    $= (\frac{9}{2} + 3) - (\frac{9}{2} - 3)$
-    $= (4.5 + 3) - (4.5 - 3)$
-    $= 7.5 - 1.5$
-    $= 6$
+### Statistics - Averages
+*   `Avg. of values = sum of values / number of values`
 
-**2. Geometric Interpretation (Net Signed Area):**
+### Special Triangles
+(Often given in the test, but good to know mentally)
 
-*   The function is $f(x)=x+1$.
-*   **Area 1 (A₁):** Region above the x-axis, from $x=-1$ to $x=3$.
-    *   $A_1 = 8$
-*   **Area 2 (A₂):** Region below the x-axis, from $x=-3$ to $x=-1$.
-    *   $A_2 = -2$
-*   **Integral Value (Net Signed Area):** "The area of the 3rd quartile will be negative, therefore my Integral will be $A_1 + A_2 = 8 - 2 = 6$."
+1.  **30-60-90 Triangle**
+    *   Sides are in the ratio: `x`, `x√3`, `2x`
+    *   (Side opposite 30° is x, opposite 60° is x√3, hypotenuse opposite 90° is 2x)
 
-**3. Total Area Calculation:**
+2.  **45-45-90 Triangle**
+    *   Sides are in the ratio: `x`, `x`, `x√2`
+    *   (The two legs are x, the hypotenuse is x√2)
 
-*   "However, I could be asked to calculate the area (not the integral). Negative areas must be turned to positive."
-*   **Total Area:** $|A_1| + |A_2| = |8| + |-2| = 8 + 2 = 10$
+---
 
-**4. Integral Properties for Area Calculation:**
+### TIP W/ CALCULATOR SECTION!
+*   **For median questions:** List out ALL the numbers from smallest to biggest.
+    *   (Don't cross off as I think in my head) Avoid silly mistakes.
+    *   **Example:**
+        *   Given: `134, 127, 201, 97, 85, 305`
+        *   List it out: `85, 97, 127, 134, 201, 305`
 
-*   "Remember integrals are sums, hence:"
-    $\int_{-3}^{3} (x+1) dx = \int_{-3}^{-1} (x+1) dx + \int_{-1}^{3} (x+1) dx$
+*   **When there is an exponent problem I don't really know how to solve:**
+    *   Set BOTH sides `y=` and put it into the calculator.
+    *   Find the intersection!
 
-*   "If I were to calculate the area, I could divide the integral into a sum, and divide it exactly where it becomes negative, where $f(x)=0$."
-*   "Now, the negative area is turned to positive to find the area with absolute value."
-    $\int_{-3}^{3} (x+1) dx = |\int_{-3}^{-1} (x+1) dx| + \int_{-1}^{3} (x+1) dx$
+---
 
-**5. Property for Reversing Integration Limits:**
-
-*   "The negative Area can also be turned Positive by using the last integral property:"
-    $\int_{a}^{b} f(x) dx = - \int_{b}^{a} f(x) dx$
-*   **Example:** $\int_{-4}^{-2} f(x) dx = - \int_{-2}^{-4} f(x) dx$
+### General Tip
+*   Always make sure you write down the CORRECT number that is given in questions/table.
 
 [Confidence: 99%]
