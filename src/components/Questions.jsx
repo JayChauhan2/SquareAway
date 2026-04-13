@@ -298,7 +298,7 @@ export default function Questions() {
 
       // 3. New Session: Fetch from API
       try {
-        const response = await fetch('http://127.0.0.1:5000/create-questions', {
+        const response = await fetch('/api/create-questions', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ topic })
@@ -400,7 +400,7 @@ export default function Questions() {
     if (currentQuestion.type === 'free' || currentQuestion.type === 'word') {
       setIsEvaluating(true);
       try {
-        const response = await fetch('http://127.0.0.1:5000/evaluate-answer', {
+        const response = await fetch('/api/evaluate-answer', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -470,7 +470,7 @@ export default function Questions() {
     setChatLoading(true);
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/chatbot", {
+      const response = await fetch("/api/chatbot", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -491,7 +491,7 @@ export default function Questions() {
   // --- Video Generation Logic ---
   const pollVideo = async (jobId) => {
     const timestamp = new Date().getTime();
-    const videoCheckUrl = `http://127.0.0.1:5000/videos/video_${jobId}.mp4?t=${timestamp}`;
+    const videoCheckUrl = `/api/videos/video_${jobId}.mp4?t=${timestamp}`;
 
     try {
       const response = await fetch(videoCheckUrl, { method: 'HEAD' });
@@ -511,7 +511,7 @@ export default function Questions() {
     const qText = currentQuestion.question.map(p => p.content).join(' ');
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/generate-video', {
+      const response = await fetch('/api/generate-video', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text: qText }),

@@ -63,7 +63,7 @@ def clear_folder(folder_path):
             shutil.rmtree(file_path)
 
 
-@app.route('/chatbot', methods=['POST'])
+@app.route('/api/chatbot', methods=['POST'])
 def chatbot():
     """
     Receives:
@@ -117,7 +117,7 @@ def chatbot():
     return jsonify({"answer": answer})
 
 
-@app.route('/leave-class', methods=['POST'])
+@app.route('/api/leave-class', methods=['POST'])
 def leave_class():
     data = request.json
     student_id = data.get('student_id')
@@ -150,7 +150,7 @@ def leave_class():
     else:
         return jsonify({"error": "Failed to leave class", "details": response.text}), response.status_code
 
-@app.route('/create-questions', methods=['POST', 'OPTIONS'])
+@app.route('/api/create-questions', methods=['POST', 'OPTIONS'])
 def create_questions():
     if request.method == 'OPTIONS':
         return jsonify({}), 200
@@ -323,7 +323,7 @@ def convert_to_latex(text):
 
     return llm_output
     
-@app.route('/extract-text', methods=['POST'])
+@app.route('/api/extract-text', methods=['POST'])
 def extractText():
     # 1. Clear uploads and results folders
     clear_folder(UPLOAD_FOLDER)
@@ -465,7 +465,7 @@ def background_video_creation(user_text, job_id=None):
         import traceback
         traceback.print_exc()
     
-@app.route('/generate-video', methods=['POST'])
+@app.route('/api/generate-video', methods=['POST'])
 def generate_video():
     data = request.json
     user_text = data.get('text', '')
@@ -482,7 +482,7 @@ def generate_video():
     # Immediately respond to the client with the job_id
     return jsonify({"status": "started", "job_id": job_id})
 
-@app.route('/video', methods=['GET'])
+@app.route('/api/video', methods=['GET'])
 def get_video():
     """Serve the generated video file (Latest/Legacy)"""
     video_path = Path("media/videos/generated_manim_script/1080p60/Explainer.mp4")
@@ -497,7 +497,7 @@ def get_video():
         download_name='Explainer.mp4'
     )
 
-@app.route('/videos/<filename>', methods=['GET'])
+@app.route('/api/videos/<filename>', methods=['GET'])
 def serve_specific_video(filename):
     """Serve a specific video file by name"""
     # Define directory where unique videos are stored
@@ -1214,7 +1214,7 @@ def createVideo(user_text_here):
      #return llm_output
 
 
-@app.route('/evaluate-answer', methods=['POST'])
+@app.route('/api/evaluate-answer', methods=['POST'])
 def evaluate_answer():
     data = request.json
     question_text = data.get('question', '')
@@ -1260,7 +1260,7 @@ def evaluate_answer():
         is_correct = correct_answer.lower() in user_answer.lower() if correct_answer else False
         return jsonify({"correct": is_correct, "feedback": "AI evaluation failed, falling back to simple check."})
 
-@app.route('/save-changed-notes', methods=['POST'])
+@app.route('/api/save-changed-notes', methods=['POST'])
 def save_changed_notes():
     """Save edited notes content back to file"""
     try:
@@ -1283,7 +1283,7 @@ def save_changed_notes():
         return jsonify({'error': str(e)}), 500
 
 
-@app.route('/get-users', methods=['GET'])
+@app.route('/api/get-users', methods=['GET'])
 def get_users():
     """
     Fetches all users from Supabase Auth Admin API.

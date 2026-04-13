@@ -1,41 +1,42 @@
-## Mathematics Notes
+# MATH STUFF
 
-### Trigonometry Identities
-*   **Unfamiliar with:**
-    *   `sin x = cos(90 - x)`
-    *   `cos x = sin(90 - x)`
-    *   _x will be some angle_
+## Undefined
+*   # / 0 (anything w/ "0" in denominator)
 
-### Statistics - Averages
-*   `Avg. of values = sum of values / number of values`
+## Speed
+*   Speed = Distance / Time
+    *   (think of running & figuring out the pace)
 
-### Special Triangles
-(Often given in the test, but good to know mentally)
+## Exponential Form
+*   y = a(b)^x
+    *   `a` = y-intercept
+    *   `b` = rate
+    *   b < 1: decay (graph shown)
+    *   b > 1: growth (graph shown)
 
-1.  **30-60-90 Triangle**
-    *   Sides are in the ratio: `x`, `x√3`, `2x`
-    *   (Side opposite 30° is x, opposite 60° is x√3, hypotenuse opposite 90° is 2x)
+## Quadratic
+*   c / a = product of roots / zeroes
+*   -b / a = sum of roots or zeroes
+*   Cap (referring to vertex/turning point):
+    *   -b / 2a = find Axis of Symmetry (AoS) (min-max- point on parabola) x-coordinate
 
-2.  **45-45-90 Triangle**
-    *   Sides are in the ratio: `x`, `x`, `x√2`
-    *   (The two legs are x, the hypotenuse is x√2)
+## Discriminant (Find # of real solutions)
+*   b^2 - 4ac = 0: 1 Real solution
+*   b^2 - 4ac < 0: no real solution
+*   b^2 - 4ac > 0: 2 real solutions
 
----
+## Percent Change
+*   (New - Old) / Old x 100%
 
-### TIP W/ CALCULATOR SECTION!
-*   **For median questions:** List out ALL the numbers from smallest to biggest.
-    *   (Don't cross off as I think in my head) Avoid silly mistakes.
-    *   **Example:**
-        *   Given: `134, 127, 201, 97, 85, 305`
-        *   List it out: `85, 97, 127, 134, 201, 305`
+## Systems of Equations
+*   **No Solution (Parallel):**
+    *   SAME slope
+    *   different y-intercept
+*   **Infinitely Many Solutions:**
+    *   SAME EQUATION!
+    *   (meaning same slope, same y-intercept)
 
-*   **When there is an exponent problem I don't really know how to solve:**
-    *   Set BOTH sides `y=` and put it into the calculator.
-    *   Find the intersection!
-
----
-
-### General Tip
-*   Always make sure you write down the CORRECT number that is given in questions/table.
+## Perpendicular Slope
+*   -Flip sign & slope
 
 [Confidence: 99%]

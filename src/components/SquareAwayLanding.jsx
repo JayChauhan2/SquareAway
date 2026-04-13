@@ -268,7 +268,7 @@ export default function SquareAwayLanding() {
     setChatLoading(true);
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/chatbot", {
+      const response = await fetch("/api/chatbot", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -359,7 +359,7 @@ export default function SquareAwayLanding() {
     // Don't clear videoUrl here - let it be cleared only when explicitly needed
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/extract-text', {
+      const response = await fetch('/api/extract-text', {
         method: 'POST',
         body: formData,
       });
@@ -427,7 +427,7 @@ export default function SquareAwayLanding() {
 
   const pollVideo = async (jobId) => {
     const timestamp = new Date().getTime();
-    const videoCheckUrl = `http://127.0.0.1:5000/videos/video_${jobId}.mp4?t=${timestamp}`;
+    const videoCheckUrl = `/api/videos/video_${jobId}.mp4?t=${timestamp}`;
 
     try {
       const response = await fetch(videoCheckUrl, { method: 'HEAD' });
@@ -522,7 +522,7 @@ export default function SquareAwayLanding() {
   const generateVideo = async (text) => {
     setIsGeneratingVideo(true);
     try {
-      const response = await fetch('http://127.0.0.1:5000/generate-video', {
+      const response = await fetch('/api/generate-video', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text }),

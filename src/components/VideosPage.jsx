@@ -122,7 +122,7 @@ export default function VideosPage() {
 
         try {
             // 2. Start generation directly (don't create note yet)
-            const response = await fetch('http://127.0.0.1:5000/generate-video', {
+            const response = await fetch('/api/generate-video', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ text: prompt }),
@@ -147,7 +147,7 @@ export default function VideosPage() {
 
     const pollVideo = async (jobId) => {
         const timestamp = new Date().getTime();
-        const videoCheckUrl = `http://127.0.0.1:5000/videos/video_${jobId}.mp4?t=${timestamp}`;
+        const videoCheckUrl = `/api/videos/video_${jobId}.mp4?t=${timestamp}`;
 
         try {
             const response = await fetch(videoCheckUrl, { method: 'HEAD' });
@@ -175,7 +175,7 @@ export default function VideosPage() {
             let videoUrl = specificVideoUrl;
             if (!videoUrl) {
                 const timestamp = new Date().getTime();
-                videoUrl = `http://127.0.0.1:5000/video?t=${timestamp}`;
+                videoUrl = `/api/video?t=${timestamp}`;
             }
 
             // Create note entry with the localhost video URL

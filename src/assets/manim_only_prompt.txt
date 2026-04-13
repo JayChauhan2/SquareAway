@@ -63,6 +63,13 @@ IMAGES AND ASSETS (STRICTLY FORBIDDEN):
 **NEVER attempt to fetch images, icons, or logos from Wikipedia, URLs, or local files.**
 *Only* use Manim's built-in shapes (Circle, Square, Rectangle, Line, Arrow, Axes, Plot) and Text/MathTex.
 
+AXES AND GRAPHS (STRICT USAGE):
+-----------------------------------------
+When using the `Axes` object, you MUST use `x_range=[min, max, step]` and `x_length=SIZE`. 
+DO NOT EVER use arguments like `unit_height`, `unit_width`, `x_min`, `x_max`, `y_min`, `y_max`, `width`, or `height`. 
+Example of correct usage:
+`axes = Axes(x_range=[-3, 3, 1], y_range=[-5, 5, 1], x_length=6, y_length=6)`
+
 MOBJECT ARITHMETIC (STRICTLY FORBIDDEN):
 -----------------------------------------
 DO NOT perform mathematical operations (like `+`, `-`, `*`, `/`) directly on instantiate Mobjects.
