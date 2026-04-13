@@ -300,6 +300,7 @@ SquareAway/
 
 ---
 
-## License
+## Citation
 
-[MIT License](LICENSE)
+AI was used to assist with the development of this project, specifically Google Antigravity. The citation can be found below: 
+Google DeepMind. (2026). Antigravity AI [Large language model]. Google.
