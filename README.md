@@ -1,4 +1,4 @@
-# SquareAway: AI-Powered Study Companion
+# SquareAway: AI-Powered Study Companion 
 
 SquareAway is a full-stack educational platform built to close the gap between passive studying and content understanding. Students can upload their handwritten notes or textbook pages, and SquareAway will digitize them, generate practice problems, answer questions through a built-in chatbot, and even produce a fully animated explainer video, all powered by AI.
 
